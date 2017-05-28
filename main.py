@@ -212,7 +212,6 @@ class AzureUploader(object):
             )
             self.result.put_value("report", report_url)
         except:
-            raise
             self.logger.error("Error during report upload")
         return inputs
 

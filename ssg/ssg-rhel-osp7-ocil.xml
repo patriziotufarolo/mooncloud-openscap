@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<ns0:ocil xmlns:ns0="http://scap.nist.gov/schema/ocil/2.0">
+  <ns0:generator>
+    <ns0:schema_version>2.0</ns0:schema_version>
+    <ns0:timestamp>2017-05-27T15:39:17Z</ns0:timestamp>
+  </ns0:generator>
+  <ns0:questionnaires>
+    <ns0:questionnaire id="ocil:ssg-nist_procedural_requirement_ocil:questionnaire:1">
+      <ns0:title>Procedural Requirement</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-nist_procedural_requirement_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-nist_met_inherently_ocil:questionnaire:1">
+      <ns0:title>Product Meets this Requirement</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-nist_met_inherently_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+  </ns0:questionnaires>
+  <ns0:test_actions>
+    <ns0:boolean_question_test_action id="ocil:ssg-nist_procedural_requirement_action:testaction:1" question_ref="ocil:ssg-nist_procedural_requirement_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-nist_met_inherently_action:testaction:1" question_ref="ocil:ssg-nist_met_inherently_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+  </ns0:test_actions>
+  <ns0:questions>
+    <ns0:boolean_question id="ocil:ssg-nist_procedural_requirement_question:question:1">
+      <ns0:question_text>TBD
+			Is it the case that ?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-nist_met_inherently_question:question:1">
+      <ns0:question_text>RHEL6 supports this requirement and cannot be configured to be out of
+compliance. This is a permanent not a finding.
+
+			Is it the case that ?
+			</ns0:question_text>
+    </ns0:boolean_question>
+  </ns0:questions>
+</ns0:ocil>

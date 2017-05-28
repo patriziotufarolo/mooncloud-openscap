@@ -1,0 +1,574 @@
+<?xml version="1.0"?>
+<ns0:ocil xmlns:ns0="http://scap.nist.gov/schema/ocil/2.0">
+  <ns0:generator>
+    <ns0:schema_version>2.0</ns0:schema_version>
+    <ns0:timestamp>2017-05-27T15:46:01Z</ns0:timestamp>
+  </ns0:generator>
+  <ns0:questionnaires>
+    <ns0:questionnaire id="ocil:ssg-accounts_use_pam_ocil:questionnaire:1">
+      <ns0:title>Use PAM for Unix authentication.</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-accounts_use_pam_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-accounts_passwd_cmd_ocil:questionnaire:1">
+      <ns0:title>Use passwd for changing passwords.</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-accounts_passwd_cmd_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-accounts_passwd_mode_ocil:questionnaire:1">
+      <ns0:title>Enable the ability for a user to change an expired password.</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-accounts_passwd_mode_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-sessions_login_banner_ocil:questionnaire:1">
+      <ns0:title>Display approved login banner prior to login.</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-sessions_login_banner_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-sessions_port_ocil:questionnaire:1">
+      <ns0:title>Configure approved webmin port.</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-sessions_port_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-sessions_save_password_ocil:questionnaire:1">
+      <ns0:title>Prevent the ability for a user to save their login credentials for future access.</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-sessions_save_password_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-sessions_ssl_cipher_ocil:questionnaire:1">
+      <ns0:title>Use approved ciphers for encryption.</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-sessions_ssl_cipher_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-sessions_ssl_enabled_ocil:questionnaire:1">
+      <ns0:title>Encryption is enabled and enforced.</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-sessions_ssl_enabled_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-sessions_timeout_ocil:questionnaire:1">
+      <ns0:title>Sessions are closed after idling a specified number of minutes.</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-sessions_timeout_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-logs_webmin_actions_enabled_ocil:questionnaire:1">
+      <ns0:title>Log actions performed by users.</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-logs_webmin_actions_enabled_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-logs_webmin_actions_perms_ocil:questionnaire:1">
+      <ns0:title>Logs must not be accessible to unauthorized users.</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-logs_webmin_actions_perms_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-logs_webmin_actions_cleared_ocil:questionnaire:1">
+      <ns0:title>Prevent users from covering their trail.</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-logs_webmin_actions_cleared_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-logs_webmin_requests_enabled_ocil:questionnaire:1">
+      <ns0:title>Log access attempts to the webmin.</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-logs_webmin_requests_enabled_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-logs_webmin_requests_perms_ocil:questionnaire:1">
+      <ns0:title>Logs must not be accessible to unauthorized users.</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-logs_webmin_requests_perms_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-logs_webmin_requests_cleared_ocil:questionnaire:1">
+      <ns0:title>Prevent users from covering their trail.</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-logs_webmin_requests_cleared_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-webmin_is_up_to_date_ocil:questionnaire:1">
+      <ns0:title>The Webmin application installed on the system is updated.</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-webmin_is_up_to_date_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-module_useradmin_accounts_home_perms_ocil:questionnaire:1">
+      <ns0:title>Configure new accounts to create their home directory with a default permission setting of 750.</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-module_useradmin_accounts_home_perms_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-module_useradmin_accounts_inactive_ocil:questionnaire:1">
+      <ns0:title>Configure new accounts to lock out after a number of days 
+of no activity.</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-module_useradmin_accounts_inactive_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-module_useradmin_accounts_max_ocil:questionnaire:1">
+      <ns0:title>Configure new accounts to expire their password after a maximum number days.</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-module_useradmin_accounts_max_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-module_useradmin_accounts_min_ocil:questionnaire:1">
+      <ns0:title>Configure new accounts to prevent changing passwords more than once per the minimum number of days defined.</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-module_useradmin_accounts_min_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-module_useradmin_accounts_warn_ocil:questionnaire:1">
+      <ns0:title>Configure new accounts to warn the user about their password expiring.</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-module_useradmin_accounts_warn_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-module_useradmin_accounts_password_hash_ocil:questionnaire:1">
+      <ns0:title>Configure the UserAdmin Webmin module to store passwords created using a specified hashing algorithm.</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-module_useradmin_accounts_password_hash_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-module_useradmin_accounts_min_length_ocil:questionnaire:1">
+      <ns0:title>Configure the UserAdmin Webmin module to require a minimum number of characters in passwords defined.</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-module_useradmin_accounts_min_length_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-module_useradmin_accounts_char_types_ocil:questionnaire:1">
+      <ns0:title>Configure the UserAdmin Webmin module to require at least 1 upper-case character, 1 lower-case character, 1 numeric character, and 1 special character.</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-module_useradmin_accounts_char_types_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-module_useradmin_accounts_password_dictionary_ocil:questionnaire:1">
+      <ns0:title>Configure the UserAdmin Webmin module to require passwords to not include dictionary words.</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-module_useradmin_accounts_password_dictionary_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-module_useradmin_accounts_password_same_ocil:questionnaire:1">
+      <ns0:title>Configure the UserAdmin Webmin module to require passwords to be different from the previously configured password.</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-module_useradmin_accounts_password_same_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-module_useradmin_accounts_password_masked_ocil:questionnaire:1">
+      <ns0:title>Configure the UserAdmin Webmin module to mask the password characters entered with stars.</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-module_useradmin_accounts_password_masked_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-module_useradmin_accounts_last_login_ocil:questionnaire:1">
+      <ns0:title>Configure the UserAdmin Webmin module to display last login information for all users.</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-module_useradmin_accounts_last_login_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+  </ns0:questionnaires>
+  <ns0:test_actions>
+    <ns0:boolean_question_test_action id="ocil:ssg-accounts_use_pam_action:testaction:1" question_ref="ocil:ssg-accounts_use_pam_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-accounts_passwd_cmd_action:testaction:1" question_ref="ocil:ssg-accounts_passwd_cmd_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-accounts_passwd_mode_action:testaction:1" question_ref="ocil:ssg-accounts_passwd_mode_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-sessions_login_banner_action:testaction:1" question_ref="ocil:ssg-sessions_login_banner_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-sessions_port_action:testaction:1" question_ref="ocil:ssg-sessions_port_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-sessions_save_password_action:testaction:1" question_ref="ocil:ssg-sessions_save_password_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-sessions_ssl_cipher_action:testaction:1" question_ref="ocil:ssg-sessions_ssl_cipher_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-sessions_ssl_enabled_action:testaction:1" question_ref="ocil:ssg-sessions_ssl_enabled_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-sessions_timeout_action:testaction:1" question_ref="ocil:ssg-sessions_timeout_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-logs_webmin_actions_enabled_action:testaction:1" question_ref="ocil:ssg-logs_webmin_actions_enabled_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-logs_webmin_actions_perms_action:testaction:1" question_ref="ocil:ssg-logs_webmin_actions_perms_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-logs_webmin_actions_cleared_action:testaction:1" question_ref="ocil:ssg-logs_webmin_actions_cleared_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-logs_webmin_requests_enabled_action:testaction:1" question_ref="ocil:ssg-logs_webmin_requests_enabled_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-logs_webmin_requests_perms_action:testaction:1" question_ref="ocil:ssg-logs_webmin_requests_perms_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-logs_webmin_requests_cleared_action:testaction:1" question_ref="ocil:ssg-logs_webmin_requests_cleared_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-webmin_is_up_to_date_action:testaction:1" question_ref="ocil:ssg-webmin_is_up_to_date_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-module_useradmin_accounts_home_perms_action:testaction:1" question_ref="ocil:ssg-module_useradmin_accounts_home_perms_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-module_useradmin_accounts_inactive_action:testaction:1" question_ref="ocil:ssg-module_useradmin_accounts_inactive_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-module_useradmin_accounts_max_action:testaction:1" question_ref="ocil:ssg-module_useradmin_accounts_max_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-module_useradmin_accounts_min_action:testaction:1" question_ref="ocil:ssg-module_useradmin_accounts_min_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-module_useradmin_accounts_warn_action:testaction:1" question_ref="ocil:ssg-module_useradmin_accounts_warn_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-module_useradmin_accounts_password_hash_action:testaction:1" question_ref="ocil:ssg-module_useradmin_accounts_password_hash_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-module_useradmin_accounts_min_length_action:testaction:1" question_ref="ocil:ssg-module_useradmin_accounts_min_length_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-module_useradmin_accounts_char_types_action:testaction:1" question_ref="ocil:ssg-module_useradmin_accounts_char_types_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-module_useradmin_accounts_password_dictionary_action:testaction:1" question_ref="ocil:ssg-module_useradmin_accounts_password_dictionary_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-module_useradmin_accounts_password_same_action:testaction:1" question_ref="ocil:ssg-module_useradmin_accounts_password_same_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-module_useradmin_accounts_password_masked_action:testaction:1" question_ref="ocil:ssg-module_useradmin_accounts_password_masked_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-module_useradmin_accounts_last_login_action:testaction:1" question_ref="ocil:ssg-module_useradmin_accounts_last_login_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+  </ns0:test_actions>
+  <ns0:questions>
+    <ns0:boolean_question id="ocil:ssg-accounts_use_pam_question:question:1">
+      <ns0:question_text>
+
+			Is it the case that ?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-accounts_passwd_cmd_question:question:1">
+      <ns0:question_text>
+
+			Is it the case that ?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-accounts_passwd_mode_question:question:1">
+      <ns0:question_text>
+
+			Is it the case that ?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-sessions_login_banner_question:question:1">
+      <ns0:question_text>
+
+			Is it the case that ?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-sessions_port_question:question:1">
+      <ns0:question_text>
+
+			Is it the case that ?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-sessions_save_password_question:question:1">
+      <ns0:question_text>
+
+			Is it the case that ?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-sessions_ssl_cipher_question:question:1">
+      <ns0:question_text>
+
+			Is it the case that ?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-sessions_ssl_enabled_question:question:1">
+      <ns0:question_text>
+
+			Is it the case that ?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-sessions_timeout_question:question:1">
+      <ns0:question_text>
+
+			Is it the case that ?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-logs_webmin_actions_enabled_question:question:1">
+      <ns0:question_text>
+
+			Is it the case that ?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-logs_webmin_actions_perms_question:question:1">
+      <ns0:question_text>
+
+			Is it the case that ?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-logs_webmin_actions_cleared_question:question:1">
+      <ns0:question_text>
+
+			Is it the case that ?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-logs_webmin_requests_enabled_question:question:1">
+      <ns0:question_text>
+
+			Is it the case that ?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-logs_webmin_requests_perms_question:question:1">
+      <ns0:question_text>
+
+			Is it the case that ?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-logs_webmin_requests_cleared_question:question:1">
+      <ns0:question_text>
+
+			Is it the case that ?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-webmin_is_up_to_date_question:question:1">
+      <ns0:question_text>
+
+			Is it the case that ?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-module_useradmin_accounts_home_perms_question:question:1">
+      <ns0:question_text>
+
+			Is it the case that ?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-module_useradmin_accounts_inactive_question:question:1">
+      <ns0:question_text>
+
+			Is it the case that ?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-module_useradmin_accounts_max_question:question:1">
+      <ns0:question_text>
+
+			Is it the case that ?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-module_useradmin_accounts_min_question:question:1">
+      <ns0:question_text>
+
+			Is it the case that ?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-module_useradmin_accounts_warn_question:question:1">
+      <ns0:question_text>
+
+			Is it the case that ?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-module_useradmin_accounts_password_hash_question:question:1">
+      <ns0:question_text>
+
+			Is it the case that ?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-module_useradmin_accounts_min_length_question:question:1">
+      <ns0:question_text>
+
+			Is it the case that ?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-module_useradmin_accounts_char_types_question:question:1">
+      <ns0:question_text>
+
+			Is it the case that ?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-module_useradmin_accounts_password_dictionary_question:question:1">
+      <ns0:question_text>
+
+			Is it the case that ?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-module_useradmin_accounts_password_same_question:question:1">
+      <ns0:question_text>
+
+			Is it the case that ?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-module_useradmin_accounts_password_masked_question:question:1">
+      <ns0:question_text>
+
+			Is it the case that ?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-module_useradmin_accounts_last_login_question:question:1">
+      <ns0:question_text>
+
+			Is it the case that ?
+			</ns0:question_text>
+    </ns0:boolean_question>
+  </ns0:questions>
+</ns0:ocil>

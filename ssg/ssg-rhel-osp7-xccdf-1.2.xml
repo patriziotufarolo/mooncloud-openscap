@@ -1,0 +1,2757 @@
+<?xml version="1.0"?>
+<Benchmark xmlns="http://checklists.nist.gov/xccdf/1.2" id="xccdf_org.ssgproject.content_benchmark_RHEL-7-OSP" resolved="1" xml:lang="en-US" style="SCAP_1.1">
+  <status date="2017-05-27">draft</status>
+  <title xml:lang="en-US">Guide to the Secure Configuration of Red Hat OpenStack Platform 7</title>
+  <description xml:lang="en-US">This guide presents a catalog of security-relevant
+configuration settings for Red Hat OpenStack Platform 7. It is a rendering of
+content structured in the eXtensible Configuration Checklist Description Format (XCCDF)
+in order to support security automation.  The SCAP content is
+is available in the <html:code xmlns:html="http://www.w3.org/1999/xhtml">scap-security-guide</html:code> package which is developed at
+<html:a xmlns:html="http://www.w3.org/1999/xhtml" href="https://www.open-scap.org/security-policies/scap-security-guide">https://www.open-scap.org/security-policies/scap-security-guide</html:a>.
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Providing system administrators with such guidance informs them how to securely
+configure systems under their control in a variety of network roles. Policy
+makers and baseline creators can use this catalog of settings, with its
+associated references to higher-level security control catalogs, in order to
+assist them in security baseline creation. This guide is a <html:i xmlns:html="http://www.w3.org/1999/xhtml">catalog, not a
+checklist,</html:i> and satisfaction of every item is not likely to be possible or
+sensible in many operational scenarios. However, the XCCDF format enables
+granular selection and adjustment of settings, and their association with OVAL
+and OCIL content provides an automated checking capability. Transformations of
+this document, and its associated automated checking content, are capable of
+providing baselines that meet a diverse set of policy objectives. Some example
+XCCDF <html:i xmlns:html="http://www.w3.org/1999/xhtml">Profiles</html:i>, which are selections of items that form checklists and
+can be used as baselines, are available with this guide. They can be
+processed, in an automated fashion, with tools that support the Security
+Content Automation Protocol (SCAP). The DISA STIG for Red Hat OpenStack Platform 7,
+which provides required settings for US Department of Defense systems, is
+one example of a baseline created from this guidance.
+</description>
+  <notice xml:lang="en-US" id="terms_of_use">Do not attempt to implement any of the settings in
+this guide without first testing them in a non-operational environment. The
+creators of this guidance assume no responsibility whatsoever for its use by
+other parties, and makes no guarantees, expressed or implied, about its
+quality, reliability, or any other characteristic.</notice>
+  <front-matter xml:lang="en-US">
+    <html:p xmlns:html="http://www.w3.org/1999/xhtml" xmlns:ns2="http://www.w3.org/2000/svg">
+      <ns2:svg enable-background="new 30 100 330 150" height="140px" id="Layer_1" version="1.1" viewBox="30 100 330 150" width="350px" x="0px" y="0px" xml:space="preserve">
+        <ns2:g fill="#3A3B3B">
+          <ns2:path d="m197.1 150.3s-10.1-1.2-14.4-1.2c-7.2 0-11.0 2.6-11.0 8.3 0 6.6 3.5 7.7 12.3 9.6 10.1 2.3 14.5 4.7 14.5 13.6 0 11.2-6.1 15.6-16.1 15.6-6.0 0-16.0-1.6-16.0-1.6l0.6-4.7s9.9 1.3 15.1 1.3c7.2 0 10.8-3.1 10.8-10.2 0-5.7-3.0-7.3-11.2-8.9-10.4-2.3-15.7-4.7-15.7-14.4 0-9.8 6.4-13.6 16.3-13.6 6.0 0 15.3 1.5 15.3 1.5l-0.5 4.8z"/>
+          <ns2:path d="m238.7 194.6c-3.6 0.7-9.1 1.5-13.9 1.5-15.1 0-18.5-9.2-18.5-25.9 0-17.1 3.3-26.1 18.5-26.1 5.2 0 10.7 1.0 13.9 1.6l-0.2 4.7c-3.3-0.6-9.2-1.3-13.1-1.3-11.2 0-13.2 6.7-13.2 21.1 0 14.1 1.8 20.8 13.4 20.8 4.1 0 9.5-0.7 13.0-1.3l0.2 4.8z"/>
+          <ns2:path d="m257.5 144.9h12.3l13.9 50.5h-5.6l-3.7-13.0h-21.6l-3.7 13.0h-5.5l13.9-50.5zm-3.4 32.5h19.1l-7.7-27.7h-3.8l-7.7 27.7z"/>
+          <ns2:path d="m297.2 178.4v17.0h-5.6v-50.5h18.5c11.0 0 16.1 5.3 16.1 16.3 0 11.0-5.1 17.2-16.1 17.2h-12.9zm12.8-5.0c7.4 0 10.4-4.5 10.4-12.3 0-7.7-3.1-11.3-10.4-11.3h-12.8v23.6h12.8z"/>
+        </ns2:g>
+        <ns2:g fill="#676767">
+          <ns2:path d="m176.8 211.2s-2.8-0.3-4.0-0.3c-1.5 0-2.2 0.5-2.2 1.4 0 0.9 0.5 1.2 2.8 1.9 2.9 0.9 3.8 1.8 3.8 4.0 0 3.0-2.0 4.3-4.7 4.3-1.9 0-4.5-0.6-4.5-0.6l0.3-2.1s2.7 0.4 4.1 0.4c1.5 0 2.1-0.7 2.1-1.8 0-0.8-0.5-1.2-2.4-1.8-3.1-0.9-4.2-1.9-4.2-4.1 0-2.8 1.9-4.0 4.6-4.0 1.8 0 4.5 0.5 4.5 0.5l-0.2 2.2z"/>
+          <ns2:path d="m180.6 208.7h8.8v2.4h-6.0v3.2h4.8v2.4h-4.9v3.3h6.0v2.4h-8.8v-13.6z"/>
+          <ns2:path d="m201.2 222.1c-0.9 0.2-2.7 0.5-4.0 0.5-4.2 0-5.2-2.3-5.2-7.0 0-5.2 1.2-7.0 5.2-7.0 1.4 0 3.1 0.3 4.0 0.5l-0.1 2.2c-0.9-0.1-2.6-0.3-3.5-0.3-2.1 0-2.8 0.7-2.8 4.6 0 3.7 0.5 4.6 2.8 4.6 0.9 0 2.6-0.2 3.4-0.3l0.1 2.3z"/>
+          <ns2:path d="m209.5 220.2c1.6 0 2.4-0.8 2.4-2.4v-9.1h2.8v9.0c0 3.4-1.8 4.8-5.2 4.8-3.4 0-5.2-1.4-5.2-4.8v-9.0h2.8v9.1c0 1.6 0.8 2.4 2.4 2.4z"/>
+          <ns2:path d="m221.3 217.8v4.6h-2.8v-13.6h5.3c3.1 0 4.8 1.4 4.8 4.5 0 1.9-0.8 3.1-2.0 3.9l1.9 5.2h-3.0l-1.6-4.6h-2.7zm2.5-6.7h-2.5v4.3h2.6c1.4 0 1.9-1.0 1.9-2.2 0-1.3-0.7-2.2-2.0-2.2z"/>
+          <ns2:path d="m231.9 208.7h2.8v13.6h-2.8v-13.6z"/>
+          <ns2:path d="m237.4 208.7h10.0v2.4h-3.6v11.2h-2.8v-11.2h-3.6v-2.4z"/>
+          <ns2:path d="m255.7 222.3h-2.8v-5.5l-4.2-8.1h3.1l2.5 5.4 2.5-5.4h3.1l-4.2 8.1v5.5z"/>
+          <ns2:path d="m273.4 215.1h4.0v7.1s-2.9 0.5-4.6 0.5c-4.4 0-5.6-2.5-5.6-7.0 0-5.0 1.4-7.0 5.5-7.0 2.1 0 4.7 0.6 4.7 0.6l-0.1 2.1s-2.4-0.3-4.2-0.3c-2.4 0-3.1 0.8-3.1 4.6 0 3.6 0.5 4.6 3.0 4.6 0.8 0 1.7-0.1 1.7-0.1v-2.6h-1.2v-2.4z"/>
+          <ns2:path d="m286 220.2c1.6 0 2.4-0.8 2.4-2.4v-9.1h2.8v9.0c0 3.4-1.8 4.8-5.2 4.8s-5.2-1.4-5.2-4.8v-9.0h2.8v9.1c0 1.6 0.8 2.4 2.4 2.4z"/>
+          <ns2:path d="m295.0 208.7h2.8v13.6h-2.8v-13.6z"/>
+          <ns2:path d="m301.8 222.3v-13.6h4.6c4.7 0 5.8 2.0 5.6 6.5 0 4.6-0.9 7.1-5.8 7.1h-4.6zm4.6-11.2h-1.8v8.8h1.8c2.7 0 2.9-1.6 2.9-4.7 0-3.0-0.3-4.1-3.0-4.1z"/>
+          <ns2:path d="m315.5 208.7h8.8v2.4h-6.0v3.2h4.8v2.4h-4.8v3.3h6.0v2.4h-8.8v-13.6z"/>
+        </ns2:g>
+        <ns2:path d="m116.0 204.9h-2.8c-1.5 0-2.8 1.2-2.8 2.7v19.2c0 1.5 1.3 2.7 2.8 2.7h27.9c1.5 0 2.8-1.2 2.8-2.7v-19.2c0-1.5-1.3-2.7-2.8-2.7h-2.8v-8.2c0-6.1-5.0-11.0-11.2-11.0-6.2 0-11.2 4.9-11.2 11.0v8.2zm5.6-8.2c0-3.0 2.5-5.5 5.6-5.4 3.1 0 5.6 2.4 5.6 5.5v8.2h-11.2v-8.2z" fill="#6D0B2B"/>
+        <ns2:g fill="#AD1D3F">
+          <ns2:path d="m106.4 214.7c-16.4 11.4-37.5 7.8-50.0-3.4l11.9-11.7c2.3-1.9 3.4-5.4 1.2-8.8-0.1-0.1-6.7-11.0 2.3-19.8 7.3-7.2 17.8-5.8 23.3-0.3 3.2 3.1 4.9 7.1 4.9 11.4v0.1c0 4.3-1.8 8.5-5.1 11.7-4.0 3.9-9.6 5.4-15.4 4.1-2.1-0.5-4.3 0.8-4.8 2.9-0.5 2.1 0.8 4.2 2.9 4.7 8.4 2.0 16.9-0.3 22.8-6.1 4.9-4.8 7.5-10.9 7.4-17.4-0.0-6.3-2.6-12.3-7.3-16.8-8.2-8.1-23.8-10.3-34.5 0.3-10.7 10.5-6.6 23.8-3.7 28.8l-12.8 12.6c-2.9 2.9-2.3 6.6-0.2 8.7 15.4 15.2 38.7 17.9 56.9 8.2l-0.0-9.1z"/>
+          <ns2:path d="m43.9 188.4c-1.1-7.5-1.1-21.8 11.2-33.9 8.0-7.9 18.5-12.0 29.5-11.7 10.2 0.3 20.1 4.5 27.1 11.4 7.6 7.4 11.8 17.3 11.9 27.8v0.1c1.16-0.3 2.4-0.4 3.6-0.4 1.5 0 2.9 0.2 4.3 0.6 0-0.1 0.0-0.2 0.0-0.3-0.1-12.5-5.2-24.3-14.2-33.2-8.4-8.3-20.2-13.3-32.4-13.7-13.2-0.5-25.8 4.5-35.4 14.0-9.1 8.9-14.0 20.8-14.0 33.3 0 2.4 0.2 4.8 0.5 7.2 0.6 4.0 1.8 8.1 3.7 12.2 0.9 2.0 3.2 2.8 5.2 1.9 2.0-0.9 2.9-3.1 2.0-5.1-1.5-3.3-2.6-6.8-3.1-10.1z"/>
+        </ns2:g>
+        <ns2:circle cx="127.26" cy="218.49" fill="#fff" r="3.233"/>
+      </ns2:svg>
+    </html:p>
+  </front-matter>
+  <rear-matter xml:lang="en-US">Red Hat and Red Hat Enterprise Linux are either registered
+trademarks or trademarks of Red Hat, Inc. in the United States and other
+countries. All other names are registered trademarks or trademarks of their
+respective companies.</rear-matter>
+  <platform idref="cpe:/o:redhat:enterprise_linux:7"/>
+  <platform idref="cpe:/o:redhat:enterprise_linux:7::client"/>
+  <platform idref="cpe:/o:redhat:enterprise_linux:7::computenode"/>
+  <version update="https://github.com/OpenSCAP/scap-security-guide/releases/latest">0.1.33</version>
+  <metadata>
+    <dc:publisher xmlns:dc="http://purl.org/dc/elements/1.1/">SCAP Security Guide Project</dc:publisher>
+    <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">SCAP Security Guide Project</dc:creator>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">0x66656c6978 &lt;0x66656c6978@users.noreply.github.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Gabe Alford &lt;redhatrises@gmail.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Christopher Anderson &lt;cba@fedoraproject.org&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Chuck Atkins &lt;chuck.atkins@kitware.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Molly Jo Bault &lt;Molly.Jo.Bault@ballardtech.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Joseph Bisch &lt;joseph.bisch@gmail.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Jeffrey Blank &lt;blank@eclipse.ncsc.mil&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Blake Burkhart &lt;blake.burkhart@us.af.mil&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Patrick Callahan &lt;pmc@patrickcallahan.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Nick Carboni &lt;ncarboni@redhat.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Frank Caviggia &lt;fcaviggi@ra.iad.redhat.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Eric Christensen &lt;echriste@redhat.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Caleb Cooper &lt;coopercd@ornl.gov&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Maura Dailey &lt;maura@eclipse.ncsc.mil&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Klaas Demter &lt;demter@atix.de&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Jean-Baptiste Donnette &lt;jean-baptiste.donnette@epita.fr&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">drax &lt;applezip@gmail.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Greg Elin &lt;gregelin@gitmachines.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Andrew Gilmore &lt;agilmore2@gmail.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Joshua Glemza &lt;jglemza@nasa.gov&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Steve Grubb &lt;sgrubb@redhat.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Marek Haicman &lt;mhaicman@redhat.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Trey Henefield &lt;thenefield@gmail.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">hex2a &lt;hex2a@users.noreply.github.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Robin Price II &lt;robin@redhat.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Jeremiah Jahn &lt;jeremiah@goodinassociates.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Stephan Joerrens &lt;Stephan.Joerrens@fiduciagad.de&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Yuli Khodorkovskiy &lt;ykhodorkovskiy@tresys.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Luke Kordell &lt;luke.t.kordell@lmco.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">kspargur &lt;kspargur@kspargur.csb&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Fen Labalme &lt;fen@civicactions.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Ian Lee &lt;lee1001@llnl.gov&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Jan Lieskovsky &lt;jlieskov@redhat.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Šimon Lukašík &lt;slukasik@redhat.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Jamie Lorwey Martin &lt;jlmartin@redhat.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Michael McConachie &lt;michael@redhat.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Rodney Mercer &lt;rmercer@harris.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Brian Millett &lt;bmillett@gmail.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">mmosel &lt;mmosel@kde.example.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Zbynek Moravec &lt;zmoravec@redhat.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Kazuo Moriwaka &lt;moriwaka@users.noreply.github.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Moseley &lt;michael@eclipse.ncsc.mil&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Joe Nall &lt;joe@nall.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Michele Newman &lt;mnewman@redhat.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Kaustubh Padegaonkar &lt;theTuxRacer@gmail.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Michael Palmiotto &lt;mpalmiotto@tresys.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">pcactr &lt;paul.c.arnold4.ctr@mail.mil&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Kenneth Peeples &lt;kennethwpeeples@gmail.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Frank Lin PIAT &lt;fpiat@klabs.be&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Martin Preisler &lt;mpreisle@redhat.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Raphael Sanchez Prudencio &lt;rsprudencio@redhat.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">T.O. Radzy Radzykewycz &lt;radzy@windriver.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Rick Renshaw &lt;Richard_Renshaw@xtoenergy.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Chris Reynolds &lt;c.reynolds82@gmail.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Pat Riehecky &lt;riehecky@fnal.gov&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Joshua Roys &lt;roysjosh@gmail.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">rrenshaw &lt;bofh69@yahoo.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Ray Shaw (Cont ARL/CISD) rvshaw &lt;rvshaw@esme.arl.army.mil&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Willy Santos &lt;wsantos@redhat.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Gautam Satish &lt;gautams@hpe.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Watson Sato &lt;wsato@redhat.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Satoru SATOH &lt;satoru.satoh@gmail.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Spencer Shimko &lt;sshimko@tresys.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Thomas Sjögren &lt;konstruktoid@users.noreply.github.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Francisco Slavin &lt;fslavin@tresys.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">David Smith &lt;dsmith@eclipse.ncsc.mil&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Kevin Spargur &lt;kspargur@redhat.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Kenneth Stailey &lt;kstailey.lists@gmail.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Leland Steinke &lt;leland.j.steinke.ctr@mail.mil&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Philippe Thierry &lt;phil@reseau-libre.net&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Paul Tittle &lt;ptittle@cmf.nrl.navy.mil&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Jeb Trayer &lt;jeb.d.trayer@uscg.mil&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Shawn Wells &lt;shawn@redhat.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Rob Wilmoth &lt;rwilmoth@redhat.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Lucas Yamanishi &lt;lucas.yamanishi@onyxpoint.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Kevin Zimmerman &lt;kevin.zimmerman@kitware.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Jan Černý &lt;jcerny@redhat.com&gt;</dc:contributor>
+    <dc:contributor xmlns:dc="http://purl.org/dc/elements/1.1/">Michal Šrubař &lt;msrubar@redhat.com&gt;</dc:contributor>
+    <dc:source xmlns:dc="http://purl.org/dc/elements/1.1/">https://github.com/OpenSCAP/scap-security-guide/releases/latest</dc:source>
+  </metadata>
+  <model system="urn:xccdf:scoring:default"/>
+  <Profile id="xccdf_org.ssgproject.content_profile_stig-openstack">
+    <title xml:lang="en-US">RHEL OSP STIG</title>
+    <description xml:lang="en-US" override="true">Sample profile description.</description>
+    <select idref="xccdf_org.ssgproject.content_rule_horizon_file_ownership" selected="true"/>
+    <select idref="xccdf_org.ssgproject.content_rule_horizon_file_perms" selected="true"/>
+    <select idref="xccdf_org.ssgproject.content_rule_horizon_use_ssl" selected="true"/>
+    <select idref="xccdf_org.ssgproject.content_rule_horizon_csrf_cookie_secure" selected="true"/>
+    <select idref="xccdf_org.ssgproject.content_rule_horizon_session_cookie_secure" selected="true"/>
+    <select idref="xccdf_org.ssgproject.content_rule_horizon_session_cookie_httponly" selected="true"/>
+    <select idref="xccdf_org.ssgproject.content_rule_horizon_password_autocomplete" selected="true"/>
+    <select idref="xccdf_org.ssgproject.content_rule_horizon_disable_password_reveal" selected="true"/>
+    <select idref="xccdf_org.ssgproject.content_rule_cinder_file_ownership" selected="true"/>
+    <select idref="xccdf_org.ssgproject.content_rule_cinder_file_perms" selected="true"/>
+    <select idref="xccdf_org.ssgproject.content_rule_cinder_using_keystone" selected="true"/>
+    <select idref="xccdf_org.ssgproject.content_rule_cinder_tls_enabled" selected="true"/>
+    <select idref="xccdf_org.ssgproject.content_rule_cinder_nova_tls" selected="true"/>
+    <select idref="xccdf_org.ssgproject.content_rule_cinder_glance_tls" selected="true"/>
+    <select idref="xccdf_org.ssgproject.content_rule_cinder_nas_secure_file_permissions" selected="true"/>
+    <select idref="xccdf_org.ssgproject.content_rule_cinder_osapi_max_request_body" selected="true"/>
+    <select idref="xccdf_org.ssgproject.content_rule_keystone_file_ownership" selected="true"/>
+    <select idref="xccdf_org.ssgproject.content_rule_keystone_file_perms" selected="true"/>
+    <select idref="xccdf_org.ssgproject.content_rule_keystone_use_ssl" selected="true"/>
+    <select idref="xccdf_org.ssgproject.content_rule_keystone_algorithm_hashing" selected="true"/>
+    <select idref="xccdf_org.ssgproject.content_rule_keystone_max_request_body_size" selected="true"/>
+    <select idref="xccdf_org.ssgproject.content_rule_keystone_disable_admin_token" selected="true"/>
+    <select idref="xccdf_org.ssgproject.content_rule_neutron_file_ownership" selected="true"/>
+    <select idref="xccdf_org.ssgproject.content_rule_neutron_file_perms" selected="true"/>
+    <select idref="xccdf_org.ssgproject.content_rule_neutron_use_keystone" selected="true"/>
+    <select idref="xccdf_org.ssgproject.content_rule_neutron_use_https" selected="true"/>
+    <select idref="xccdf_org.ssgproject.content_rule_neutron_api_use_ssl" selected="true"/>
+    <select idref="xccdf_org.ssgproject.content_rule_nova_file_ownership" selected="true"/>
+    <select idref="xccdf_org.ssgproject.content_rule_nova_file_perms" selected="true"/>
+    <select idref="xccdf_org.ssgproject.content_rule_nova_use_keystone" selected="true"/>
+    <select idref="xccdf_org.ssgproject.content_rule_nova_secure_authentication" selected="true"/>
+    <select idref="xccdf_org.ssgproject.content_rule_nova_secure_glance" selected="true"/>
+    <select idref="xccdf_org.ssgproject.content_group_remediation_functions" selected="false"/>
+    <select idref="xccdf_org.ssgproject.content_group_intro" selected="false"/>
+    <select idref="xccdf_org.ssgproject.content_group_general-principles" selected="false"/>
+    <select idref="xccdf_org.ssgproject.content_group_principle-encrypt-transmitted-data" selected="false"/>
+    <select idref="xccdf_org.ssgproject.content_group_principle-minimize-software" selected="false"/>
+    <select idref="xccdf_org.ssgproject.content_group_principle-separate-servers" selected="false"/>
+    <select idref="xccdf_org.ssgproject.content_group_principle-use-security-tools" selected="false"/>
+    <select idref="xccdf_org.ssgproject.content_group_principle-least-privilege" selected="false"/>
+    <select idref="xccdf_org.ssgproject.content_group_how-to-use" selected="false"/>
+    <select idref="xccdf_org.ssgproject.content_group_intro-read-sections-completely" selected="false"/>
+    <select idref="xccdf_org.ssgproject.content_group_intro-test-non-production" selected="false"/>
+    <select idref="xccdf_org.ssgproject.content_group_intro-root-shell-assumed" selected="false"/>
+    <select idref="xccdf_org.ssgproject.content_group_intro-formatting-conventions" selected="false"/>
+    <select idref="xccdf_org.ssgproject.content_group_intro-reboot-required" selected="false"/>
+    <select idref="xccdf_org.ssgproject.content_group_nist_support" selected="false"/>
+  </Profile>
+  <Group id="xccdf_org.ssgproject.content_group_remediation_functions">
+    <title xml:lang="en-US">Remediation functions used by the SCAP Security Guide Project</title>
+    <description xml:lang="en-US">XCCDF form of the various remediation functions as used by
+remediation scripts from the SCAP Security Guide Project</description>
+    <Value id="xccdf_org.ssgproject.content_value_function_fix_audit_syscall_rule" hidden="true" prohibitChanges="true" operator="equals" type="string">
+      <title xml:lang="en-US">Remediation function to fix syscall audit rule for given system call</title>
+      <description xml:lang="en-US">Function to fix syscall audit rule for given system call. It is
+based on example audit syscall rule definitions as outlined in
+/usr/share/doc/audit-2.3.7/stig.rules file provided with the audit package. It
+will combine multiple system calls belonging to the same syscall group into one
+audit rule (rather than to create audit rule per different system call) to
+avoid audit infrastructure performance penalty in the case of
+'one-audit-rule-definition-per-one-system-call'. See:
+
+	https://www.redhat.com/archives/linux-audit/2014-November/msg00009.html
+
+for further details.
+
+Expects five arguments (each of them is required) in the form of:
+  * audit tool                          tool used to load audit rules,
+                                        either 'auditctl', or 'augenrules
+  * audit rules' pattern                audit rule skeleton for same syscall
+  * syscall group                       greatest common string this rule shares
+                                        with other rules from the same group
+  * architecture                        architecture this rule is intended for
+  * full form of new rule to add        expected full form of audit rule as to
+                                        be added into audit.rules file
+
+Note: The 2-th up to 4-th arguments are used to determine how many existing
+audit rules will be inspected for resemblance with the new audit rule
+(5-th argument) the function is going to add. The rule's similarity check
+is performed to optimize audit.rules definition (merge syscalls of the same
+group into one rule) to avoid the "single-syscall-per-audit-rule" performance
+penalty.
+
+Example call:
+
+  PATTERN="-a always,exit -F arch=$ARCH -S .* -F auid&gt;=500 -F auid!=4294967295 -k delete"
+  # Use escaped BRE regex to specify rule group
+  GROUP="\(rmdir\|unlink\|rename\)"
+  FULL_RULE="-a always,exit -F arch=$ARCH -S rmdir -S unlink -S unlinkat -S rename -S renameat -F auid&gt;=500 -F auid!=4294967295 -k delete"
+  fix_audit_syscall_rule "auditctl" "$PATTERN" "$GROUP" "$ARCH" "$FULL_RULE"
+</description>
+      <value>
+function fix_audit_syscall_rule {
+
+# Load function arguments into local variables
+local tool="$1"
+local pattern="$2"
+local group="$3"
+local arch="$4"
+local full_rule="$5"
+
+# Check sanity of the input
+if [ $# -ne "5" ]
+then
+        echo "Usage: fix_audit_syscall_rule 'tool' 'pattern' 'group' 'arch' 'full rule'"
+        echo "Aborting."
+        exit 1
+fi
+
+# Create a list of audit *.rules files that should be inspected for presence and correctness
+# of a particular audit rule. The scheme is as follows:
+#
+# -----------------------------------------------------------------------------------------
+#  Tool used to load audit rules | Rule already defined  |  Audit rules file to inspect    |
+# -----------------------------------------------------------------------------------------
+#        auditctl                |     Doesn't matter    |  /etc/audit/audit.rules         |
+# -----------------------------------------------------------------------------------------
+#        augenrules              |          Yes          |  /etc/audit/rules.d/*.rules     |
+#        augenrules              |          No           |  /etc/audit/rules.d/$key.rules  |
+# -----------------------------------------------------------------------------------------
+#
+declare -a files_to_inspect
+
+# First check sanity of the specified audit tool
+if [ "$tool" != 'auditctl' ] &amp;&amp; [ "$tool" != 'augenrules' ]
+then
+        echo "Unknown audit rules loading tool: $1. Aborting."
+        echo "Use either 'auditctl' or 'augenrules'!"
+        exit 1
+# If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
+# file to the list of files to be inspected
+elif [ "$tool" == 'auditctl' ]
+then
+        files_to_inspect=("${files_to_inspect[@]}" '/etc/audit/audit.rules' )
+# If audit tool is 'augenrules', then check if the audit rule is defined
+# If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
+# If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
+elif [ "$tool" == 'augenrules' ]
+then
+        # Extract audit $key from audit rule so we can use it later
+        key=$(expr "$full_rule" : '.*-k[[:space:]]\([^[:space:]]\+\)')
+        # Check if particular audit rule is already defined
+        IFS=$'\n' matches=($(sed -s -n -e "/${pattern}/!d" -e "/${arch}/!d" -e "/${group}/!d;F" /etc/audit/rules.d/*.rules))
+        # Reset IFS back to default
+        unset IFS
+        for match in "${matches[@]}"
+        do
+                files_to_inspect=("${files_to_inspect[@]}" "${match}")
+        done
+        # Case when particular rule isn't defined in /etc/audit/rules.d/*.rules yet
+        if [ ${#files_to_inspect[@]} -eq "0" ]
+        then
+                files_to_inspect="/etc/audit/rules.d/$key.rules"
+                if [ ! -e "$files_to_inspect" ]
+                then
+                        touch "$files_to_inspect"
+                        chmod 0640 "$files_to_inspect"
+                fi
+        fi
+fi
+
+#
+# Indicator that we want to append $full_rule into $audit_file by default
+local append_expected_rule=0
+
+for audit_file in "${files_to_inspect[@]}"
+do
+
+        # Filter existing $audit_file rules' definitions to select those that:
+        # * follow the rule pattern, and
+        # * meet the hardware architecture requirement, and
+        # * are current syscall group specific
+        IFS=$'\n' existing_rules=($(sed -e "/${pattern}/!d" -e "/${arch}/!d" -e "/${group}/!d"  "$audit_file"))
+        # Reset IFS back to default
+        unset IFS
+
+        # Process rules found case-by-case
+        for rule in "${existing_rules[@]}"
+        do
+                # Found rule is for same arch &amp; key, but differs (e.g. in count of -S arguments)
+                if [ "${rule}" != "${full_rule}" ]
+                then
+                        # If so, isolate just '(-S \w)+' substring of that rule
+                        rule_syscalls=$(echo $rule | grep -o -P '(-S \w+ )+')
+                        # Check if list of '-S syscall' arguments of that rule is subset
+                        # of '-S syscall' list of expected $full_rule
+                        if grep -q -- "$rule_syscalls" &lt;&lt;&lt; "$full_rule"
+                        then
+                                # Rule is covered (i.e. the list of -S syscalls for this rule is
+                                # subset of -S syscalls of $full_rule =&gt; existing rule can be deleted
+                                # Thus delete the rule from audit.rules &amp; our array
+                                sed -i -e "/$rule/d" "$audit_file"
+                                existing_rules=("${existing_rules[@]//$rule/}")
+                        else
+                                # Rule isn't covered by $full_rule - it besides -S syscall arguments
+                                # for this group contains also -S syscall arguments for other syscall
+                                # group. Example: '-S lchown -S fchmod -S fchownat' =&gt; group='chown'
+                                # since 'lchown' &amp; 'fchownat' share 'chown' substring
+                                # Therefore:
+                                # * 1) delete the original rule from audit.rules
+                                # (original '-S lchown -S fchmod -S fchownat' rule would be deleted)
+                                # * 2) delete the -S syscall arguments for this syscall group, but
+                                # keep those not belonging to this syscall group
+                                # (original '-S lchown -S fchmod -S fchownat' would become '-S fchmod'
+                                # * 3) append the modified (filtered) rule again into audit.rules
+                                # if the same rule not already present
+                                #
+                                # 1) Delete the original rule
+                                sed -i -e "/$rule/d" "$audit_file"
+                                # 2) Delete syscalls for this group, but keep those from other groups
+                                # Convert current rule syscall's string into array splitting by '-S' delimiter
+                                IFS=$'-S' read -a rule_syscalls_as_array &lt;&lt;&lt; "$rule_syscalls"
+                                # Reset IFS back to default
+                                unset IFS
+                                # Declare new empty string to hold '-S syscall' arguments from other groups
+                                new_syscalls_for_rule=''
+                                # Walk through existing '-S syscall' arguments
+                                for syscall_arg in "${rule_syscalls_as_array[@]}"
+                                do
+                                        # Skip empty $syscall_arg values
+                                        if [ "$syscall_arg" == '' ]
+                                        then
+                                                continue
+                                        fi
+                                        # If the '-S syscall' doesn't belong to current group add it to the new list
+                                        # (together with adding '-S' delimiter back for each of such item found)
+                                        if grep -q -v -- "$group" &lt;&lt;&lt; "$syscall_arg"
+                                        then
+                                                new_syscalls_for_rule="$new_syscalls_for_rule -S $syscall_arg"
+                                        fi
+                                done
+                                # Replace original '-S syscall' list with the new one for this rule
+                                updated_rule=${rule//$rule_syscalls/$new_syscalls_for_rule}
+                                # Squeeze repeated whitespace characters in rule definition (if any) into one
+                                updated_rule=$(echo "$updated_rule" | tr -s '[:space:]')
+                                # 3) Append the modified / filtered rule again into audit.rules
+                                #    (but only in case it's not present yet to prevent duplicate definitions)
+                                if ! grep -q -- "$updated_rule" "$audit_file"
+                                then
+                                        echo "$updated_rule" &gt;&gt; "$audit_file"
+                                fi
+                        fi
+                else
+                        # $audit_file already contains the expected rule form for this
+                        # architecture &amp; key =&gt; don't insert it second time
+                        append_expected_rule=1
+                fi
+        done
+
+        # We deleted all rules that were subset of the expected one for this arch &amp; key.
+        # Also isolated rules containing system calls not from this system calls group.
+        # Now append the expected rule if it's not present in $audit_file yet
+        if [[ ${append_expected_rule} -eq "0" ]]
+        then
+                echo "$full_rule" &gt;&gt; "$audit_file"
+        fi
+done
+
+}
+</value>
+    </Value>
+    <Value id="xccdf_org.ssgproject.content_value_function_fix_audit_watch_rule" hidden="true" prohibitChanges="true" operator="equals" type="string">
+      <title xml:lang="en-US">Remediation function to fix audit file system object watch rule for given path</title>
+      <description xml:lang="en-US">Function to fix audit file system object watch rule for given path:
+  * if rule exists, also verifies the -w bits match the requirements
+  * if rule doesn't exist yet, appends expected rule form to $files_to_inspect
+    audit rules file, depending on the tool which was used to load audit rules
+
+Expects four arguments (each of them is required) in the form of:
+  * audit tool                          tool used to load audit rules,
+                                        either 'auditctl', or 'augenrules'
+  * path                                value of -w audit rule's argument
+  * required access bits                value of -p audit rule's argument
+  * key                                 value of -k audit rule's argument
+
+Example call:
+
+  fix_audit_watch_rule "auditctl" "/etc/localtime" "wa" "audit_time_rules"
+</description>
+      <value>
+function fix_audit_watch_rule {
+
+# Load function arguments into local variables
+local tool="$1"
+local path="$2"
+local required_access_bits="$3"
+local key="$4"
+
+# Check sanity of the input
+if [ $# -ne "4" ]
+then
+        echo "Usage: fix_audit_watch_rule 'tool' 'path' 'bits' 'key'"
+        echo "Aborting."
+        exit 1
+fi
+
+# Create a list of audit *.rules files that should be inspected for presence and correctness
+# of a particular audit rule. The scheme is as follows:
+#
+# -----------------------------------------------------------------------------------------
+# Tool used to load audit rules | Rule already defined  |  Audit rules file to inspect    |
+# -----------------------------------------------------------------------------------------
+#       auditctl                |     Doesn't matter    |  /etc/audit/audit.rules         |
+# -----------------------------------------------------------------------------------------
+#       augenrules              |          Yes          |  /etc/audit/rules.d/*.rules     |
+#       augenrules              |          No           |  /etc/audit/rules.d/$key.rules  |
+# -----------------------------------------------------------------------------------------
+declare -a files_to_inspect
+
+# Check sanity of the specified audit tool
+if [ "$tool" != 'auditctl' ] &amp;&amp; [ "$tool" != 'augenrules' ]
+then
+        echo "Unknown audit rules loading tool: $1. Aborting."
+        echo "Use either 'auditctl' or 'augenrules'!"
+        exit 1
+# If the audit tool is 'auditctl', then add '/etc/audit/audit.rules'
+# into the list of files to be inspected
+elif [ "$tool" == 'auditctl' ]
+then
+        files_to_inspect=("${files_to_inspect[@]}" '/etc/audit/audit.rules')
+# If the audit is 'augenrules', then check if rule is already defined
+# If rule is defined, add '/etc/audit/rules.d/*.rules' to list of files for inspection.
+# If rule isn't defined, add '/etc/audit/rules.d/$key.rules' to list of files for inspection.
+elif [ "$tool" == 'augenrules' ]
+then
+        # Case when particular audit rule is already defined in some of /etc/audit/rules.d/*.rules file
+        # Get pair -- filepath : matching_row into @matches array
+        IFS=$'\n' matches=($(grep -P "[\s]*-w[\s]+$path" /etc/audit/rules.d/*.rules))
+        # Reset IFS back to default
+        unset IFS
+        # For each of the matched entries
+        for match in "${matches[@]}"
+        do
+                # Extract filepath from the match
+                rulesd_audit_file=$(echo $match | cut -f1 -d ':')
+                # Append that path into list of files for inspection
+                files_to_inspect=("${files_to_inspect[@]}" "$rulesd_audit_file")
+        done
+        # Case when particular audit rule isn't defined yet
+        if [ ${#files_to_inspect[@]} -eq "0" ]
+        then
+                # Append '/etc/audit/rules.d/$key.rules' into list of files for inspection
+                files_to_inspect="/etc/audit/rules.d/$key.rules"
+                # If the $key.rules file doesn't exist yet, create it with correct permissions
+                if [ ! -e "$files_to_inspect" ]
+                then
+                        touch "$files_to_inspect"
+                        chmod 0640 "$files_to_inspect"
+                fi
+        fi
+fi
+
+# Finally perform the inspection and possible subsequent audit rule
+# correction for each of the files previously identified for inspection
+for audit_rules_file in "${files_to_inspect[@]}"
+do
+
+        # Check if audit watch file system object rule for given path already present
+        if grep -q -P -- "[\s]*-w[\s]+$path" "$audit_rules_file"
+        then
+                # Rule is found =&gt; verify yet if existing rule definition contains
+                # all of the required access type bits
+
+                # Escape slashes in path for use in sed pattern below
+                local esc_path=${path//$'/'/$'\/'}
+                # Define BRE whitespace class shortcut
+                local sp="[[:space:]]"
+                # Extract current permission access types (e.g. -p [r|w|x|a] values) from audit rule
+                current_access_bits=$(sed -ne "s/$sp*-w$sp\+$esc_path$sp\+-p$sp\+\([rxwa]\{1,4\}\).*/\1/p" "$audit_rules_file")
+                # Split required access bits string into characters array
+                # (to check bit's presence for one bit at a time)
+                for access_bit in $(echo "$required_access_bits" | grep -o .)
+                do
+                        # For each from the required access bits (e.g. 'w', 'a') check
+                        # if they are already present in current access bits for rule.
+                        # If not, append that bit at the end
+                        if ! grep -q "$access_bit" &lt;&lt;&lt; "$current_access_bits"
+                        then
+                                # Concatenate the existing mask with the missing bit
+                                current_access_bits="$current_access_bits$access_bit"
+                        fi
+                done
+                # Propagate the updated rule's access bits (original + the required
+                # ones) back into the /etc/audit/audit.rules file for that rule
+                sed -i "s/\($sp*-w$sp\+$esc_path$sp\+-p$sp\+\)\([rxwa]\{1,4\}\)\(.*\)/\1$current_access_bits\3/" "$audit_rules_file"
+        else
+                # Rule isn't present yet. Append it at the end of $audit_rules_file file
+                # with proper key
+
+                echo "-w $path -p $required_access_bits -k $key" &gt;&gt; "$audit_rules_file"
+        fi
+done
+}
+</value>
+    </Value>
+    <Value id="xccdf_org.ssgproject.content_value_function_package_command" hidden="true" prohibitChanges="true" operator="equals" type="string">
+      <title xml:lang="en-US">Remediation function to to install or uninstall packages on RHEL and Fedora systems</title>
+      <description xml:lang="en-US">Function to install or uninstall packages on RHEL and Fedora systems.
+
+Example Call(s):
+
+  package_command install aide
+  package_command remove telnet-server
+</description>
+      <value>
+function package_command {
+
+# Load function arguments into local variables
+local package_operation=$1
+local package=$2
+
+# Check sanity of the input
+if [ $# -ne "2" ]
+then
+  echo "Usage: package_command 'install/uninstall' 'rpm_package_name"
+  echo "Aborting."
+  exit 1
+fi
+
+# If dnf is installed, use dnf; otherwise, use yum
+if [ -f "/usr/bin/dnf" ] ; then
+  install_util="/usr/bin/dnf"
+else
+  install_util="/usr/bin/yum"
+fi
+
+if [ "$package_operation" != 'remove' ] ; then
+  # If the rpm is not installed, install the rpm
+  if ! /bin/rpm -q --quiet $package; then
+    $install_util -y $package_operation $package
+  fi
+else
+  # If the rpm is installed, uninstall the rpm
+  if /bin/rpm -q --quiet $package; then
+    $install_util -y $package_operation $package
+  fi
+fi
+
+}
+</value>
+    </Value>
+    <Value id="xccdf_org.ssgproject.content_value_function_service_command" hidden="true" prohibitChanges="true" operator="equals" type="string">
+      <title xml:lang="en-US">Remediation function to enable/disable and start/stop services on RHEL
+and Fedora systems</title>
+      <description xml:lang="en-US">Function to enable/disable and start/stop services on RHEL and
+Fedora systems.
+
+Example Call(s):
+
+  service_command enable bluetooth
+  service_command disable bluetooth.service
+
+  Using xinetd:
+  service_command disable rsh.socket xinetd=rsh
+</description>
+      <value>
+function service_command {
+
+# Load function arguments into local variables
+local service_state=$1
+local service=$2
+local xinetd=$(echo $3 | cut -d'=' -f2)
+
+# Check sanity of the input
+if [ $# -lt "2" ]
+then
+  echo "Usage: service_command 'enable/disable' 'service_name.service'"
+  echo
+  echo "To enable or disable xinetd services add \'xinetd=service_name\'"
+  echo "as the last argument"
+  echo "Aborting."
+  exit 1
+fi
+
+# If systemctl is installed, use systemctl command; otherwise, use the service/chkconfig commands
+if [ -f "/usr/bin/systemctl" ] ; then
+  service_util="/usr/bin/systemctl"
+else
+  service_util="/sbin/service"
+  chkconfig_util="/sbin/chkconfig"
+fi
+
+# If disable is not specified in arg1, set variables to enable services.
+# Otherwise, variables are to be set to disable services.
+if [ "$service_state" != 'disable' ] ; then
+  service_state="enable"
+  service_operation="start"
+  chkconfig_state="on"
+else
+  service_state="disable"
+  service_operation="stop"
+  chkconfig_state="off"
+fi
+
+# If chkconfig_util is not empty, use chkconfig/service commands.
+if ! [ "x$chkconfig_util" = x ] ; then
+  $service_util $service $service_operation
+  $chkconfig_util --level 0123456 $service $chkconfig_state
+else
+  $service_util $service_operation $service
+  $service_util $service_state $service
+fi
+
+# Test if local variable xinetd is empty using non-bashism.
+# If empty, then xinetd is not being used.
+if ! [ "x$xinetd" = x ] ; then
+  grep -qi disable /etc/xinetd.d/$xinetd &amp;&amp; \
+
+  if ! [ "$service_operation" != 'disable' ] ; then
+    sed -i "s/disable.*/disable         = no/gI" /etc/xinetd.d/$xinetd
+  else
+    sed -i "s/disable.*/disable         = yes/gI" /etc/xinetd.d/$xinetd
+  fi
+fi
+
+}
+</value>
+    </Value>
+    <Value id="xccdf_org.ssgproject.content_value_function_perform_audit_rules_privileged_commands_remediation" hidden="true" prohibitChanges="true" operator="equals" type="string">
+      <title xml:lang="en-US">Remediation function to perform remediation for 'audit_rules_privileged_commands' rule</title>
+      <description xml:lang="en-US">Function to perform remediation for 'audit_rules_privileged_commands' rule
+
+Expects two arguments:
+
+  audit_tool            tool used to load audit rules
+                        One of 'auditctl' or 'augenrules'
+
+  min_auid              Minimum original ID the user logged in with
+                        '500' for RHEL-6 and before, '1000' for RHEL-7 and after.
+
+Example Call(s):
+
+  perform_audit_rules_privileged_commands_remediation "auditctl" "500"
+  perform_audit_rules_privileged_commands_remediation "augenrules" "1000"
+</description>
+      <value>
+function perform_audit_rules_privileged_commands_remediation {
+#
+# Load function arguments into local variables
+local tool="$1"
+local min_auid="$2"
+
+# Check sanity of the input
+if [ $# -ne "2" ]
+then
+        echo "Usage: perform_audit_rules_privileged_commands_remediation 'auditctl | augenrules' '500 | 1000'"
+        echo "Aborting."
+        exit 1
+fi
+
+declare -a files_to_inspect=()
+
+# Check sanity of the specified audit tool
+if [ "$tool" != 'auditctl' ] &amp;&amp; [ "$tool" != 'augenrules' ]
+then
+        echo "Unknown audit rules loading tool: $1. Aborting."
+        echo "Use either 'auditctl' or 'augenrules'!"
+        exit 1
+# If the audit tool is 'auditctl', then:
+# * add '/etc/audit/audit.rules'to the list of files to be inspected,
+# * specify '/etc/audit/audit.rules' as the output audit file, where
+#   missing rules should be inserted
+elif [ "$tool" == 'auditctl' ]
+then
+        files_to_inspect=("/etc/audit/audit.rules")
+        output_audit_file="/etc/audit/audit.rules"
+#
+# If the audit tool is 'augenrules', then:
+# * add '/etc/audit/rules.d/*.rules' to the list of files to be inspected
+#   (split by newline),
+# * specify /etc/audit/rules.d/privileged.rules' as the output file, where
+#   missing rules should be inserted
+elif [ "$tool" == 'augenrules' ]
+then
+        IFS=$'\n' files_to_inspect=($(find /etc/audit/rules.d -maxdepth 1 -type f -name *.rules -print))
+        output_audit_file="/etc/audit/rules.d/privileged.rules"
+fi
+
+# Obtain the list of SUID/SGID binaries on the particular system (split by newline)
+# into privileged_binaries array
+IFS=$'\n' privileged_binaries=($(find / -xdev -type f -perm -4000 -o -type f -perm -2000 2&gt;/dev/null))
+
+# Keep list of SUID/SGID binaries that have been already handled within some previous iteration
+declare -a sbinaries_to_skip=()
+
+# For each found sbinary in privileged_binaries list
+for sbinary in "${privileged_binaries[@]}"
+do
+
+        # Replace possible slash '/' character in sbinary definition so we could use it in sed expressions below
+        sbinary_esc=${sbinary//$'/'/$'\/'}
+        # Check if this sbinary wasn't already handled in some of the previous iterations
+        # Return match only if whole sbinary definition matched (not in the case just prefix matched!!!)
+        if [[ $(sed -ne "/${sbinary_esc}$/p" &lt;&lt;&lt; ${sbinaries_to_skip[@]}) ]]
+        then
+                # If so, don't process it second time &amp; go to process next sbinary
+                continue
+        fi
+
+        # Reset the counter of inspected files when starting to check
+        # presence of existing audit rule for new sbinary
+        local count_of_inspected_files=0
+
+        # For each audit rules file from the list of files to be inspected
+        for afile in "${files_to_inspect[@]}"
+        do
+
+                # Search current audit rules file's content for match. Match criteria:
+                # * existing rule is for the same SUID/SGID binary we are currently processing (but
+                #   can contain multiple -F path= elements covering multiple SUID/SGID binaries)
+                # * existing rule contains all arguments from expected rule form (though can contain
+                #   them in arbitrary order)
+
+                base_search=$(sed -e "/-a always,exit/!d" -e "/-F path=${sbinary_esc}$/!d"   \
+                                  -e "/-F path=[^[:space:]]\+/!d" -e "/-F perm=.*/!d"       \
+                                  -e "/-F auid&gt;=${min_auid}/!d" -e "/-F auid!=4294967295/!d"  \
+                                  -e "/-k privileged/!d" $afile)
+
+                # Increase the count of inspected files for this sbinary
+                count_of_inspected_files=$((count_of_inspected_files + 1))
+
+                # Define expected rule form for this binary
+                expected_rule="-a always,exit -F path=${sbinary} -F perm=x -F auid&gt;=${min_auid} -F auid!=4294967295 -k privileged"
+
+                # Require execute access type to be set for existing audit rule
+                exec_access='x'
+
+                # Search current audit rules file's content for presence of rule pattern for this sbinary
+                if [[ $base_search ]]
+                then
+
+                        # Current audit rules file already contains rule for this binary =&gt;
+                        # Store the exact form of found rule for this binary for further processing
+                        concrete_rule=$base_search
+
+                        # Select all other SUID/SGID binaries possibly also present in the found rule
+                        IFS=$'\n' handled_sbinaries=($(grep -o -e "-F path=[^[:space:]]\+" &lt;&lt;&lt; $concrete_rule))
+                        IFS=$' ' handled_sbinaries=(${handled_sbinaries[@]//-F path=/})
+
+                        # Merge the list of such SUID/SGID binaries found in this iteration with global list ignoring duplicates
+                        sbinaries_to_skip=($(for i in "${sbinaries_to_skip[@]}" "${handled_sbinaries[@]}"; do echo $i; done | sort -du))
+
+                        # Separate concrete_rule into three sections using hash '#'
+                        # sign as a delimiter around rule's permission section borders
+                        concrete_rule=$(echo $concrete_rule | sed -n "s/\(.*\)\+\(-F perm=[rwax]\+\)\+/\1#\2#/p")
+
+                        # Split concrete_rule into head, perm, and tail sections using hash '#' delimiter
+                        IFS=$'#' read rule_head rule_perm rule_tail &lt;&lt;&lt;  "$concrete_rule"
+
+                        # Extract already present exact access type [r|w|x|a] from rule's permission section
+                        access_type=${rule_perm//-F perm=/}
+
+                        # Verify current permission access type(s) for rule contain 'x' (execute) permission
+                        if ! grep -q "$exec_access" &lt;&lt;&lt; "$access_type"
+                        then
+
+                                # If not, append the 'x' (execute) permission to the existing access type bits
+                                access_type="$access_type$exec_access"
+                                # Reconstruct the permissions section for the rule
+                                new_rule_perm="-F perm=$access_type"
+                                # Update existing rule in current audit rules file with the new permission section
+                                sed -i "s#${rule_head}\(.*\)${rule_tail}#${rule_head}${new_rule_perm}${rule_tail}#" $afile
+
+                        fi
+
+                # If the required audit rule for particular sbinary wasn't found yet, insert it under following conditions:
+                #
+                # * in the "auditctl" mode of operation insert particular rule each time
+                #   (because in this mode there's only one file -- /etc/audit/audit.rules to be inspected for presence of this rule),
+                #
+                # * in the "augenrules" mode of operation insert particular rule only once and only in case we have already
+                #   searched all of the files from /etc/audit/rules.d/*.rules location (since that audit rule can be defined
+                #   in any of those files and if not, we want it to be inserted only once into /etc/audit/rules.d/privileged.rules file)
+                #
+                elif [ "$tool" == "auditctl" ] || [[ "$tool" == "augenrules" &amp;&amp; $count_of_inspected_files -eq "${#files_to_inspect[@]}" ]]
+                then
+
+                        # Current audit rules file's content doesn't contain expected rule for this
+                        # SUID/SGID binary yet =&gt; append it
+                        echo $expected_rule &gt;&gt; $output_audit_file
+                fi
+
+        done
+
+done
+
+}
+</value>
+    </Value>
+    <Value id="xccdf_org.ssgproject.content_value_function_populate" hidden="true" prohibitChanges="true" operator="equals" type="string">
+      <title xml:lang="en-US">Remediation function to populate environment variables needed for unit testing</title>
+      <description xml:lang="en-US">The populate function isn't directly used by SSG at the moment but it can
+ba used for testing purposes (to verify proper work of the remediation script directly
+from the shell).</description>
+      <value>
+function populate {
+# Code to populate environment variables needed (for unit testing)
+if [ -z "${!1}" ]; then
+	echo "$1 is not defined. Exiting."
+	exit
+fi
+}
+</value>
+    </Value>
+    <Value id="xccdf_org.ssgproject.content_value_function_rhel6_perform_audit_adjtimex_settimeofday_stime_remediation" hidden="true" prohibitChanges="true" operator="equals" type="string">
+      <title xml:lang="en-US">Remediation function for the 'adjtimex', 'settimeofday', and 'stime'
+audit system calls on Red Hat Enterprise Linux 6</title>
+      <description xml:lang="en-US">Perform the remediation for the 'adjtimex', 'settimeofday', and 'stime' audit
+# system calls on Red Hat Enterprise Linux 6 OS</description>
+      <value>
+function fix_audit_syscall_rule {
+
+# Load function arguments into local variables
+local tool="$1"
+local pattern="$2"
+local group="$3"
+local arch="$4"
+local full_rule="$5"
+
+# Check sanity of the input
+if [ $# -ne "5" ]
+then
+        echo "Usage: fix_audit_syscall_rule 'tool' 'pattern' 'group' 'arch' 'full rule'"
+        echo "Aborting."
+        exit 1
+fi
+
+# Create a list of audit *.rules files that should be inspected for presence and correctness
+# of a particular audit rule. The scheme is as follows:
+# 
+# -----------------------------------------------------------------------------------------
+#  Tool used to load audit rules | Rule already defined  |  Audit rules file to inspect    |
+# -----------------------------------------------------------------------------------------
+#        auditctl                |     Doesn't matter    |  /etc/audit/audit.rules         |
+# -----------------------------------------------------------------------------------------
+#        augenrules              |          Yes          |  /etc/audit/rules.d/*.rules     |
+#        augenrules              |          No           |  /etc/audit/rules.d/$key.rules  |
+# -----------------------------------------------------------------------------------------
+#
+declare -a files_to_inspect
+
+# First check sanity of the specified audit tool
+if [ "$tool" != 'auditctl' ] &amp;&amp; [ "$tool" != 'augenrules' ]
+then
+        echo "Unknown audit rules loading tool: $1. Aborting."
+        echo "Use either 'auditctl' or 'augenrules'!"
+        exit 1
+# If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
+# file to the list of files to be inspected
+elif [ "$tool" == 'auditctl' ]
+then
+        files_to_inspect=("${files_to_inspect[@]}" '/etc/audit/audit.rules' )
+# If audit tool is 'augenrules', then check if the audit rule is defined
+# If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
+# If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
+elif [ "$tool" == 'augenrules' ]
+then
+        # Extract audit $key from audit rule so we can use it later
+        key=$(expr "$full_rule" : '.*-k[[:space:]]\([^[:space:]]\+\)')
+        # Check if particular audit rule is already defined
+        IFS=$'\n' matches=($(sed -s -n -e "/${pattern}/!d" -e "/${arch}/!d" -e "/${group}/!d;F" /etc/audit/rules.d/*.rules))
+        # Reset IFS back to default
+        unset IFS
+        for match in "${matches[@]}"
+        do
+                files_to_inspect=("${files_to_inspect[@]}" "${match}")
+        done
+        # Case when particular rule isn't defined in /etc/audit/rules.d/*.rules yet
+        if [ ${#files_to_inspect[@]} -eq "0" ]
+        then
+                files_to_inspect="/etc/audit/rules.d/$key.rules"
+                if [ ! -e "$files_to_inspect" ]
+                then
+                        touch "$files_to_inspect"
+                        chmod 0640 "$files_to_inspect"
+                fi
+        fi
+fi
+
+#
+# Indicator that we want to append $full_rule into $audit_file by default
+local append_expected_rule=0
+
+for audit_file in "${files_to_inspect[@]}"
+do
+
+        # Filter existing $audit_file rules' definitions to select those that:
+        # * follow the rule pattern, and
+        # * meet the hardware architecture requirement, and
+        # * are current syscall group specific
+        IFS=$'\n' existing_rules=($(sed -e "/${pattern}/!d" -e "/${arch}/!d" -e "/${group}/!d"  "$audit_file"))
+        # Reset IFS back to default
+        unset IFS
+
+        # Process rules found case-by-case
+        for rule in "${existing_rules[@]}"
+        do
+                # Found rule is for same arch &amp; key, but differs (e.g. in count of -S arguments)
+                if [ "${rule}" != "${full_rule}" ]
+                then
+                        # If so, isolate just '(-S \w)+' substring of that rule
+                        rule_syscalls=$(echo $rule | grep -o -P '(-S \w+ )+')
+                        # Check if list of '-S syscall' arguments of that rule is subset
+                        # of '-S syscall' list of expected $full_rule
+                        if grep -q -- "$rule_syscalls" &lt;&lt;&lt; "$full_rule"
+                        then
+                                # Rule is covered (i.e. the list of -S syscalls for this rule is
+                                # subset of -S syscalls of $full_rule =&gt; existing rule can be deleted
+                                # Thus delete the rule from audit.rules &amp; our array
+                                sed -i -e "/$rule/d" "$audit_file"
+                                existing_rules=("${existing_rules[@]//$rule/}")
+                        else
+                                # Rule isn't covered by $full_rule - it besides -S syscall arguments
+                                # for this group contains also -S syscall arguments for other syscall
+                                # group. Example: '-S lchown -S fchmod -S fchownat' =&gt; group='chown'
+                                # since 'lchown' &amp; 'fchownat' share 'chown' substring
+                                # Therefore:
+                                # * 1) delete the original rule from audit.rules
+                                # (original '-S lchown -S fchmod -S fchownat' rule would be deleted)
+                                # * 2) delete the -S syscall arguments for this syscall group, but
+                                # keep those not belonging to this syscall group
+                                # (original '-S lchown -S fchmod -S fchownat' would become '-S fchmod'
+                                # * 3) append the modified (filtered) rule again into audit.rules
+                                # if the same rule not already present
+                                #
+                                # 1) Delete the original rule
+                                sed -i -e "/$rule/d" "$audit_file"
+                                # 2) Delete syscalls for this group, but keep those from other groups
+                                # Convert current rule syscall's string into array splitting by '-S' delimiter
+                                IFS=$'-S' read -a rule_syscalls_as_array &lt;&lt;&lt; "$rule_syscalls"
+                                # Reset IFS back to default
+                                unset IFS
+                                # Declare new empty string to hold '-S syscall' arguments from other groups
+                                new_syscalls_for_rule=''
+                                # Walk through existing '-S syscall' arguments
+                                for syscall_arg in "${rule_syscalls_as_array[@]}"
+                                do
+                                        # Skip empty $syscall_arg values
+                                        if [ "$syscall_arg" == '' ]
+                                        then
+                                                continue
+                                        fi
+                                        # If the '-S syscall' doesn't belong to current group add it to the new list
+                                        # (together with adding '-S' delimiter back for each of such item found)
+                                        if grep -q -v -- "$group" &lt;&lt;&lt; "$syscall_arg"
+                                        then
+                                                new_syscalls_for_rule="$new_syscalls_for_rule -S $syscall_arg"
+                                        fi
+                                done
+                                # Replace original '-S syscall' list with the new one for this rule
+                                updated_rule=${rule//$rule_syscalls/$new_syscalls_for_rule}
+                                # Squeeze repeated whitespace characters in rule definition (if any) into one
+                                updated_rule=$(echo "$updated_rule" | tr -s '[:space:]')
+                                # 3) Append the modified / filtered rule again into audit.rules
+                                #    (but only in case it's not present yet to prevent duplicate definitions)
+                                if ! grep -q -- "$updated_rule" "$audit_file"
+                                then
+                                        echo "$updated_rule" &gt;&gt; "$audit_file"
+                                fi
+                        fi
+                else
+                        # $audit_file already contains the expected rule form for this
+                        # architecture &amp; key =&gt; don't insert it second time
+                        append_expected_rule=1
+                fi
+        done
+
+        # We deleted all rules that were subset of the expected one for this arch &amp; key.
+        # Also isolated rules containing system calls not from this system calls group.
+        # Now append the expected rule if it's not present in $audit_file yet
+        if [[ ${append_expected_rule} -eq "0" ]]
+        then
+                echo "$full_rule" &gt;&gt; "$audit_file"
+        fi
+done
+
+}
+
+function rhel6_perform_audit_adjtimex_settimeofday_stime_remediation {
+
+# Perform the remediation for the 'adjtimex', 'settimeofday', and 'stime' audit
+# system calls on Red Hat Enterprise Linux 6 OS
+#
+# Retrieve hardware architecture of the underlying system
+[ $(getconf LONG_BIT) = "32" ] &amp;&amp; RULE_ARCHS=("b32") || RULE_ARCHS=("b32" "b64")
+
+for ARCH in "${RULE_ARCHS[@]}"
+do
+        PATTERN="-a always,exit -F arch=${ARCH} -S .* -k *"
+        # Create expected audit group and audit rule form for particular system call &amp; architecture
+        if [ ${ARCH} = "b32" ]
+        then
+                # stime system call is known at 32-bit arch (see e.g "$ ausyscall i386 stime" 's output)
+                # so append it to the list of time group system calls to be audited
+                GROUP="\(adjtimex\|settimeofday\|stime\)"
+                FULL_RULE="-a always,exit -F arch=${ARCH} -S adjtimex -S settimeofday -S stime -k audit_time_rules"
+        elif [ ${ARCH} = "b64" ]
+        then
+                # stime system call isn't known at 64-bit arch (see "$ ausyscall x86_64 stime" 's output)
+                # therefore don't add it to the list of time group system calls to be audited
+                GROUP="\(adjtimex\|settimeofday\)"
+                FULL_RULE="-a always,exit -F arch=${ARCH} -S adjtimex -S settimeofday -k audit_time_rules"
+        fi
+        # Perform the remediation itself
+        fix_audit_syscall_rule "auditctl" "$PATTERN" "$GROUP" "$ARCH" "$FULL_RULE"
+done
+
+}
+</value>
+    </Value>
+    <Value id="xccdf_org.ssgproject.content_value_function_rhel7_fedora_perform_audit_adjtimex_settimeofday_stime_remediation" hidden="true" prohibitChanges="true" operator="equals" type="string">
+      <title xml:lang="en-US">Remediation function for the 'adjtimex', 'settimeofday', and 'stime'
+audit system calls on Red Hat Enterprise Linux 7 or Fedora</title>
+      <description xml:lang="en-US">Perform the remediation for the 'adjtimex', 'settimeofday', and
+'stime' audit system calls on Red Hat Enterprise Linux 7 or Fedora OSes</description>
+      <value>
+function fix_audit_syscall_rule {
+
+# Load function arguments into local variables
+local tool="$1"
+local pattern="$2"
+local group="$3"
+local arch="$4"
+local full_rule="$5"
+
+# Check sanity of the input
+if [ $# -ne "5" ]
+then
+        echo "Usage: fix_audit_syscall_rule 'tool' 'pattern' 'group' 'arch' 'full rule'"
+        echo "Aborting."
+        exit 1
+fi
+
+# Create a list of audit *.rules files that should be inspected for presence and correctness
+# of a particular audit rule. The scheme is as follows:
+# 
+# -----------------------------------------------------------------------------------------
+#  Tool used to load audit rules | Rule already defined  |  Audit rules file to inspect    |
+# -----------------------------------------------------------------------------------------
+#        auditctl                |     Doesn't matter    |  /etc/audit/audit.rules         |
+# -----------------------------------------------------------------------------------------
+#        augenrules              |          Yes          |  /etc/audit/rules.d/*.rules     |
+#        augenrules              |          No           |  /etc/audit/rules.d/$key.rules  |
+# -----------------------------------------------------------------------------------------
+#
+declare -a files_to_inspect
+
+# First check sanity of the specified audit tool
+if [ "$tool" != 'auditctl' ] &amp;&amp; [ "$tool" != 'augenrules' ]
+then
+        echo "Unknown audit rules loading tool: $1. Aborting."
+        echo "Use either 'auditctl' or 'augenrules'!"
+        exit 1
+# If audit tool is 'auditctl', then add '/etc/audit/audit.rules'
+# file to the list of files to be inspected
+elif [ "$tool" == 'auditctl' ]
+then
+        files_to_inspect=("${files_to_inspect[@]}" '/etc/audit/audit.rules' )
+# If audit tool is 'augenrules', then check if the audit rule is defined
+# If rule is defined, add '/etc/audit/rules.d/*.rules' to the list for inspection
+# If rule isn't defined yet, add '/etc/audit/rules.d/$key.rules' to the list for inspection
+elif [ "$tool" == 'augenrules' ]
+then
+        # Extract audit $key from audit rule so we can use it later
+        key=$(expr "$full_rule" : '.*-k[[:space:]]\([^[:space:]]\+\)')
+        # Check if particular audit rule is already defined
+        IFS=$'\n' matches=($(sed -s -n -e "/${pattern}/!d" -e "/${arch}/!d" -e "/${group}/!d;F" /etc/audit/rules.d/*.rules))
+        # Reset IFS back to default
+        unset IFS
+        for match in "${matches[@]}"
+        do
+                files_to_inspect=("${files_to_inspect[@]}" "${match}")
+        done
+        # Case when particular rule isn't defined in /etc/audit/rules.d/*.rules yet
+        if [ ${#files_to_inspect[@]} -eq "0" ]
+        then
+                files_to_inspect="/etc/audit/rules.d/$key.rules"
+                if [ ! -e "$files_to_inspect" ]
+                then
+                        touch "$files_to_inspect"
+                        chmod 0640 "$files_to_inspect"
+                fi
+        fi
+fi
+
+#
+# Indicator that we want to append $full_rule into $audit_file by default
+local append_expected_rule=0
+
+for audit_file in "${files_to_inspect[@]}"
+do
+
+        # Filter existing $audit_file rules' definitions to select those that:
+        # * follow the rule pattern, and
+        # * meet the hardware architecture requirement, and
+        # * are current syscall group specific
+        IFS=$'\n' existing_rules=($(sed -e "/${pattern}/!d" -e "/${arch}/!d" -e "/${group}/!d"  "$audit_file"))
+        # Reset IFS back to default
+        unset IFS
+
+        # Process rules found case-by-case
+        for rule in "${existing_rules[@]}"
+        do
+                # Found rule is for same arch &amp; key, but differs (e.g. in count of -S arguments)
+                if [ "${rule}" != "${full_rule}" ]
+                then
+                        # If so, isolate just '(-S \w)+' substring of that rule
+                        rule_syscalls=$(echo $rule | grep -o -P '(-S \w+ )+')
+                        # Check if list of '-S syscall' arguments of that rule is subset
+                        # of '-S syscall' list of expected $full_rule
+                        if grep -q -- "$rule_syscalls" &lt;&lt;&lt; "$full_rule"
+                        then
+                                # Rule is covered (i.e. the list of -S syscalls for this rule is
+                                # subset of -S syscalls of $full_rule =&gt; existing rule can be deleted
+                                # Thus delete the rule from audit.rules &amp; our array
+                                sed -i -e "/$rule/d" "$audit_file"
+                                existing_rules=("${existing_rules[@]//$rule/}")
+                        else
+                                # Rule isn't covered by $full_rule - it besides -S syscall arguments
+                                # for this group contains also -S syscall arguments for other syscall
+                                # group. Example: '-S lchown -S fchmod -S fchownat' =&gt; group='chown'
+                                # since 'lchown' &amp; 'fchownat' share 'chown' substring
+                                # Therefore:
+                                # * 1) delete the original rule from audit.rules
+                                # (original '-S lchown -S fchmod -S fchownat' rule would be deleted)
+                                # * 2) delete the -S syscall arguments for this syscall group, but
+                                # keep those not belonging to this syscall group
+                                # (original '-S lchown -S fchmod -S fchownat' would become '-S fchmod'
+                                # * 3) append the modified (filtered) rule again into audit.rules
+                                # if the same rule not already present
+                                #
+                                # 1) Delete the original rule
+                                sed -i -e "/$rule/d" "$audit_file"
+                                # 2) Delete syscalls for this group, but keep those from other groups
+                                # Convert current rule syscall's string into array splitting by '-S' delimiter
+                                IFS=$'-S' read -a rule_syscalls_as_array &lt;&lt;&lt; "$rule_syscalls"
+                                # Reset IFS back to default
+                                unset IFS
+                                # Declare new empty string to hold '-S syscall' arguments from other groups
+                                new_syscalls_for_rule=''
+                                # Walk through existing '-S syscall' arguments
+                                for syscall_arg in "${rule_syscalls_as_array[@]}"
+                                do
+                                        # Skip empty $syscall_arg values
+                                        if [ "$syscall_arg" == '' ]
+                                        then
+                                                continue
+                                        fi
+                                        # If the '-S syscall' doesn't belong to current group add it to the new list
+                                        # (together with adding '-S' delimiter back for each of such item found)
+                                        if grep -q -v -- "$group" &lt;&lt;&lt; "$syscall_arg"
+                                        then
+                                                new_syscalls_for_rule="$new_syscalls_for_rule -S $syscall_arg"
+                                        fi
+                                done
+                                # Replace original '-S syscall' list with the new one for this rule
+                                updated_rule=${rule//$rule_syscalls/$new_syscalls_for_rule}
+                                # Squeeze repeated whitespace characters in rule definition (if any) into one
+                                updated_rule=$(echo "$updated_rule" | tr -s '[:space:]')
+                                # 3) Append the modified / filtered rule again into audit.rules
+                                #    (but only in case it's not present yet to prevent duplicate definitions)
+                                if ! grep -q -- "$updated_rule" "$audit_file"
+                                then
+                                        echo "$updated_rule" &gt;&gt; "$audit_file"
+                                fi
+                        fi
+                else
+                        # $audit_file already contains the expected rule form for this
+                        # architecture &amp; key =&gt; don't insert it second time
+                        append_expected_rule=1
+                fi
+        done
+
+        # We deleted all rules that were subset of the expected one for this arch &amp; key.
+        # Also isolated rules containing system calls not from this system calls group.
+        # Now append the expected rule if it's not present in $audit_file yet
+        if [[ ${append_expected_rule} -eq "0" ]]
+        then
+                echo "$full_rule" &gt;&gt; "$audit_file"
+        fi
+done
+
+}
+
+function rhel7_fedora_perform_audit_adjtimex_settimeofday_stime_remediation {
+
+# Perform the remediation for the 'adjtimex', 'settimeofday', and 'stime' audit
+# system calls on Red Hat Enterprise Linux 7 or Fedora OSes
+#
+# Retrieve hardware architecture of the underlying system
+[ $(getconf LONG_BIT) = "32" ] &amp;&amp; RULE_ARCHS=("b32") || RULE_ARCHS=("b32" "b64")
+
+for ARCH in "${RULE_ARCHS[@]}"
+do
+
+        PATTERN="-a always,exit -F arch=${ARCH} -S .* -k *"
+        # Create expected audit group and audit rule form for particular system call &amp; architecture
+        if [ ${ARCH} = "b32" ]
+        then
+                # stime system call is known at 32-bit arch (see e.g "$ ausyscall i386 stime" 's output)
+                # so append it to the list of time group system calls to be audited
+                GROUP="\(adjtimex\|settimeofday\|stime\)"
+                FULL_RULE="-a always,exit -F arch=${ARCH} -S adjtimex -S settimeofday -S stime -k audit_time_rules"
+        elif [ ${ARCH} = "b64" ]
+        then
+                # stime system call isn't known at 64-bit arch (see "$ ausyscall x86_64 stime" 's output)
+                # therefore don't add it to the list of time group system calls to be audited
+                GROUP="\(adjtimex\|settimeofday\)"
+                FULL_RULE="-a always,exit -F arch=${ARCH} -S adjtimex -S settimeofday -k audit_time_rules"
+        fi
+        # Perform the remediation for both possible tools: 'auditctl' and 'augenrules'
+        fix_audit_syscall_rule "auditctl" "$PATTERN" "$GROUP" "$ARCH" "$FULL_RULE"
+        fix_audit_syscall_rule "augenrules" "$PATTERN" "$GROUP" "$ARCH" "$FULL_RULE"
+done
+
+}
+</value>
+    </Value>
+    <Value id="xccdf_org.ssgproject.content_value_function_replace_or_append" hidden="true" prohibitChanges="true" operator="equals" type="string">
+      <title xml:lang="en-US">Remediation function to replace configuration setting in config file or
+add the configuration setting if it does not exist yet</title>
+      <description xml:lang="en-US">Function to replace configuration setting in config file or add
+the configuration setting if it does not exist.
+
+Expects four arguments:
+
+  config_file:		Configuration file that will be modified
+  key:			Configuration option to change
+  value:		Value of the configuration option to change
+  cce:			The CCE identifier or '@CCENUM@' if no CCE identifier exists
+
+Optional arguments:
+
+  format:		Optional argument to specify the format of how key/value should be
+			modified/appended in the configuration file. The default is key = value.
+
+Example Call(s):
+
+  With default format of 'key = value':
+  replace_or_append '/etc/sysctl.conf' '^kernel.randomize_va_space' '2' '@CCENUM@'
+
+  With custom key/value format:
+  replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' 'disabled' '@CCENUM@' '%s=%s'
+
+  With a variable:
+  replace_or_append '/etc/sysconfig/selinux' '^SELINUX=' $var_selinux_state '@CCENUM@' '%s=%s'
+</description>
+      <value>
+function replace_or_append {
+  local config_file=$1
+  local key=$2
+  local value=$3
+  local cce=$4
+  local format=$5
+
+  # Check sanity of the input
+  if [ $# -lt "3" ]
+  then
+        echo "Usage: replace_or_append 'config_file_location' 'key_to_search' 'new_value'"
+        echo
+        echo "If symlinks need to be taken into account, add yes/no to the last argument"
+        echo "to allow to 'follow_symlinks'."
+        echo "Aborting."
+        exit 1
+  fi
+
+  # Test if the config_file is a symbolic link. If so, use --follow-symlinks with sed.
+  # Otherwise, regular sed command will do.
+  if test -L $config_file; then
+    sed_command="sed -i --follow-symlinks"
+  else
+    sed_command="sed -i"
+  fi
+
+  # Test that the cce arg is not empty or does not equal @CCENUM@.
+  # If @CCENUM@ exists, it means that there is no CCE assigned.
+  if ! [ "x$cce" = x ] &amp;&amp; [ "$cce" != '@CCENUM@' ]; then
+    cce="CCE-${cce}"
+  else
+    cce="CCE"
+  fi
+
+  # Strip any search characters in the key arg so that the key can be replaced without
+  # adding any search characters to the config file.
+  stripped_key=$(sed "s/[\^=\$,;+]*//g" &lt;&lt;&lt; $key)
+
+  # If there is no print format specified in the last arg, use the default format.
+  if ! [ "x$format" = x ] ; then
+    printf -v formatted_output "$format" "$stripped_key" "$value"
+  else
+    formatted_output="$stripped_key = $value"
+  fi
+
+  # If the key exists, change it. Otherwise, add it to the config_file.
+  if `grep -qi $key $config_file` ; then
+    $sed_command "s/$key.*/$formatted_output/g" $config_file
+  else
+    # \n is precaution for case where file ends without trailing newline
+    echo -e "\n# Per $cce: Set $formatted_output in $config_file" &gt;&gt; $config_file
+    echo -e "$formatted_output" &gt;&gt; $config_file
+  fi
+
+}
+</value>
+    </Value>
+    <Value id="xccdf_org.ssgproject.content_value_function_firefox_js_setting" hidden="true" prohibitChanges="true" operator="equals" type="string">
+      <title xml:lang="en-US">Remediation function to replace configuration setting(s) in the Firefox
+preferences JavaScript file or add the preference if it does not exist yet</title>
+      <description xml:lang="en-US">Function to replace configuration setting(s) in the Firefox
+preferences JavaScript file or add the preference if it does not exist.
+
+Expects three arguments:
+
+  config_file:          Configuration file that will be modified
+  key:                  Configuration option to change
+  value:                Value of the configuration option to change
+
+
+Example Call(s):
+
+  Without string or variable:
+  firefox_js_setting "stig_settings.js" "general.config.obscure_value" "0"
+
+  With string:
+  firefox_js_setting "stig_settings.js" "general.config.filename" "\"stig.cfg\""
+
+  With a string variable:
+  firefox_js_setting "stig_settings.js" "general.config.filename" "\"$var_config_file_name\""
+</description>
+      <value>
+function firefox_js_setting {
+  local firefox_js=$1
+  local key=$2
+  local value=$3
+  local firefox_dirs="/usr/lib/firefox /usr/lib64/firefox /usr/local/lib/firefox /usr/local/lib64/firefox"
+  local firefox_pref="/defaults/pref"
+  local firefox_preferences="/defaults/preferences"
+
+  # Check sanity of input
+  if [ $# -lt "3" ]
+  then
+        echo "Usage: firefox_js_setting 'config_javascript_file' 'key_to_search' 'new_value'"
+        echo
+        echo "Aborting."
+        exit 1
+  fi
+
+  # Check the possible Firefox install directories
+  for firefox_dir in ${firefox_dirs}; do
+    # If the Firefox directory exists, then Firefox is installed
+    if [ -d "${firefox_dir}" ]; then
+      # Different versions of Firefox have different preferences directories, check for them and set the right one
+      if [ -d "${firefox_dir}/${firefox_pref}" ] ; then
+        local firefox_pref_dir="${firefox_dir}/${firefox_pref}"
+      elif [ -d "${firefox_dir}/${firefox_preferences}" ] ; then
+        local firefox_pref_dir="${firefox_dir}/${firefox_preferences}"
+      else
+        mkdir -m 755 -p "${firefox_dir}/${firefox_preferences}"
+        local firefox_pref_dir="${firefox_dir}/${firefox_preferences}"
+      fi
+
+      # Make sure the Firefox .js file exists and has the appropriate permissions
+      if ! [ -f "${firefox_pref_dir}/${firefox_js}" ] ; then
+        touch "${firefox_pref_dir}/${firefox_js}"
+        chmod 644 "${firefox_pref_dir}/${firefox_js}"
+      fi
+
+      # If the key exists, change it. Otherwise, add it to the config_file.
+      if `grep -q "^pref(\"${key}\", " "${firefox_pref_dir}/${firefox_js}"` ; then
+        sed -i "s/pref(\"${key}\".*/pref(\"${key}\", ${value});/g" "${firefox_pref_dir}/${firefox_js}"
+      else
+        echo "pref(\"${key}\", ${value});" &gt;&gt; "${firefox_pref_dir}/${firefox_js}"
+      fi
+    fi
+  done
+
+}
+</value>
+    </Value>
+    <Value id="xccdf_org.ssgproject.content_value_function_firefox_cfg_setting" hidden="true" prohibitChanges="true" operator="equals" type="string">
+      <title xml:lang="en-US">Remediation function to replace configuration setting(s) in the Firefox
+preferences configuration (.cfg) file or add the preference if it does not exist yet</title>
+      <description xml:lang="en-US">Function to replace configuration setting(s) in the Firefox
+preferences configuration (.cfg) file or add the preference if it does not exist.
+
+Expects three arguments:
+
+  config_file:          Configuration file that will be modified
+  key:                  Configuration option to change
+  value:                Value of the configuration option to change
+
+
+Example Call(s):
+
+  Without string or variable:
+  firefox_cfg_setting "stig.cfg" "extensions.update.enabled" "false"
+
+  With string:
+  firefox_cfg_setting "stig.cfg" "security.default_personal_cert" "\"Ask Every Time\""
+
+  With a string variable:
+  firefox_cfg_setting "stig.cfg" "browser.startup.homepage\" "\"${var_default_home_page}\""
+</description>
+      <value>
+function firefox_cfg_setting {
+  local firefox_cfg=$1
+  local key=$2
+  local value=$3
+  local firefox_dirs="/usr/lib/firefox /usr/lib64/firefox /usr/local/lib/firefox /usr/local/lib64/firefox"
+
+  # Check sanity of input
+  if [ $# -lt "3" ]
+  then
+        echo "Usage: firefox_cfg_setting 'config_cfg_file' 'key_to_search' 'new_value'"
+        echo
+        echo "Aborting."
+        exit 1
+  fi
+
+  # Check the possible Firefox install directories
+  for firefox_dir in ${firefox_dirs}; do
+    # If the Firefox directory exists, then Firefox is installed
+    if [ -d "${firefox_dir}" ]; then
+      # Make sure the Firefox .cfg file exists and has the appropriate permissions
+      if ! [ -f "${firefox_dir}/${firefox_cfg}" ] ; then
+        touch "${firefox_dir}/${firefox_cfg}"
+        chmod 644 "${firefox_dir}/${firefox_cfg}"
+      fi
+
+      # If the key exists, change it. Otherwise, add it to the config_file.
+      if `grep -q "^lockPref(\"${key}\", " "${firefox_dir}/${firefox_cfg}"` ; then
+        sed -i "s/lockPref(\"${key}\".*/lockPref(\"${key}\", ${value});/g" "${firefox_dir}/${firefox_cfg}"
+      else
+        echo "lockPref(\"${key}\", ${value});" &gt;&gt; "${firefox_dir}/${firefox_cfg}"
+      fi
+    fi
+  done
+}
+</value>
+    </Value>
+  </Group>
+  <Group id="xccdf_org.ssgproject.content_group_intro">
+    <title xml:lang="en-US">Introduction</title>
+    <description xml:lang="en-US">
+The purpose of this guidance is to provide security configuration
+recommendations and baselines for the Red Hat OpenStack Platform 7 operating
+system. Recommended settings for the basic operating system are provided,
+as well as for many network services that the system can provide to other systems.
+The guide is intended for system administrators. Readers are assumed to
+possess basic system administration skills for Unix-like systems, as well
+as some familiarity with the product's documentation and administration
+conventions. Some instructions within this guide are complex.
+All directions should be followed completely and with understanding of
+their effects in order to avoid serious adverse effects on the system
+and its security.
+</description>
+    <Group id="xccdf_org.ssgproject.content_group_general-principles">
+      <title xml:lang="en-US">General Principles</title>
+      <description xml:lang="en-US">
+The following general principles motivate much of the advice in this
+guide and should also influence any configuration decisions that are
+not explicitly covered.
+</description>
+      <Group id="xccdf_org.ssgproject.content_group_principle-encrypt-transmitted-data">
+        <title xml:lang="en-US">Encrypt Transmitted Data Whenever Possible</title>
+        <description xml:lang="en-US">
+Data transmitted over a network, whether wired or wireless, is susceptible
+to passive monitoring. Whenever practical solutions for encrypting
+such data exist, they should be applied. Even if data is expected to
+be transmitted only over a local network, it should still be encrypted.
+Encrypting authentication data, such as passwords, is particularly
+important. Networks of Red Hat OpenStack Platform 7 machines can and should be configured
+so that no unencrypted authentication data is ever transmitted between
+machines.
+</description>
+      </Group>
+      <Group id="xccdf_org.ssgproject.content_group_principle-minimize-software">
+        <title xml:lang="en-US">Minimize Software to Minimize Vulnerability</title>
+        <description xml:lang="en-US">
+The simplest way to avoid vulnerabilities in software is to avoid
+installing that software. On Red Hat OpenStack Platform 7,
+the RPM Package Manager (originally Red Hat
+Package Manager, abbreviated RPM)
+allows for careful management of
+the set of software packages installed on a system. Installed software
+contributes to system vulnerability in several ways. Packages that
+include setuid programs may provide local attackers a potential path to
+privilege escalation. Packages that include network services may give
+this opportunity to network-based attackers. Packages that include
+programs which are predictably executed by local users (e.g. after
+graphical login) may provide opportunities for trojan horses or other
+attack code to be run undetected. The number of software packages
+installed on a system can almost always be significantly pruned to include
+only the software for which there is an environmental or operational need.
+</description>
+      </Group>
+      <Group id="xccdf_org.ssgproject.content_group_principle-separate-servers">
+        <title xml:lang="en-US">Run Different Network Services on Separate Systems</title>
+        <description xml:lang="en-US">
+Whenever possible, a server should be dedicated to serving exactly one
+network service. This limits the number of other services that can
+be compromised in the event that an attacker is able to successfully
+exploit a software flaw in one network service.
+</description>
+      </Group>
+      <Group id="xccdf_org.ssgproject.content_group_principle-use-security-tools">
+        <title xml:lang="en-US">Configure Security Tools to Improve System Robustness</title>
+        <description xml:lang="en-US">
+Several tools exist which can be effectively used to improve a system's
+resistance to and detection of unknown attacks. These tools can improve
+robustness against attack at the cost of relatively little configuration
+effort. In particular, this guide recommends and discusses the use of
+host-based firewalling, SELinux for protection against
+vulnerable services, and a logging and auditing infrastructure for
+detection of problems.
+</description>
+      </Group>
+      <Group id="xccdf_org.ssgproject.content_group_principle-least-privilege">
+        <title xml:lang="en-US">Least Privilege</title>
+        <description xml:lang="en-US">
+Grant the least privilege necessary for user accounts and software to perform tasks.
+For example, <html:code xmlns:html="http://www.w3.org/1999/xhtml">sudo</html:code> can be implemented to limit authorization to super user
+accounts on the system only to designated personnel. Another example is to limit
+logins on server systems to only those administrators who need to log into them in
+order to perform administration tasks. Using SELinux also follows the principle of
+least privilege: SELinux policy can confine software to perform only actions on the
+system that are specifically allowed. This can be far more restrictive than the
+actions permissible by the traditional Unix permissions model.
+</description>
+      </Group>
+    </Group>
+    <Group id="xccdf_org.ssgproject.content_group_how-to-use">
+      <title xml:lang="en-US">How to Use This Guide</title>
+      <description xml:lang="en-US">
+Readers should heed the following points when using the guide.
+</description>
+      <Group id="xccdf_org.ssgproject.content_group_intro-read-sections-completely">
+        <title xml:lang="en-US">Read Sections Completely and in Order</title>
+        <description xml:lang="en-US">
+Each section may build on information and recommendations discussed in
+prior sections. Each section should be read and understood completely;
+instructions should never be blindly applied. Relevant discussion may
+occur after instructions for an action. 
+</description>
+      </Group>
+      <Group id="xccdf_org.ssgproject.content_group_intro-test-non-production">
+        <title xml:lang="en-US">Test in Non-Production Environment</title>
+        <description xml:lang="en-US">
+This guidance should always be tested in a non-production environment
+before deployment. This test environment should simulate the setup in
+which the system will be deployed as closely as possible.
+</description>
+      </Group>
+      <Group id="xccdf_org.ssgproject.content_group_intro-root-shell-assumed">
+        <title xml:lang="en-US">Root Shell Environment Assumed</title>
+        <description xml:lang="en-US">
+Most of the actions listed in this document are written with the
+assumption that they will be executed by the root user running the
+<html:code xmlns:html="http://www.w3.org/1999/xhtml">/bin/bash</html:code> shell. Commands preceded with a hash mark (#)
+assume that the administrator will execute the commands as root, i.e.
+apply the command via <html:code xmlns:html="http://www.w3.org/1999/xhtml">sudo</html:code> whenever possible, or use
+<html:code xmlns:html="http://www.w3.org/1999/xhtml">su</html:code> to gain root privileges if <html:code xmlns:html="http://www.w3.org/1999/xhtml">sudo</html:code> cannot be
+used. Commands which can be executed as a non-root user are are preceded
+by a dollar sign ($) prompt.
+</description>
+      </Group>
+      <Group id="xccdf_org.ssgproject.content_group_intro-formatting-conventions">
+        <title xml:lang="en-US">Formatting Conventions</title>
+        <description xml:lang="en-US">
+Commands intended for shell execution, as well as configuration file text,
+are featured in a <html:code xmlns:html="http://www.w3.org/1999/xhtml">monospace font</html:code>. <html:i xmlns:html="http://www.w3.org/1999/xhtml">Italics</html:i> are used
+to indicate instances where the system administrator must substitute
+the appropriate information into a command or configuration file.
+</description>
+      </Group>
+      <Group id="xccdf_org.ssgproject.content_group_intro-reboot-required">
+        <title xml:lang="en-US">Reboot Required</title>
+        <description xml:lang="en-US">
+A system reboot is implicitly required after some actions in order to
+complete the reconfiguration of the system. In many cases, the changes
+will not take effect until a reboot is performed. In order to ensure
+that changes are applied properly and to test functionality, always
+reboot the system after applying a set of recommendations from this guide.
+</description>
+      </Group>
+    </Group>
+  </Group>
+  <Group id="xccdf_org.ssgproject.content_group_services">
+    <title xml:lang="en-US">Services</title>
+    <description xml:lang="en-US">
+The best protection against vulnerable software is running less software. This section describes how to review
+the software which Red Hat OpenStack Platform 7 installs on a system and disable software which is not needed. It
+then enumerates the software packages installed on a default Red Hat OpenStack Platform 7 system and provides guidance about which
+ones can be safely disabled.
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/><html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Red Hat OpenStack Platform 7 provides a convenient minimal install option that essentially installs the bare necessities for a functional
+system. When building Red Hat OpenStack Platform 7 systems, it is highly recommended to select the minimal packages and then build up
+the system from there.
+</description>
+    <Group id="xccdf_org.ssgproject.content_group_horizon">
+      <title xml:lang="en-US">Horizon STIG Checklist</title>
+      <description xml:lang="en-US">High level overview of Horizon STIG settings to go here!</description>
+      <Rule id="xccdf_org.ssgproject.content_rule_horizon_file_ownership" selected="false" severity="low">
+        <title xml:lang="en-US">Check-Dashboard-01: Is user/group of config files set to root/horizon?</title>
+        <description xml:lang="en-US">
+Configuration files contain critical parameters and information required for smooth functioning of the component. If an unprivileged user, either intentionally or accidentally modifies or deletes any of the parameters or the file itself then it would cause severe availability issues causing a denial of service to the other end users. Thus user ownership of such critical configuration files must be set to root and group ownership must be set to horizon.
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Run the following commands:
+
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:code xmlns:html="http://www.w3.org/1999/xhtml">
+$ stat -L -c "%U %G"  /etc/openstack-dashboard/local_settings | egrep "root horizon"
+</html:code>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Pass: If user and group ownership of the config file is set to root and horizon respectively. The above commands show output of root horizon.
+
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Fail: If the above commands does not return any output as the user and group ownership might have set to any user other than root or any group other than horizon.
+</description>
+        <fix id="horizon_file_ownership" system="urn:xccdf:fix:script:sh" complexity="low" disruption="low" strategy="enable">chown root /etc/openstack-dashboard/local_settings
+chgrp horizon /etc/openstack-dashboard/local_settings
+</fix>
+      </Rule>
+      <Rule id="xccdf_org.ssgproject.content_rule_horizon_file_perms" selected="false" severity="low">
+        <title xml:lang="en-US">Check-Dashboard-02: Are strict permissions set for horizon configuration files?</title>
+        <description xml:lang="en-US">
+Similar to the previous check, it is recommended to set strict access permissions for such configuration files.
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+
+Run the following commands:
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:code xmlns:html="http://www.w3.org/1999/xhtml">
+$ stat -L -c "%a" /etc/openstack-dashboard/local_settings
+</html:code>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Pass: If permissions are set to 640 or stricter. The permissions of 640 translates into owner r/w, group r, and no rights to others i.e. “u=rw,g=r,o=”. Note that with Check-Dashboard-01: Is user/group of config files set to root/horizon? and permissions set to 640, root has read/write access and horizon has read access to these configuration files. The access rights can also be validated using the following command. This command will only be available on your system if it supports ACLs.
+
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:code xmlns:html="http://www.w3.org/1999/xhtml">
+$ getfacl --tabular -a /etc/openstack-dashboard/local_settings
+<html:br/>
+getfacl: Removing leading '/' from absolute path names
+<html:br/>
+# file: etc/openstack-dashboard/local_settings
+<html:br/>
+USER   root     rw-
+<html:br/>
+GROUP  horizon  r--
+<html:br/>
+mask            r--
+<html:br/>
+other           ---
+</html:code>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Fail: If permissions are not set to at least 640.
+</description>
+        <fix id="horizon_file_perms" system="urn:xccdf:fix:script:sh" complexity="low" disruption="low" strategy="enable">chmod 640 /etc/openstack-dashboard/local_settings
+</fix>
+      </Rule>
+      <Rule id="xccdf_org.ssgproject.content_rule_horizon_use_ssl" selected="false" severity="low">
+        <title xml:lang="en-US">Check-Dashboard-03: Is USE_SSL parameter set to True?</title>
+        <description xml:lang="en-US">
+Openstack services communicate with each other using various protocols and the communication might involve sensitive/confidential information. An attacker may try to eavesdrop on the channel in order to get access to sensitive information. Thus all the services must communicate with each other using a secured communication protocol like HTTPS.
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Pass: If value of parameter USE_SSL in /etc/openstack-dashboard/local_settings is set to True.
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Fail: If value of parameter USE_SSL in /etc/openstack-dashboard/local_settings is set to False.
+</description>
+        <fix id="horizon_use_ssl" system="urn:xccdf:fix:script:sh" complexity="low" disruption="low" strategy="enable">openstack-config --set /etc/openstack-dashboard/local_settings DEFAULT use_ssl True
+</fix>
+        <check system="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+          <check-content-ref name="oval:ssg-horizon_use_ssl:def:1" href="ssg-rhel-osp7-oval.xml"/>
+        </check>
+      </Rule>
+      <Rule id="xccdf_org.ssgproject.content_rule_horizon_csrf_cookie_secure" selected="false" severity="low">
+        <title xml:lang="en-US">Check-Dashboard-04: Is CSRF_COOKIE_SECURE parameter set to True?</title>
+        <description xml:lang="en-US">
+CSRF (Cross-site request forgery) is an attack which forces an end user to execute unauthorized commands on a web application in which he/she is currently authenticated. A successful CSRF exploit can compromise end user data and operations in case of normal user. If the targeted end user has admin privileges, this can compromise the entire web application.
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Pass: If value of parameter CSRF_COOKIE_SECURE in /etc/openstack-dashboard/local_settings is set to True.
+
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Fail: If value of parameter CSRF_COOKIE_SECURE in /etc/openstack-dashboard/local_settings is set to False.
+</description>
+        <fix id="horizon_csrf_cookie_secure" system="urn:xccdf:fix:script:sh" complexity="low" disruption="low" strategy="enable">openstack-config --set /etc/openstack-dashboard/local_settings DEFAULT CSRF_COOKIE_SECURE True
+</fix>
+        <check system="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+          <check-content-ref name="oval:ssg-horizon_csrf_cookie_secure:def:1" href="ssg-rhel-osp7-oval.xml"/>
+        </check>
+      </Rule>
+      <Rule id="xccdf_org.ssgproject.content_rule_horizon_session_cookie_secure" selected="false" severity="low">
+        <title xml:lang="en-US">Check-Dashboard-05: Is SESSION_COOKIE_SECURE parameter set to True?</title>
+        <description xml:lang="en-US">
+The “SECURE” cookie attribute instructs web browsers to only send the cookie through an encrypted HTTPS (SSL/TLS) connection. This session protection mechanism is mandatory to prevent the disclosure of the session ID through MitM (Man-in-the-Middle) attacks. It ensures that an attacker cannot simply capture the session ID from web browser traffic.
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Pass: If value of parameter SESSION_COOKIE_SECURE in /etc/openstack-dashboard/local_settings is set to True.
+
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Fail: If value of parameter SESSION_COOKIE_SECURE in /etc/openstack-dashboard/local_settings is set to False.
+</description>
+        <fix id="horizon_session_cookie_secure" system="urn:xccdf:fix:script:sh" complexity="low" disruption="low" strategy="enable">openstack-config --set /etc/openstack-dashboard/local_settings DEFAULT SESSION_COOKIE_SECURE True
+</fix>
+        <check system="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+          <check-content-ref name="oval:ssg-horizon_session_cookie_secure:def:1" href="ssg-rhel-osp7-oval.xml"/>
+        </check>
+      </Rule>
+      <Rule id="xccdf_org.ssgproject.content_rule_horizon_session_cookie_httponly" selected="false" severity="low">
+        <title xml:lang="en-US">Check-Dashboard-06: Is SESSION_COOKIE_HTTPONLY parameter set to True?</title>
+        <description xml:lang="en-US">
+The “HTTPONLY” cookie attribute instructs web browsers not to allow scripts (e.g. JavaScript or VBscript) an ability to access the cookies via the DOM document.cookie object. This session ID protection is mandatory to prevent session ID stealing through XSS attacks.
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Pass: If value of parameter SESSION_COOKIE_HTTPONLY in /etc/openstack-dashboard/local_settings is set to True.
+
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Fail: If value of parameter SESSION_COOKIE_HTTPONLY in /etc/openstack-dashboard/local_settings is set to False.
+</description>
+        <fix id="horizon_session_cookie_httponly" system="urn:xccdf:fix:script:sh" complexity="low" disruption="low" strategy="enable">openstack-config --set /etc/openstack-dashboard/local_settings DEFAULT SESSION_COOKIE_HTTPONLY True
+</fix>
+        <check system="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+          <check-content-ref name="oval:ssg-horizon_session_cookie_httponly:def:1" href="ssg-rhel-osp7-oval.xml"/>
+        </check>
+      </Rule>
+      <Rule id="xccdf_org.ssgproject.content_rule_horizon_password_autocomplete" selected="false" severity="low">
+        <title xml:lang="en-US">Check-Dashboard-07: Is password_autocomplete set to False?</title>
+        <description xml:lang="en-US">
+Common feature that applications use to provide users a convenience is to cache the password locally in the browser (on the client machine) and having it ‘pre-typed’ in all subsequent requests. While this feature can be perceived as extremely friendly for the average user, at the same time, it introduces a flaw, as the user account becomes easily accessible to anyone that uses the same account on the client machine and thus may lead to compromise of the user account.
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Pass: If value of parameter password_autocomplete in /etc/openstack-dashboard/local_settings is set to off.
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Fail: If value of parameter password_autocomplete in /etc/openstack-dashboard/local_settings is set to on.
+</description>
+        <fix id="horizon_password_autocomplete" system="urn:xccdf:fix:script:sh" complexity="low" disruption="low" strategy="enable">openstack-config --set /etc/openstack-dashboard/local_settings DEFAULT PASSWORD_AUTOCOMPLETE True
+</fix>
+        <check system="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+          <check-content-ref name="oval:ssg-horizon_password_autocomplete:def:1" href="ssg-rhel-osp7-oval.xml"/>
+        </check>
+      </Rule>
+      <Rule id="xccdf_org.ssgproject.content_rule_horizon_disable_password_reveal" selected="false" severity="low">
+        <title xml:lang="en-US">Check-Dashboard-08: Is disable_password_reveal set to True?</title>
+        <description xml:lang="en-US">
+Similar to the previous check, it is recommended not to reveal password fields.
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Pass: If value of parameter disable_password_reveal in /etc/openstack-dashboard/local_settings is set to True.
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Fail: If value of parameter disable_password_reveal in /etc/openstack-dashboard/local_settings is set to False.
+</description>
+        <fix id="horizon_disable_password_reveal" system="urn:xccdf:fix:script:sh" complexity="low" disruption="low" strategy="enable">openstack-config --set /etc/openstack-dashboard/local_settings DEFAULT DISABLE_PASSWORD_REVEAL True
+</fix>
+        <check system="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+          <check-content-ref name="oval:ssg-horizon_disable_password_reveal:def:1" href="ssg-rhel-osp7-oval.xml"/>
+        </check>
+      </Rule>
+    </Group>
+    <Group id="xccdf_org.ssgproject.content_group_cinder">
+      <title xml:lang="en-US">Cinder STIG Checklist</title>
+      <description xml:lang="en-US">High level overview of Cinder STIG settings to go here!</description>
+      <Rule id="xccdf_org.ssgproject.content_rule_cinder_file_ownership" selected="false" severity="low">
+        <title xml:lang="en-US">Check-Block-01: Is user/group ownership of config files set to root/cinder?</title>
+        <description xml:lang="en-US">
+Configuration files contain critical parameters and information required for smooth functioning of the component. If an unprivileged user, either intentionally or accidentally, modifies or deletes any of the parameters or the file itself then it would cause severe availability issues resulting in a denial of service to the other end users. Thus user ownership of such critical configuration files must be set to root and group ownership must be set to cinder.
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Run the following commands:
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:code xmlns:html="http://www.w3.org/1999/xhtml">
+$ stat -L -c "%U %G" /etc/cinder/cinder.conf | egrep "root cinder"
+<html:br/>
+$ stat -L -c "%U %G" /etc/cinder/api-paste.ini | egrep "root cinder"
+<html:br/>
+$ stat -L -c "%U %G" /etc/cinder/policy.json | egrep "root cinder"
+<html:br/>
+$ stat -L -c "%U %G" /etc/cinder/rootwrap.conf | egrep "root cinder"
+</html:code>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Pass: If user and group ownership of all these config files is set to root and cinder respectively. The above commands show output of root cinder.
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Fail: If the above commands does not return any output as the user and group ownership might have set to any user other than root or any group other than cinder.
+</description>
+        <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">FOO-1(a)</reference>
+        <ident system="https://nvd.nist.gov/cce/index.cfm">CCE-RHELOSP-CCE-TBD</ident>
+        <fix id="cinder_file_ownership" system="urn:xccdf:fix:script:sh" complexity="low" disruption="low" strategy="enable">for file in /etc/cinder/cinder.conf \
+		/etc/cinder/api-paste.ini \
+		/etc/cinder/policy.json \
+		/etc/cinder/rootwrap.conf; do
+	chown root $file
+	chgrp cinder $file
+done
+</fix>
+      </Rule>
+      <Rule id="xccdf_org.ssgproject.content_rule_cinder_file_perms" selected="false" severity="low">
+        <title xml:lang="en-US">Check-Block-02: Are strict permissions set for Compute configuration files?</title>
+        <description xml:lang="en-US">
+Similar to the previous check, it is recommended to set strict access permissions for such configuration files.
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Run the following commands:
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:code xmlns:html="http://www.w3.org/1999/xhtml">
+$ stat -L -c "%a" /etc/cinder/cinder.conf
+<html:br/>
+$ stat -L -c "%a" /etc/cinder/api-paste.ini
+<html:br/>
+$ stat -L -c "%a" /etc/cinder/policy.json
+<html:br/>
+$ stat -L -c "%a" /etc/cinder/rootwrap.conf
+</html:code>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Pass: If permissions are set to 640 or stricter. The permissions of 640 translates into owner r/w, group r, and no rights to others i.e. “u=rw,g=r,o=”. Note that with Check-Block-01: Is user/group ownership of config files set to root/cinder? and permissions set to 640, root has read/write access and cinder has read access to these configuration files. The access rights can also be validated using the following command. This command will only be available on your system if it supports ACLs.
+
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:code xmlns:html="http://www.w3.org/1999/xhtml">
+$ getfacl --tabular -a /etc/cinder/cinder.conf
+<html:br/>
+getfacl: Removing leading '/' from absolute path names
+<html:br/>
+# file: etc/cinder/cinder.conf
+<html:br/>
+USER   root  rw-
+<html:br/>
+GROUP  cinder  r--
+<html:br/>
+mask         r--
+<html:br/>
+other        ---
+</html:code>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Fail: If permissions are not set to at least 640.
+</description>
+        <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">FOO-1(a)</reference>
+        <ident system="https://nvd.nist.gov/cce/index.cfm">CCE-RHELOSP-CCE-TBD</ident>
+        <fix id="cinder_file_perms" system="urn:xccdf:fix:script:sh" complexity="low" disruption="low" strategy="enable">chmod 640 /etc/cinder/cinder.conf
+chmod 640 /etc/cinder/api-paste.ini
+chmod 640 /etc/cinder/policy.json
+chmod 640 /etc/cinder/rootwrap.conf
+</fix>
+      </Rule>
+      <Rule id="xccdf_org.ssgproject.content_rule_cinder_using_keystone" selected="false" severity="low">
+        <title xml:lang="en-US">Check-Block-03: Is keystone used for authentication?</title>
+        <description xml:lang="en-US">
+OpenStack supports various authentication strategies like noauth, keystone etc. If the ‘noauth’ strategy is used then the users could interact with OpenStack services without any authentication. This could be a potential risk since an attacker might gain unauthorized access to the OpenStack components. Thus it is strongly recommended that all services must be authenticated with keystone using their service accounts.
+
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Pass: If value of parameter auth_strategy under [DEFAULT] section in /etc/cinder/cinder.conf is set to keystone.
+
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Fail: If value of parameter auth_strategy under [DEFAULT] section is set to noauth.
+</description>
+        <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">FOO-1(a)</reference>
+        <ident system="https://nvd.nist.gov/cce/index.cfm">CCE-RHELOSP-CCE-TBD</ident>
+        <fix id="cinder_using_keystone" system="urn:xccdf:fix:script:sh" complexity="low" disruption="low" strategy="enable">openstack-config --set /etc/cinder/cinder.conf DEFAULT auth_strategy keystone
+</fix>
+      </Rule>
+      <Rule id="xccdf_org.ssgproject.content_rule_cinder_tls_enabled" selected="false" severity="low">
+        <title xml:lang="en-US">Check-Block-04: Is TLS enabled for authentication?</title>
+        <description xml:lang="en-US">
+OpenStack components communicate with each other using various protocols and the communication might involve sensitive / confidential data. An attacker may try to eavesdrop on the channel in order to get access to sensitive information. Thus all the components must communicate with each other using a secured communication protocol.
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Pass: If value of parameter auth_protocol under [keystone_authtoken] section in /etc/cinder/cinder.conf is set to https, or if value of parameter identity_uri under [keystone_authtoken] section in /etc/cinder/cinder.conf is set to Identity API endpoint starting with https:// and value of parameter insecure under the same [keystone_authtoken] section in the same /etc/cinder/cinder.conf is set to False.
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Fail: If value of parameter auth_protocol under [keystone_authtoken] section in /etc/cinder/cinder.conf is set to http, or if value of parameter identity_uri under [keystone_authtoken] section in /etc/cinder/cinder.conf is not set to Identity API endpoint starting with https:// or value of parameter insecure under the same [keystone_authtoken] section in the same /etc/cinder/cinder.conf is set to True.
+</description>
+        <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">FOO-1(a)</reference>
+        <ident system="https://nvd.nist.gov/cce/index.cfm">CCE-RHELOSP-CCE-TBD</ident>
+        <fix id="cinder_tls_enabled" system="urn:xccdf:fix:script:sh" complexity="low" disruption="low" strategy="enable">OLD_IDENTITY_URL=$(openstack-config --get /etc/cinder/cinder.conf keystone_authtoken identity_uri)
+NEW_IDENTITY_URI="${OLD_IDENTITY_URI:0:4}s${OLD_IDENTITY_URI:4:-1}"
+openstack-config --set /etc/cinder/cinder.conf keystone_authtoken identity_uri $NEW_IDENTIY_URI
+
+OLD_AUTH_URI=$(openstack-config --get /etc/cinder/cinder.conf keystone_authtoken auth_uri)
+NEW_AUTH_URI="${OLD_AUTH_URI:0:4}s${OLD_AUTH_URI:4:-1}"
+openstack-config --set /etc/cinder/cinder.conf keystone_authtoken auth_uri $NEW_AUTH_URI
+
+</fix>
+      </Rule>
+      <Rule id="xccdf_org.ssgproject.content_rule_cinder_nova_tls" selected="false" severity="low">
+        <title xml:lang="en-US">Check-Block-05: Does cinder communicates with nova over TLS?</title>
+        <description xml:lang="en-US">
+OpenStack components communicate with each other using various protocols and the communication might involve sensitive / confidential data. An attacker may try to eavesdrop on the channel in order to get access to sensitive information. Thus all the components must communicate with each other using a secured communication protocol.
+
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Pass: If value of parameter nova_api_insecure under [DEFAULT] section in /etc/cinder/cinder.conf is set to False.
+
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Fail: If value of parameter nova_api_insecure under [DEFAULT] section in /etc/cinder/cinder.conf is set to True.
+</description>
+        <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">FOO-1(a)</reference>
+        <ident system="https://nvd.nist.gov/cce/index.cfm">CCE-RHELOSP-CCE-TBD</ident>
+        <fix id="cinder_nova_tls" system="urn:xccdf:fix:script:sh" complexity="low" disruption="low" strategy="enable">openstack-config --set /etc/cinder/cinder.conf DEFAULT nova_api_insecure False
+</fix>
+      </Rule>
+      <Rule id="xccdf_org.ssgproject.content_rule_cinder_glance_tls" selected="false" severity="low">
+        <title xml:lang="en-US">Check-Block-06: Does cinder communicates with glance over TLS?</title>
+        <description xml:lang="en-US">
+Similar to previous check (Check-Block-05: Does cinder communicates with nova over TLS?), it is recommended all the components must communicate with each other using a secured communication protocol.
+
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Pass: If value of parameter glance_api_insecure under [DEFAULT] section in /etc/cinder/cinder.conf is set to False.
+
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Fail: If value of parameter glance_api_insecure under [DEFAULT] section in /etc/cinder/cinder.conf is set to True.
+</description>
+        <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">FOO-1(a)</reference>
+        <ident system="https://nvd.nist.gov/cce/index.cfm">CCE-RHELOSP-CCE-TBD</ident>
+        <fix id="cinder_glance_tls" system="urn:xccdf:fix:script:sh" complexity="low" disruption="low" strategy="enable">openstack-config --set /etc/cinder/cinder.conf DEFAULT glance_api_insecure False
+</fix>
+      </Rule>
+      <Rule id="xccdf_org.ssgproject.content_rule_cinder_nas_secure_file_permissions" selected="false" severity="low">
+        <title xml:lang="en-US">Check-Block-07: Is NAS operating in secure enviornment?</title>
+        <description xml:lang="en-US">
+Cinder supports an NFS driver which works differently than a traditional block storage driver. The NFS driver does not actually allow an instance to access a storage device at the block level. Instead, files are created on an NFS share and mapped to instances, which emulates a block device. Cinder supports secure configuration for such files by controlling the file permissions when cinder volumes are created. Cinder configuration can also control whether file operations are run as the root user or the current OpenStack process user.
+
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Pass: If value of parameter nas_secure_file_permissions under [DEFAULT] section in /etc/cinder/cinder.conf is set to auto. When set to auto, a check is done during cinder startup to determine if there are existing cinder volumes, no volumes will set the option to True, and use secure file permissions. The detection of existing volumes will set the option to False, and use the current insecure method of handling file permissions. If value of parameter nas_secure_file_operations under [DEFAULT] section in /etc/cinder/cinder.conf is set to auto. When set to “auto”, a check is done during cinder startup to determine if there are existing cinder volumes, no volumes will set the option to True, be secure and do NOT run as the root user. The detection of existing volumes will set the option to False, and use the current method of running operations as the root user. For new installations, a “marker file” is written so that subsequent restarts of cinder will know what the original determination had been.
+
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Fail: If value of parameter nas_secure_file_permissions under [DEFAULT] section in /etc/cinder/cinder.conf is set to False and if value of parameter nas_secure_file_operations under [DEFAULT] section in /etc/cinder/cinder.conf is set to False.
+</description>
+        <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">FOO-1(a)</reference>
+        <ident system="https://nvd.nist.gov/cce/index.cfm">CCE-RHELOSP-CCE-TBD</ident>
+      </Rule>
+      <Rule id="xccdf_org.ssgproject.content_rule_cinder_osapi_max_request_body" selected="false" severity="low">
+        <title xml:lang="en-US">Check-Block-08: Is max size for the body of a request set to default (114688)?</title>
+        <description xml:lang="en-US">
+If the maximum body size per request is not defined, the attacker can craft an arbitrary osapi request of large size causing the service to crash and finally resulting in Denial Of Service attack. Assigning the maximum value ensures that any malicious oversized request gets blocked ensuring continued availability of the service.
+
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Pass: If value of parameter osapi_max_request_body_size under [DEFAULT] section in /etc/cinder/cinder.conf is set to 114688 or if value of parameter max_request_body_size under [oslo_middleware] section in /etc/cinder/cinder.conf is set to 114688.
+
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Fail: If value of parameter osapi_max_request_body_size under [DEFAULT] section in /etc/cinder/cinder.conf is not set to 114688 or if value of parameter max_request_body_size under [oslo_middleware] section in /etc/cinder/cinder.conf is not set to 114688.
+</description>
+        <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">FOO-1(a)</reference>
+        <ident system="https://nvd.nist.gov/cce/index.cfm">CCE-RHELOSP-CCE-TBD</ident>
+        <fix id="cinder_osapi_max_request_body" system="urn:xccdf:fix:script:sh" complexity="low" disruption="low" strategy="enable">openstack-config --set /etc/cinder/cinder.conf DEFAULT osapi_max_request_body_size 114688
+</fix>
+      </Rule>
+    </Group>
+    <Group id="xccdf_org.ssgproject.content_group_keystone">
+      <title xml:lang="en-US">Keystone STIG Checklist</title>
+      <description xml:lang="en-US">High level overview of Keystone STIG settings to go here!</description>
+      <Rule id="xccdf_org.ssgproject.content_rule_keystone_file_ownership" selected="false" severity="low">
+        <title xml:lang="en-US">Check-Identity-01: Is user/group ownership of config files set to keystone?</title>
+        <description xml:lang="en-US">
+Configuration files contain critical parameters and information required for smooth functioning of the component. If an unprivileged user, either intentionally or accidentally modifies or deletes any of the parameters or the file itself then it would cause severe availability issues causing a denial of service to the other end users. Thus user and group ownership of such critical configuration files must be set to that component owner.
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Run the following commands:
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:code xmlns:html="http://www.w3.org/1999/xhtml">
+$ stat -L -c "%U %G" /etc/keystone/keystone.conf | egrep "keystone keystone" <html:br/>
+$ stat -L -c "%U %G" /etc/keystone/keystone-paste.ini | egrep "keystone keystone"<html:br/>
+$ stat -L -c "%U %G" /etc/keystone/policy.json | egrep "keystone keystone"<html:br/>
+$ stat -L -c "%U %G" /etc/keystone/logging.conf | egrep "keystone keystone"<html:br/>
+$ stat -L -c "%U %G" /etc/keystone/ssl/certs/signing_cert.pem | egrep "keystone keystone"<html:br/>
+$ stat -L -c "%U %G" /etc/keystone/ssl/private/signing_key.pem | egrep "keystone keystone"<html:br/>
+$ stat -L -c "%U %G" /etc/keystone/ssl/certs/ca.pem | egrep "keystone keystone"<html:br/>
+</html:code>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Pass: If user and group ownership of all these config files is set to keystone. The above commands show output of keystone keystone.
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Fail: If the above commands does not return any output as the user or group ownership might have set to any user other than keystone.
+</description>
+      </Rule>
+      <Rule id="xccdf_org.ssgproject.content_rule_keystone_file_perms" selected="false" severity="low">
+        <title xml:lang="en-US">Check-Identity-02: Are strict permissions set for Identity configuration files?</title>
+        <description xml:lang="en-US">
+Similar to the previous check, it is recommended to set strict access permissions for such configuration files.
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Run the following commands:
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:code xmlns:html="http://www.w3.org/1999/xhtml"> 
+$ stat -L -c "%a" /etc/keystone/keystone.conf<html:br/>
+$ stat -L -c "%a" /etc/keystone/keystone-paste.ini<html:br/>
+$ stat -L -c "%a" /etc/keystone/policy.json<html:br/>
+$ stat -L -c "%a" /etc/keystone/logging.conf<html:br/>
+$ stat -L -c "%a" /etc/keystone/ssl/certs/signing_cert.pem<html:br/>
+$ stat -L -c "%a" /etc/keystone/ssl/private/signing_key.pem<html:br/>
+$ stat -L -c "%a" /etc/keystone/ssl/certs/ca.pem<html:br/>
+</html:code>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Pass: If permissions are set to 640 or stricter.
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Fail: If permissions are not set to at least 640.
+</description>
+      </Rule>
+      <Rule id="xccdf_org.ssgproject.content_rule_keystone_use_ssl" selected="false" severity="low">
+        <title xml:lang="en-US">Check-Identity-03: is SSL enabled for Identity?</title>
+        <description xml:lang="en-US">
+OpenStack components communicate with each other using various protocols and the communication might involve sensitive or confidential data. An attacker may try to eavesdrop on the channel in order to get access to sensitive information. Thus all the components must communicate with each other using a secured communication protocol like HTTPS.
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Pass: If value of parameter enable under [ssl] section in /etc/keystone/keystone.conf is set to True.
+
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Fail: If value of parameter enable under [ssl] section is not set to True.
+</description>
+      </Rule>
+      <Rule id="xccdf_org.ssgproject.content_rule_keystone_algorithm_hashing" selected="false" severity="low">
+        <title xml:lang="en-US">Check-Identity-04: Does Identity use strong hashing algorithms for PKI tokens?</title>
+        <description xml:lang="en-US">
+MD5 is a weak and depreciated hashing algorithm. It can be cracked using brute force attack. Identity tokens are sensitive and need to be protected with a stronger hashing algorithm to prevent unauthorized disclosure and subsequent access.
+
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Pass: If value of parameter hash_algorithm under [token] section in /etc/keystone/keystone.conf is set to SHA256.
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+
+Fail: If value of parameter hash_algorithm under [token]section is set to MD5.
+</description>
+      </Rule>
+      <Rule id="xccdf_org.ssgproject.content_rule_keystone_max_request_body_size" selected="false" severity="low">
+        <title xml:lang="en-US">Check-Identity-05: Is max_request_body_size set to default (114688)?</title>
+        <description xml:lang="en-US">
+The parameter max_request_body_size defines the maximum body size per request in bytes. If the maximum size is not defined, the attacker could craft an arbitrary request of large size causing the service to crash and finally resulting in Denial Of Service attack. Assigning the maximum value ensures that any malicious oversized request gets blocked ensuring continued availability of the component.
+
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Pass: If value of parameter max_request_body_size in /etc/keystone/keystone.conf is set to default (114688) or some reasonable value based on your environment.
+
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Fail: If value of parameter max_request_body_size is not set.
+</description>
+      </Rule>
+      <Rule id="xccdf_org.ssgproject.content_rule_keystone_disable_admin_token" selected="false" severity="low">
+        <title xml:lang="en-US">Check-Identity-06: Disable admin token in /etc/keystone/keystone.conf</title>
+        <description xml:lang="en-US">
+The admin token is generally used to bootstrap Identity. This token is the most valuable Identity asset, which could be used to gain cloud admin privileges.
+
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Pass: If admin_token under [DEFAULT] section in /etc/keystone/keystone.conf is disabled. And, AdminTokenAuthMiddleware under [filter:admin_token_auth] is deleted from /etc/keystone/keystone-paste.ini
+
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Fail: If admin_token under [DEFAULT] section is set and AdminTokenAuthMiddleware exists in keystone-paste.ini.
+</description>
+      </Rule>
+    </Group>
+    <Group id="xccdf_org.ssgproject.content_group_neutron">
+      <title xml:lang="en-US">Neutron STIG Checklist</title>
+      <description xml:lang="en-US">High level overview of Neutron STIG settings to go here!</description>
+      <Rule id="xccdf_org.ssgproject.content_rule_neutron_file_ownership" selected="false" severity="low">
+        <title xml:lang="en-US">Check-Neutron-01: Is user/group ownership of config files set to root/neutron?</title>
+        <description xml:lang="en-US">
+Configuration files contain critical parameters and information required for smooth functioning of the component. If an unprivileged user, either intentionally or accidentally modifies or deletes any of the parameters or the file itself then it would cause severe availability issues causing a denial of service to the other end users. Thus user ownership of such critical configuration files must be set to root and group ownership must be set to neutron.
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Run the following commands:
+
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+$ stat -L -c "%U %G" /etc/neutron/neutron.conf | egrep "root neutron"
+$ stat -L -c "%U %G" /etc/neutron/api-paste.ini | egrep "root neutron"
+$ stat -L -c "%U %G" /etc/neutron/policy.json | egrep "root neutron"
+$ stat -L -c "%U %G" /etc/neutron/rootwrap.conf | egrep "root neutron"
+Pass: If user and group ownership of all these config files is set to root and neutron respectively. The above commands show output of root neutron.
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+
+Fail: If the above commands does not return any output as the user and group ownership might have set to any user other than root or any group other than neutron.
+</description>
+        <fix id="neutron_file_ownership" system="urn:xccdf:fix:script:sh" complexity="low" disruption="low" strategy="enable">for file in /etc/neutron/neutron.conf \
+		/etc/neutron/api-paste.ini \
+		/etc/neutron/policy.json \
+		/etc/neutron/rootwrap.conf; do
+	chown root $file
+	chgrp neutron $file
+done
+</fix>
+      </Rule>
+      <Rule id="xccdf_org.ssgproject.content_rule_neutron_file_perms" selected="false" severity="low">
+        <title xml:lang="en-US">Check-Neutron-02: Are strict permissions set for Compute configuration files?</title>
+        <description xml:lang="en-US">
+Similar to the previous check, it is recommended to set strict access permissions for such configuration files.
+
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Run the following commands:
+
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:code xmlns:html="http://www.w3.org/1999/xhtml">
+$ stat -L -c "%a" /etc/neutron/neutron.conf
+<html:br/>
+$ stat -L -c "%a" /etc/neutron/api-paste.ini
+<html:br/>
+$ stat -L -c "%a" /etc/neutron/policy.json
+<html:br/>
+$ stat -L -c "%a" /etc/neutron/rootwrap.conf
+</html:code>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Pass: If permissions are set to 640 or stricter. The permissions of 640 translates into owner r/w, group r, and no rights to others i.e. “u=rw,g=r,o=”. Note that with Check-Neutron-01: Is user/group ownership of config files set to root/neutron? and permissions set to 640, root has read/write access and neutron has read access to these configuration files. The access rights can also be validated using the following command. This command will only be available on your system if it supports ACLs.
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:code xmlns:html="http://www.w3.org/1999/xhtml">
+$ getfacl --tabular -a /etc/neutron/neutron.conf
+<html:br/>
+getfacl: Removing leading '/' from absolute path names
+<html:br/>
+<html:br/>
+# file: etc/neutron/neutron.conf
+<html:br/>
+USER   root     rw-
+<html:br/>
+GROUP  neutron  r--
+<html:br/>
+mask            r--
+<html:br/>
+other           ---
+</html:code>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Fail: If permissions are not set to at least 640.
+</description>
+        <fix id="neutron_file_perms" system="urn:xccdf:fix:script:sh" complexity="low" disruption="low" strategy="enable">chmod 640 /etc/neutron/neutron.conf
+chmod 640 /etc/neutron/api-paste.ini
+chmod 640 /etc/neutron/policy.json
+chmod 640 /etc/neutron/rootwrap.conf
+</fix>
+      </Rule>
+      <Rule id="xccdf_org.ssgproject.content_rule_neutron_use_keystone" selected="false" severity="low">
+        <title xml:lang="en-US">Check-Neutron-03: Is keystone used for authentication?</title>
+        <description xml:lang="en-US">
+OpenStack supports various authentication strategies like noauth, keystone etc. If the ‘noauth’ strategy is used then the users could interact with OpenStack services without any authentication. This could be a potential risk since an attacker might gain unauthorized access to the OpenStack components. Thus it is strongly recommended that all services must be authenticated with keystone using their service accounts.
+
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Pass: If value of parameter auth_strategy under [DEFAULT] section in /etc/neutron/neutron.conf is set to keystone.
+
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Fail: If value of parameter auth_strategy under [DEFAULT] section is set to noauth or noauth2.
+</description>
+        <fix id="neutron_use_keystone" system="urn:xccdf:fix:script:sh" complexity="low" disruption="low" strategy="enable">openstack-config --set /etc/neutron/neutron.conf DEFAULT auth_strategy keystone
+</fix>
+      </Rule>
+      <Rule id="xccdf_org.ssgproject.content_rule_neutron_use_https" selected="false" severity="low">
+        <title xml:lang="en-US">Check-Neutron-04: Is secure protocol used for authentication?</title>
+        <description xml:lang="en-US">
+OpenStack components communicate with each other using various protocols and the communication might involve sensitive / confidential data. An attacker may try to eavesdrop on the channel in order to get access to sensitive information. Thus all the components must communicate with each other using a secured communication protocol.
+
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Pass: If value of parameter auth_protocol under [keystone_authtoken] section in /etc/neutron/neutron.conf is set to https, or if value of parameter identity_uri under [keystone_authtoken] section in /etc/neutron/neutron.conf is set to Identity API endpoint starting with https://.
+
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Fail: If value of parameter auth_protocol under [keystone_authtoken] section in /etc/neutron/neutron.conf is set to http`, or if value of parameter identity_uri under [keystone_authtoken] section in /etc/neutron/neutron.conf is not set to Identity API endpoint starting with https://.
+</description>
+        <fix id="neutron_use_https" system="urn:xccdf:fix:script:sh" complexity="low" disruption="low" strategy="enable">STR_IDENTITY_URI=$(openstack-config --get /etc/neutron/neutron.conf keystone_authtoken identity_uri)
+NEW_IDENTITY_URI=${STR_IDENTITY_URI:0:4}s${STR_IDENTITY_URI:4:-1}
+openstack-config --set /etc/neutron/neutron.conf keystone_authtoken identity_uri $NEW_IDENTITY_URI
+
+STR_AUTH_URI=$(openstack-config --get /etc/neutron/neutron.conf keystone_authtoken auth_uri)
+NEW_AUTH_URI=${STR_AUTH_URI:0:4}s${STR_AUTH_URI:4:-1}
+openstack-config --set /etc/neutron/neutron.conf keystone_authtoken auth_uri $NEW_AUTH_URI
+</fix>
+      </Rule>
+      <Rule id="xccdf_org.ssgproject.content_rule_neutron_api_use_ssl" selected="false" severity="low">
+        <title xml:lang="en-US">Check-Neutron-05: Is SSL enabled on Neutron API server?</title>
+        <description xml:lang="en-US">
+Similar to the previous check, it is recommended to enable secure communication on API server.
+
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Pass: If value of parameter use_ssl under [DEFAULT] section in /etc/neutron/neutron.conf is set to True.
+
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Fail: If value of parameter use_ssl under [DEFAULT] section in /etc/neutron/neutron.conf is set to False.
+</description>
+        <fix id="neutron_api_use_ssl" system="urn:xccdf:fix:script:sh" complexity="low" disruption="low" strategy="enable">openstack-config --set /etc/neutron/neutron.conf DEFAULT use_ssl True
+</fix>
+      </Rule>
+    </Group>
+    <Group id="xccdf_org.ssgproject.content_group_nova">
+      <title xml:lang="en-US">Nova STIG Checklist</title>
+      <description xml:lang="en-US">High level overview of Nova STIG settings to go here!</description>
+      <Rule id="xccdf_org.ssgproject.content_rule_nova_file_ownership" selected="false" severity="low">
+        <title xml:lang="en-US">Check-Compute-01: Is user/group ownership of config files set to root/nova?</title>
+        <description xml:lang="en-US">
+Configuration files contain critical parameters and information required for smooth functioning of the component. If an unprivileged user, either intentionally or accidentally modifies or deletes any of the parameters or the file itself then it would cause severe availability issues causing a denial of service to the other end users. Thus user ownership of such critical configuration files must be set to root and group ownership must be set to nova.
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Run the following commands:
+
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:code xmlns:html="http://www.w3.org/1999/xhtml">
+$ stat -L -c "%U %G" /etc/nova/nova.conf | egrep "root nova"
+<html:br/>
+$ stat -L -c "%U %G" /etc/nova/api-paste.ini | egrep "root nova"
+<html:br/>
+$ stat -L -c "%U %G" /etc/nova/policy.json | egrep "root nova"
+<html:br/>
+$ stat -L -c "%U %G" /etc/nova/rootwrap.conf | egrep "root nova"
+</html:code>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Pass: If user and group ownership of all these config files is set to root and nova respectively. The above commands show output of root nova.
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+
+Fail: If the above commands does not return any output as the user and group ownership might have set to any user other than root or any group other than nova.
+</description>
+        <fix id="nova_file_ownership" system="urn:xccdf:fix:script:sh" complexity="low" disruption="low" strategy="enable">for file in /etc/nova/nova.conf \
+		/etc/nova/api-paste.ini \
+		/etc/nova/policy.json \
+		/etc/nova/rootwrap.conf; do
+	chown root $file
+	chgrp nova $file
+done
+</fix>
+      </Rule>
+      <Rule id="xccdf_org.ssgproject.content_rule_nova_file_perms" selected="false" severity="low">
+        <title xml:lang="en-US">Check-Compute-02: Are strict permissions set for Compute configuration files?</title>
+        <description xml:lang="en-US">
+Similar to the previous check, it is recommended to set strict access permissions for such configuration files.
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+
+Run the following commands:
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:code xmlns:html="http://www.w3.org/1999/xhtml">
+$ stat -L -c "%a" /etc/nova/nova.conf
+<html:br/>
+$ stat -L -c "%a" /etc/nova/api-paste.ini
+<html:br/>
+$ stat -L -c "%a" /etc/nova/policy.json
+<html:br/>
+$ stat -L -c "%a" /etc/nova/rootwrap.conf
+</html:code>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+
+Pass: If permissions are set to 640 or stricter. The permissions of 640 translates into owner r/w, group r, and no rights to others i.e. “u=rw,g=r,o=”. Note that with Check-Compute-01: Is user/group ownership of config files set to root/nova? and permissions set to 640, root has read/write access and nova has read access to these configuration files. The access rights can also be validated using the following command. This command will only be available on your system if it supports ACLs.
+
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:code xmlns:html="http://www.w3.org/1999/xhtml">
+$ getfacl --tabular -a /etc/nova/nova.conf
+<html:br/>
+getfacl: Removing leading '/' from absolute path names
+<html:br/>
+# file: etc/nova/nova.conf
+<html:br/>
+USER   root  rw-
+<html:br/>
+GROUP  nova  r--
+<html:br/>
+mask         r--
+<html:br/>
+other        ---
+</html:code>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Fail: If permissions are not set to at least 640.
+</description>
+        <fix id="nova_file_perms" system="urn:xccdf:fix:script:sh" complexity="low" disruption="low" strategy="enable">chmod 640 /etc/nova/nova.conf
+chmod 640 /etc/nova/api-paste.ini
+chmod 640 /etc/nova/policy.json
+chmod 640 /etc/nova/rootwrap.conf
+</fix>
+      </Rule>
+      <Rule id="xccdf_org.ssgproject.content_rule_nova_use_keystone" selected="false" severity="low">
+        <title xml:lang="en-US">Check-Compute-03: Is keystone used for authentication?</title>
+        <description xml:lang="en-US">
+OpenStack supports various authentication strategies like noauth, keystone etc. If the ‘noauth’ strategy is used then the users could interact with OpenStack services without any authentication. This could be a potential risk since an attacker might gain unauthorized access to the OpenStack components. Thus it is strongly recommended that all services must be authenticated with keystone using their service accounts.
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+
+Pass: If value of parameter auth_strategy under [DEFAULT] section in /etc/nova/nova.conf is set to keystone.
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+
+Fail: If value of parameter auth_strategy under [DEFAULT] section is set to noauth or noauth2.
+</description>
+        <fix id="nova_use_keystone" system="urn:xccdf:fix:script:sh" complexity="low" disruption="low" strategy="enable">openstack-config --set /etc/nova/nova.conf DEFAULT auth_strategy keystone
+</fix>
+      </Rule>
+      <Rule id="xccdf_org.ssgproject.content_rule_nova_secure_authentication" selected="false" severity="low">
+        <title xml:lang="en-US">Check-Compute-04: Is secure protocol used for authentication?</title>
+        <description xml:lang="en-US">
+OpenStack components communicate with each other using various protocols and the communication might involve sensitive / confidential data. An attacker may try to eavesdrop on the channel in order to get access to sensitive information. Thus all the components must communicate with each other using a secured communication protocol.
+
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+Pass: If value of parameter auth_protocol under [keystone_authtoken] section in /etc/nova/nova.conf is set to https, or if value of parameter identity_uri under [keystone_authtoken] section in /etc/nova/nova.conf is set to Identity API endpoint starting with https://.
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+
+Fail: If value of parameter auth_protocol under [keystone_authtoken] section in /etc/nova/nova.conf is set to http`, or if value of parameter identity_uri under [keystone_authtoken] section in /etc/nova/nova.conf is not set to Identity API endpoint starting with https://.
+</description>
+        <fix id="nova_secure_authentication" system="urn:xccdf:fix:script:sh" complexity="low" disruption="low" strategy="enable">STR_IDENTITY_URI=$(openstack-config --get /etc/nova/nova.conf keystone_authtoken identity_uri)
+NEW_IDENTITY_URI=${STR_IDENTITY_URI:0:4}s${STR_IDENTITY_URI:4:-1}
+openstack-config --set /etc/nova/nova.conf keystone_authtoken identity_uri $NEW_IDENTITY_URI
+
+STR_AUTH_URI=$(openstack-config --get /etc/nova/nova.conf keystone_authtoken auth_uri)
+NEW_AUTH_URI=${STR_AUTH_URI:0:4}s${STR_AUTH_URI:4:-1}
+openstack-config --set /etc/nova/nova.conf keystone_authtoken auth_uri $NEW_AUTH_URI
+</fix>
+      </Rule>
+      <Rule id="xccdf_org.ssgproject.content_rule_nova_secure_glance" selected="false" severity="low">
+        <title xml:lang="en-US">Check-Compute-05: Does Nova communicates with Glance securely?</title>
+        <description xml:lang="en-US">
+OpenStack components communicate with each other using various protocols and the communication might involve sensitive / confidential data. An attacker may try to eavesdrop on the channel in order to get access to sensitive information. Thus all the components must communicate with each other using a secured communication protocol.
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+
+Pass: If value of parameter glance_api_insecure under [DEFAULT] section in /etc/nova/nova.conf is set to False, or if value of parameter api_insecure under [glance] section in /etc/nova/nova.conf is set to False.
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+
+Fail: If value of parameter glance_api_insecure under [DEFAULT] section in /etc/nova/nova.conf is set to True, or if value of parameter api_insecure under [glance] section in /etc/nova/nova.conf is set to True.
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+<html:br xmlns:html="http://www.w3.org/1999/xhtml"/>
+</description>
+        <fix id="nova_secure_glance" system="urn:xccdf:fix:script:sh" complexity="low" disruption="low" strategy="enable">openstack-config --set /etc/nova/nova.conf DEFAULT glance_api_insecure False
+openstack-config --set /etc/nova/nova.conf glance api_insecure False
+</fix>
+      </Rule>
+    </Group>
+  </Group>
+  <Group id="xccdf_org.ssgproject.content_group_nist_support" hidden="true">
+    <title xml:lang="en-US">Documentation to Support NIST 800-53 Mapping</title>
+    <description xml:lang="en-US">These groups exist to document how the Red Hat Enterprise Linux
+product meets (or does not meet) requirements listed in NIST 800-53, for
+those cases where Groups or Rules elsewhere in scap-security-guide do
+not clearly relate.
+</description>
+    <Rule id="xccdf_org.ssgproject.content_rule_nist_procedural_requirement" selected="false" severity="low">
+      <title xml:lang="en-US">Procedural Requirement</title>
+      <description xml:lang="en-US">This requirement is procedural, and can not be met
+through automated means.</description>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-1</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-2(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-2(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-2(c)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-2(d)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-2(e)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-2(f)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-2(g)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-2(h)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-2(i)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-2(j)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-2(7)(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-5</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-6(1)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-8(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-11(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-17(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-17(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-17(4)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-17(5)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-17(6)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-19(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-19(1)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-19(2)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-19(3)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-19(4)(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-19(4)(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-20(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-20(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-20(1)(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-20(1)(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-20(2)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-21(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-21(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-22(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-22(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-22(c)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-22(d)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-22(e)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AU-2(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AU-6(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AU-6(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AU-6(3)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CA-1(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CA-1(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CA-2(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CA-2(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CA-2(c)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CA-2(d)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CA-2(1)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CA-2(2)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CA-3(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CA-3(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CA-3(1)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CA-3(2)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CA-5(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CA-5(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CA-6(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CA-6(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CA-6(c)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CM-3(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CM-3(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CM-3(c)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CM-3(d)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CM-3(e)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CM-3(f)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CM-3(4)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CM-7(3)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IA-1(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IA-1(b)</reference>
+      <rationale xml:lang="en-US">This requirement is procedural, and can not be met through
+automated means.</rationale>
+      <check system="http://scap.nist.gov/schema/ocil/2">
+        <check-content-ref name="ocil:ssg-nist_procedural_requirement_ocil:questionnaire:1" href="ssg-rhel-osp7-ocil.xml"/>
+      </check>
+    </Rule>
+    <Rule id="xccdf_org.ssgproject.content_rule_nist_not_OS_applicable" selected="false" severity="low">
+      <title xml:lang="en-US">Not Applicable to Operating System</title>
+      <description xml:lang="en-US">While this requirement is applicable at an information system level, implementation
+is not performed within the Operating System.</description>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-2(1)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-7(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">PM-11</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">PM-10</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">PM-9</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">PM-8</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">PM-7</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">PM-6</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">PM-5</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">PM-4</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">PM-3</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">PM-2</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">PM-1</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-17(3)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-18(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-18(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-18(5)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-21(1)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CP-10(2)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AT-1(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AT-1(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AT-2</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AT-3</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AT-3(2)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AT-4(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AT-4(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AT-2</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AT-2(1)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AT-3</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AT-3(1)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AT-3(2)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AT-5</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AU-1(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AU-1(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AU-2(3)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AU-6(1)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AU-6(3)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AU-7</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AU-7(1)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CA-7(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CA-7(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CA-7(c)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CA-7(d)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CA-7(1)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CA-7(2)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CM-1(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CM-1(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CM-2</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CM-2(1)(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CM-2(1)(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CM-2(1)(c)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CM-2(2)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CM-2(5)(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CM-2(5)(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CM-3(2)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CM-4</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CM-4(2)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CM-5</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CM-5(2)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CM-5(5)(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CM-6(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CM-6(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CM-6(c)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CM-6(1)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CM-7(1)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CM-8(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CM-8(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CM-8(c)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CM-8(d)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CM-8(e)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CM-8(1)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CM-8(4)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CM-8(5)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CM-8(6)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CM-9(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CM-9(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CM-9(c)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CP-1(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CP-1(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CP-2(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CP-2(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CP-2(c)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CP-2(d)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CP-2(e)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CP-2(f)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CP-2(1)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CP-2(2)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CP-3</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CP-4(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CP-4(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CP-4(1)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CP-6</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CP-6(1)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CP-6(2)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CP-7(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CP-7(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CP-7(1)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CP-7(2)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CP-7(3)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CP-7(5)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CP-8</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CP-(8)(1)(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CP-8(1)(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CP-8(2)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CP-9(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CP-9(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CP-9(c)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CP-9(d)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CP-9(1)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CP-9(3)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CP-10</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CP-10(2)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CP-10(3)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IA-4(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IA-4(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IA-4(c)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IA-4(d)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IA-4(e)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IA-4(4)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IA-5(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IA-5(d)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IA-5(3)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IA-5(6)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IA-5(7)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IR-1(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IR-1(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IR-2(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IR-2(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IR-3</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IR-4(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IR-4(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IR-4(c)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IR-4(1)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IR-6</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IR-7</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IR-7(1)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IR-7(2)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IR-8(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IR-8(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IR-8(c)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IR-8(d)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IR-8(e)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">MA-1(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">MA-2(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">MA-2(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">MA-2(c)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">MA-2(d)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">MA-2(e)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">MA-2(1)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">MA-3</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">MA-3(1)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">MA-3(2)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">MA-3(3)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">MA-4(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">MA-4(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">SI-1(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">SI-1(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">SI-2(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">SI-2(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">SI-2(c)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">SI-3(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">SI-3(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">SI-3(c)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">SI-3(d)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">SI-3(1)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">SI-1(2)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">SI-1(3)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">SI-4(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">SI-4(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">SI-4(c)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">SI-4(d)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">SI-4(e)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">SI-4(2)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">SI-4(4)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">SI-4(5)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">SI-4(6)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">SI-5(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">SI-5(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">SI-5(c)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">SI-5(d)</reference>
+      <rationale xml:lang="en-US">This requirement is not applicable to an operating system.</rationale>
+    </Rule>
+    <Rule id="xccdf_org.ssgproject.content_rule_nist_met_inherently" selected="false" severity="low">
+      <title xml:lang="en-US">Product Meets this Requirement</title>
+      <description xml:lang="en-US">
+This requirement is permanent not a finding. No fix is required.
+</description>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-3(4)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-14(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-14(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-14(1)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-17(c)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-17(d)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-17(e)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-18(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-18(c)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-18(4)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-19(c)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-19(f)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AC-19(g)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AU-3</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AU-8</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AU-9(4)(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">AU-12(b)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CM-8(3)(a)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IA-2</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IA-5(e)</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IA-6</reference>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">IA-8</reference>
+      <rationale xml:lang="en-US">
+Red Hat Enterprise Linux meets this requirement through design and implementation.
+</rationale>
+      <check system="http://scap.nist.gov/schema/ocil/2">
+        <check-content-ref name="ocil:ssg-nist_met_inherently_ocil:questionnaire:1" href="ssg-rhel-osp7-ocil.xml"/>
+      </check>
+    </Rule>
+    <Rule id="xccdf_org.ssgproject.content_rule_apply_to_everything" selected="false" severity="low">
+      <title xml:lang="en-US">Requirement Applies to All Rules</title>
+      <description xml:lang="en-US">These are generic NIST requirements, and apply to all rules</description>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf">CM-6(a)</reference>
+      <rationale xml:lang="en-US">The following requirements apply to all rules</rationale>
+    </Rule>
+    <Rule id="xccdf_org.ssgproject.content_rule_not_cds" selected="false" severity="low">
+      <title xml:lang="en-US">Requirement not applicable to non-CDS systems</title>
+      <description xml:lang="en-US">Implimentation of this requirement is not applicable
+for a general purpose deployment</description>
+      <reference href="http://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-53r4.pdf"/>
+      <rationale xml:lang="en-US">Full compliance with this requirement would require
+deployment of MLS SELinux policy. Cross domain systems are out of
+scope for this guide.</rationale>
+    </Rule>
+  </Group>
+</Benchmark>

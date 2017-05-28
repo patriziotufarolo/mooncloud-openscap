@@ -1,0 +1,25 @@
+variables:
+  CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_BUILD_REF_NAME
+  CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
+
+stages:
+  - build 
+  - release
+
+before_script:
+  - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY 
+
+build:
+  stage: build
+  script:
+    - docker build -t $CONTAINER_TEST_IMAGE .
+    - docker push $CONTAINER_TEST_IMAGE
+
+release:
+  stage: release
+  script:
+    - docker pull $CONTAINER_TEST_IMAGE
+    - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
+    - docker push $CONTAINER_RELEASE_IMAGE
+  only:
+    - master

@@ -1,0 +1,745 @@
+<?xml version="1.0"?>
+<ns0:ocil xmlns:ns0="http://scap.nist.gov/schema/ocil/2.0">
+  <ns0:generator>
+    <ns0:schema_version>2.0</ns0:schema_version>
+    <ns0:timestamp>2017-05-27T15:45:34Z</ns0:timestamp>
+  </ns0:generator>
+  <ns0:questionnaires>
+    <ns0:questionnaire id="ocil:ssg-file_owner_etc_passwd_ocil:questionnaire:1">
+      <ns0:title>Verify User Who Owns passwd File</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-file_owner_etc_passwd_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-file_groupowner_etc_passwd_ocil:questionnaire:1">
+      <ns0:title>Verify Group Who Owns passwd File</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-file_groupowner_etc_passwd_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-file_permissions_etc_passwd_ocil:questionnaire:1">
+      <ns0:title>Verify Permissions on passwd File</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-file_permissions_etc_passwd_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-file_permissions_sshd_pub_key_ocil:questionnaire:1">
+      <ns0:title>Verify Permissions on SSH Server Public *.pub Key Files</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-file_permissions_sshd_pub_key_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-file_permissions_sshd_private_key_ocil:questionnaire:1">
+      <ns0:title>Verify Permissions on SSH Server Private *_key Key Files</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-file_permissions_sshd_private_key_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-sshd_allow_only_protocol2_ocil:questionnaire:1">
+      <ns0:title>Allow Only SSH Protocol 2</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-sshd_allow_only_protocol2_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-sshd_disable_gssapi_auth_ocil:questionnaire:1">
+      <ns0:title>Disable GSSAPI Authentication</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-sshd_disable_gssapi_auth_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-sshd_disable_kerb_auth_ocil:questionnaire:1">
+      <ns0:title>Disable Kerberos Authentication</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-sshd_disable_kerb_auth_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-sshd_enable_strictmodes_ocil:questionnaire:1">
+      <ns0:title>Enable Use of Strict Mode Checking</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-sshd_enable_strictmodes_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-sshd_use_priv_separation_ocil:questionnaire:1">
+      <ns0:title>Enable Use of Privilege Separation</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-sshd_use_priv_separation_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-sshd_disable_compression_ocil:questionnaire:1">
+      <ns0:title>Disable Compression Or Set Compression to delayed</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-sshd_disable_compression_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-sshd_print_last_log_ocil:questionnaire:1">
+      <ns0:title>Print Last Log</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-sshd_print_last_log_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-sshd_set_loglevel_info_ocil:questionnaire:1">
+      <ns0:title>Set LogLevel to INFO</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-sshd_set_loglevel_info_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-sshd_set_idle_timeout_ocil:questionnaire:1">
+      <ns0:title>Set SSH Idle Timeout Interval</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-sshd_set_idle_timeout_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-sshd_set_keepalive_ocil:questionnaire:1">
+      <ns0:title>Set SSH Client Alive Count</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-sshd_set_keepalive_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-sshd_set_max_auth_tries_ocil:questionnaire:1">
+      <ns0:title>Set SSH authentication attempt limit</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-sshd_set_max_auth_tries_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-sshd_disable_rhosts_ocil:questionnaire:1">
+      <ns0:title>Disable SSH Support for .rhosts Files</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-sshd_disable_rhosts_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-sshd_disable_user_known_hosts_ocil:questionnaire:1">
+      <ns0:title>Disable SSH Support for User Known Hosts</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-sshd_disable_user_known_hosts_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-sshd_disable_rhosts_rsa_ocil:questionnaire:1">
+      <ns0:title>Disable SSH Support for Rhosts RSA Authentication</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-sshd_disable_rhosts_rsa_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-disable_host_auth_ocil:questionnaire:1">
+      <ns0:title>Disable Host-Based Authentication</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-disable_host_auth_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-sshd_enable_x11_forwarding_ocil:questionnaire:1">
+      <ns0:title>Enable Encrypted X11 Fordwarding</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-sshd_enable_x11_forwarding_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-sshd_disable_root_login_ocil:questionnaire:1">
+      <ns0:title>Disable SSH Root Login</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-sshd_disable_root_login_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-sshd_disable_empty_passwords_ocil:questionnaire:1">
+      <ns0:title>Disable SSH Access via Empty Passwords</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-sshd_disable_empty_passwords_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-sshd_enable_warning_banner_ocil:questionnaire:1">
+      <ns0:title>Enable SSH Warning Banner</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-sshd_enable_warning_banner_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-sshd_do_not_permit_user_env_ocil:questionnaire:1">
+      <ns0:title>Do Not Allow SSH Environment Options</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-sshd_do_not_permit_user_env_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-sshd_use_approved_ciphers_ocil:questionnaire:1">
+      <ns0:title>Use Only FIPS 140-2 Validated Ciphers</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-sshd_use_approved_ciphers_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-sshd_use_approved_macs_ocil:questionnaire:1">
+      <ns0:title>Use Only FIPS 140-2 Validated MACs</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-sshd_use_approved_macs_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-sshd_use_strong_ciphers_ocil:questionnaire:1">
+      <ns0:title>Use Only Strong Ciphers</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-sshd_use_strong_ciphers_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-sshd_use_strong_macs_ocil:questionnaire:1">
+      <ns0:title>Use Only Strong MACs</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-sshd_use_strong_macs_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+  </ns0:questionnaires>
+  <ns0:test_actions>
+    <ns0:boolean_question_test_action id="ocil:ssg-file_owner_etc_passwd_action:testaction:1" question_ref="ocil:ssg-file_owner_etc_passwd_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-file_groupowner_etc_passwd_action:testaction:1" question_ref="ocil:ssg-file_groupowner_etc_passwd_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-file_permissions_etc_passwd_action:testaction:1" question_ref="ocil:ssg-file_permissions_etc_passwd_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-file_permissions_sshd_pub_key_action:testaction:1" question_ref="ocil:ssg-file_permissions_sshd_pub_key_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-file_permissions_sshd_private_key_action:testaction:1" question_ref="ocil:ssg-file_permissions_sshd_private_key_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-sshd_allow_only_protocol2_action:testaction:1" question_ref="ocil:ssg-sshd_allow_only_protocol2_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-sshd_disable_gssapi_auth_action:testaction:1" question_ref="ocil:ssg-sshd_disable_gssapi_auth_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-sshd_disable_kerb_auth_action:testaction:1" question_ref="ocil:ssg-sshd_disable_kerb_auth_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-sshd_enable_strictmodes_action:testaction:1" question_ref="ocil:ssg-sshd_enable_strictmodes_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-sshd_use_priv_separation_action:testaction:1" question_ref="ocil:ssg-sshd_use_priv_separation_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-sshd_disable_compression_action:testaction:1" question_ref="ocil:ssg-sshd_disable_compression_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-sshd_print_last_log_action:testaction:1" question_ref="ocil:ssg-sshd_print_last_log_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-sshd_set_loglevel_info_action:testaction:1" question_ref="ocil:ssg-sshd_set_loglevel_info_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-sshd_set_idle_timeout_action:testaction:1" question_ref="ocil:ssg-sshd_set_idle_timeout_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-sshd_set_keepalive_action:testaction:1" question_ref="ocil:ssg-sshd_set_keepalive_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-sshd_set_max_auth_tries_action:testaction:1" question_ref="ocil:ssg-sshd_set_max_auth_tries_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-sshd_disable_rhosts_action:testaction:1" question_ref="ocil:ssg-sshd_disable_rhosts_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-sshd_disable_user_known_hosts_action:testaction:1" question_ref="ocil:ssg-sshd_disable_user_known_hosts_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-sshd_disable_rhosts_rsa_action:testaction:1" question_ref="ocil:ssg-sshd_disable_rhosts_rsa_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-disable_host_auth_action:testaction:1" question_ref="ocil:ssg-disable_host_auth_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-sshd_enable_x11_forwarding_action:testaction:1" question_ref="ocil:ssg-sshd_enable_x11_forwarding_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-sshd_disable_root_login_action:testaction:1" question_ref="ocil:ssg-sshd_disable_root_login_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-sshd_disable_empty_passwords_action:testaction:1" question_ref="ocil:ssg-sshd_disable_empty_passwords_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-sshd_enable_warning_banner_action:testaction:1" question_ref="ocil:ssg-sshd_enable_warning_banner_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-sshd_do_not_permit_user_env_action:testaction:1" question_ref="ocil:ssg-sshd_do_not_permit_user_env_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-sshd_use_approved_ciphers_action:testaction:1" question_ref="ocil:ssg-sshd_use_approved_ciphers_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-sshd_use_approved_macs_action:testaction:1" question_ref="ocil:ssg-sshd_use_approved_macs_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-sshd_use_strong_ciphers_action:testaction:1" question_ref="ocil:ssg-sshd_use_strong_ciphers_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-sshd_use_strong_macs_action:testaction:1" question_ref="ocil:ssg-sshd_use_strong_macs_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+  </ns0:test_actions>
+  <ns0:questions>
+    <ns0:boolean_question id="ocil:ssg-file_owner_etc_passwd_question:question:1">
+      <ns0:question_text>
+              
+    To check the ownership of /etc/passwd, run the command:
+    $ ls -lL /etc/passwd
+    If properly configured, the output should indicate the following owner:
+    root
+            
+			Is it the case that it does not?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-file_groupowner_etc_passwd_question:question:1">
+      <ns0:question_text>
+              
+    To check the group ownership of /etc/passwd, run the command:
+    $ ls -lL /etc/passwd
+    If properly configured, the output should indicate the following group-owner.
+    root
+            
+			Is it the case that it does not?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-file_permissions_etc_passwd_question:question:1">
+      <ns0:question_text>
+              
+    To check the permissions of /etc/passwd, run the command:
+    $ ls -l /etc/passwd
+    If properly configured, the output should indicate the following permissions:
+    -rw-r--r--
+            
+			Is it the case that it does not?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-file_permissions_sshd_pub_key_question:question:1">
+      <ns0:question_text>
+          
+    To check the permissions of /etc/ssh/*.pub, run the command:
+    $ ls -l /etc/ssh/*.pub
+    If properly configured, the output should indicate the following permissions:
+    -rw-r--r--
+        
+			Is it the case that it does not?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-file_permissions_sshd_private_key_question:question:1">
+      <ns0:question_text>
+          
+    To check the permissions of /etc/ssh/*_key, run the command:
+    $ ls -l /etc/ssh/*_key
+    If properly configured, the output should indicate the following permissions:
+    -rw-r-----
+        
+			Is it the case that it does not?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-sshd_allow_only_protocol2_question:question:1">
+      <ns0:question_text>
+To check which SSH protocol version is allowed, run the following command:
+$ sudo grep Protocol /etc/ssh/sshd_config
+If configured properly, output should be Protocol 2
+
+			Is it the case that it is commented out or is not set correctly to Protocol 2?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-sshd_disable_gssapi_auth_question:question:1">
+      <ns0:question_text>
+To check if GSSAPIAuthentication is disabled or set correctly, run the following
+command:
+$ sudo grep GSSAPIAuthentication /etc/ssh/sshd_config
+If configured properly, output should be no
+
+			Is it the case that it is commented out or is not disabled?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-sshd_disable_kerb_auth_question:question:1">
+      <ns0:question_text>
+To check if KerberosAuthentication is disabled or set correctly, run the
+following command:
+$ sudo grep KerberosAuthentication /etc/ssh/sshd_config
+If configured properly, output should be no
+
+			Is it the case that it is commented out or is not disabled?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-sshd_enable_strictmodes_question:question:1">
+      <ns0:question_text>
+To check if StrictModes is enabled or set correctly, run the
+following command:
+$ sudo grep StrictModes /etc/ssh/sshd_config
+If configured properly, output should be yes
+
+			Is it the case that it is commented out or is not enabled?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-sshd_use_priv_separation_question:question:1">
+      <ns0:question_text>
+To check if UsePrivilegeSeparation is enabled or set correctly, run the
+following command:
+$ sudo grep UsePrivilegeSeparation /etc/ssh/sshd_config
+If configured properly, output should be yes
+
+			Is it the case that it is commented out or is not enabled?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-sshd_disable_compression_question:question:1">
+      <ns0:question_text>
+To check if compression is enabled or set correctly, run the
+following command:
+$ sudo grep Compression /etc/ssh/sshd_config
+If configured properly, output should be no or delayed.
+
+			Is it the case that it is commented out, or is not set to no or delayed?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-sshd_print_last_log_question:question:1">
+      <ns0:question_text>
+To check if PrintLastLog is enabled or set correctly, run the
+following command:
+$ sudo grep PrintLastLog /etc/ssh/sshd_config
+If configured properly, output should be yes
+
+			Is it the case that it is commented out or is not enabled?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-sshd_set_loglevel_info_question:question:1">
+      <ns0:question_text>
+To check if LogLevel is enabled or set correctly, run the
+following command:
+$ sudo grep "^LogLevel" /etc/ssh/sshd_config
+If configured properly, output should be LogLevel INFO
+
+			Is it the case that it is commented out or is not enabled?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-sshd_set_idle_timeout_question:question:1">
+      <ns0:question_text>
+Run the following command to see what the timeout interval is:
+$ sudo grep ClientAliveInterval /etc/ssh/sshd_config
+If properly configured, the output should be:
+ClientAliveInterval 600
+
+			Is it the case that it is commented out or not configured properly?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-sshd_set_keepalive_question:question:1">
+      <ns0:question_text>
+To ensure the SSH idle timeout will occur when the ClientAliveCountMax is set, run the following command:
+$ sudo grep ClientAliveCountMax /etc/ssh/sshd_config
+If properly configured, output should be:
+ClientAliveCountMax 0
+
+			Is it the case that it is commented out or not configured properly?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-sshd_set_max_auth_tries_question:question:1">
+      <ns0:question_text>
+To ensure the MaxAuthTries parameter is set, run the following command:
+$ sudo grep MaxAuthTries /etc/ssh/sshd_config
+If properly configured, output should be:
+MaxAuthTries tries
+
+			Is it the case that it is commented out or not configured properly?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-sshd_disable_rhosts_question:question:1">
+      <ns0:question_text>
+            
+    To determine how the SSH daemon's
+    IgnoreRhosts
+    option is set, run the following command:
+    preserve$ sudo grep -i IgnoreRhosts /etc/ssh/sshd_config
+      If no line, a commented line, or a line indicating the value
+      yes is returned, then the required value is set.
+    
+          
+			Is it the case that the required value is not set?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-sshd_disable_user_known_hosts_question:question:1">
+      <ns0:question_text>
+            
+    To determine how the SSH daemon's
+    IgnoreUserKnownHosts
+    option is set, run the following command:
+    preserve$ sudo grep -i IgnoreUserKnownHosts /etc/ssh/sshd_config
+      If a line indicating yes is returned, then the required value is set.
+    
+          
+			Is it the case that the required value is not set?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-sshd_disable_rhosts_rsa_question:question:1">
+      <ns0:question_text>
+            
+    To determine how the SSH daemon's
+    RhostsRSAAuthentication
+    option is set, run the following command:
+    preserve$ sudo grep -i RhostsRSAAuthentication /etc/ssh/sshd_config
+      If no line, a commented line, or a line indicating the value
+      no is returned, then the required value is set.
+    
+          
+			Is it the case that the required value is not set?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-disable_host_auth_question:question:1">
+      <ns0:question_text>
+            
+    To determine how the SSH daemon's
+    HostbasedAuthentication
+    option is set, run the following command:
+    preserve$ sudo grep -i HostbasedAuthentication /etc/ssh/sshd_config
+      If no line, a commented line, or a line indicating the value
+      no is returned, then the required value is set.
+    
+          
+			Is it the case that the required value is not set?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-sshd_enable_x11_forwarding_question:question:1">
+      <ns0:question_text>
+            
+    To determine how the SSH daemon's
+    X11Forwarding
+    option is set, run the following command:
+    preserve$ sudo grep -i X11Forwarding /etc/ssh/sshd_config
+      If a line indicating yes is returned, then the required value is set.
+    
+          
+			Is it the case that the required value is not set?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-sshd_disable_root_login_question:question:1">
+      <ns0:question_text>
+            
+    To determine how the SSH daemon's
+    PermitRootLogin
+    option is set, run the following command:
+    preserve$ sudo grep -i PermitRootLogin /etc/ssh/sshd_config
+      If a line indicating no is returned, then the required value is set.
+    
+          
+			Is it the case that the required value is not set?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-sshd_disable_empty_passwords_question:question:1">
+      <ns0:question_text>
+            
+    To determine how the SSH daemon's
+    PermitEmptyPasswords
+    option is set, run the following command:
+    preserve$ sudo grep -i PermitEmptyPasswords /etc/ssh/sshd_config
+      If no line, a commented line, or a line indicating the value
+      no is returned, then the required value is set.
+    
+          
+			Is it the case that the required value is not set?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-sshd_enable_warning_banner_question:question:1">
+      <ns0:question_text>
+            
+    To determine how the SSH daemon's
+    Banner
+    option is set, run the following command:
+    preserve$ sudo grep -i Banner /etc/ssh/sshd_config
+      If a line indicating /etc/issue is returned, then the required value is set.
+    
+          
+			Is it the case that the required value is not set?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-sshd_do_not_permit_user_env_question:question:1">
+      <ns0:question_text>
+To ensure users are not able to present environment daemons, run the following command:
+$ sudo grep PermitUserEnvironment /etc/ssh/sshd_config
+If properly configured, output should be:
+PermitUserEnvironment no
+
+			Is it the case that PermitUserEnvironment is not disabled?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-sshd_use_approved_ciphers_question:question:1">
+      <ns0:question_text>
+Only FIPS ciphers should be used. To verify that only FIPS-approved
+ciphers are in use, run the following command:
+$ sudo grep Ciphers /etc/ssh/sshd_config
+The output should contain only those ciphers which are FIPS-approved.
+			Is it the case that FIPS ciphers are not configured or the enabled ciphers are not FIPS-approved?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-sshd_use_approved_macs_question:question:1">
+      <ns0:question_text>
+Only FIPS-approved MACs should be used. To verify that only FIPS-approved
+MACs are in use, run the following command:
+$ sudo grep -i macs /etc/ssh/sshd_config
+The output should contain only those MACs which are FIPS-approved. Any use of other
+ciphers or algorithms will result in the module entering the non-FIPS mode of
+operation.
+
+
+			Is it the case that MACs option is commented out or not using FIPS-approved hash algorithms?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-sshd_use_strong_ciphers_question:question:1">
+      <ns0:question_text>
+Only strong ciphers should be used. To verify that only strong
+ciphers are in use, run the following command:
+$ sudo grep Ciphers /etc/ssh/sshd_config
+The output should contain only those ciphers which are considered strong, namely,
+chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes128-ctr
+
+			Is it the case that ciphers are not configured or not using strong ciphers?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-sshd_use_strong_macs_question:question:1">
+      <ns0:question_text>
+Only strong MACs should be used. To verify that only strong
+MACs are in use, run the following command:
+$ sudo grep -i macs /etc/ssh/sshd_config
+The output should contain only those MACs which are strong, namely,
+hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256,hmac-ripemd160 hash functions.
+
+			Is it the case that MACs option is commented out or not using strong hash algorithms?
+			</ns0:question_text>
+    </ns0:boolean_question>
+  </ns0:questions>
+</ns0:ocil>

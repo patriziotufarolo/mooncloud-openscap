@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<ns0:ocil xmlns:ns0="http://scap.nist.gov/schema/ocil/2.0">
+  <ns0:generator>
+    <ns0:schema_version>2.0</ns0:schema_version>
+    <ns0:timestamp>2017-05-27T15:39:12Z</ns0:timestamp>
+  </ns0:generator>
+  <ns0:questionnaires>
+    <ns0:questionnaire id="ocil:ssg-file_owner_etc_passwd_ocil:questionnaire:1">
+      <ns0:title>Verify User Who Owns passwd File</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-file_owner_etc_passwd_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-file_groupowner_etc_passwd_ocil:questionnaire:1">
+      <ns0:title>Verify Group Who Owns passwd File</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-file_groupowner_etc_passwd_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-file_permissions_etc_passwd_ocil:questionnaire:1">
+      <ns0:title>Verify Permissions on passwd File</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-file_permissions_etc_passwd_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+    <ns0:questionnaire id="ocil:ssg-file_permissions_unauthorized_world_writable_ocil:questionnaire:1">
+      <ns0:title>Ensure No World-Writable Files Exist</ns0:title>
+      <ns0:actions>
+        <ns0:test_action_ref>ocil:ssg-file_permissions_unauthorized_world_writable_action:testaction:1</ns0:test_action_ref>
+      </ns0:actions>
+    </ns0:questionnaire>
+  </ns0:questionnaires>
+  <ns0:test_actions>
+    <ns0:boolean_question_test_action id="ocil:ssg-file_owner_etc_passwd_action:testaction:1" question_ref="ocil:ssg-file_owner_etc_passwd_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-file_groupowner_etc_passwd_action:testaction:1" question_ref="ocil:ssg-file_groupowner_etc_passwd_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-file_permissions_etc_passwd_action:testaction:1" question_ref="ocil:ssg-file_permissions_etc_passwd_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+    <ns0:boolean_question_test_action id="ocil:ssg-file_permissions_unauthorized_world_writable_action:testaction:1" question_ref="ocil:ssg-file_permissions_unauthorized_world_writable_question:question:1">
+      <ns0:when_true>
+        <ns0:result>PASS</ns0:result>
+      </ns0:when_true>
+      <ns0:when_false>
+        <ns0:result>FAIL</ns0:result>
+      </ns0:when_false>
+    </ns0:boolean_question_test_action>
+  </ns0:test_actions>
+  <ns0:questions>
+    <ns0:boolean_question id="ocil:ssg-file_owner_etc_passwd_question:question:1">
+      <ns0:question_text>
+              
+    To check the ownership of /etc/passwd, run the command:
+    $ ls -lL /etc/passwd
+    If properly configured, the output should indicate the following owner:
+    root
+            
+			Is it the case that it does not?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-file_groupowner_etc_passwd_question:question:1">
+      <ns0:question_text>
+              
+    To check the group ownership of /etc/passwd, run the command:
+    $ ls -lL /etc/passwd
+    If properly configured, the output should indicate the following group-owner.
+    root
+            
+			Is it the case that it does not?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-file_permissions_etc_passwd_question:question:1">
+      <ns0:question_text>
+              
+    To check the permissions of /etc/passwd, run the command:
+    $ ls -l /etc/passwd
+    If properly configured, the output should indicate the following permissions:
+    -rw-r--r--
+            
+			Is it the case that it does not?
+			</ns0:question_text>
+    </ns0:boolean_question>
+    <ns0:boolean_question id="ocil:ssg-file_permissions_unauthorized_world_writable_question:question:1">
+      <ns0:question_text>
+To find world-writable files, run the following command:
+$ sudo find / -xdev -type f -perm -002
+
+			Is it the case that there is output?
+			</ns0:question_text>
+    </ns0:boolean_question>
+  </ns0:questions>
+</ns0:ocil>

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<ns0:cpe-list xmlns:ns0="http://cpe.mitre.org/dictionary/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://cpe.mitre.org/dictionary/2.0 http://cpe.mitre.org/files/cpe-dictionary_2.1.xsd">
+      <ns0:cpe-item name="cpe:/o:suse:linux_enterprise_server:12">
+            <ns0:title xml:lang="en-us">SUSE Linux Enterprise Server 12</ns0:title>
+            
+            <ns0:check href="ssg-sle12-cpe-oval.xml" system="http://oval.mitre.org/XMLSchema/oval-definitions-5">oval:ssg-installed_OS_is_sle12:def:1</ns0:check>
+      </ns0:cpe-item>
+      <ns0:cpe-item name="cpe:/o:suse:linux_enterprise_desktop:12">
+            <ns0:title xml:lang="en-us">SUSE Linux Enterprise Desktop 12</ns0:title>
+            
+            <ns0:check href="ssg-sle12-cpe-oval.xml" system="http://oval.mitre.org/XMLSchema/oval-definitions-5">oval:ssg-installed_OS_is_sle12:def:1</ns0:check>
+      </ns0:cpe-item>
+</ns0:cpe-list>

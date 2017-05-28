@@ -1,0 +1,815 @@
+<?xml version="1.0"?>
+<ns0:oval_definitions xmlns:ns0="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:ns4="http://oval.mitre.org/XMLSchema/oval-definitions-5#linux" xmlns:ns3="http://oval.mitre.org/XMLSchema/oval-definitions-5#independent" xmlns:ns2="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://oval.mitre.org/XMLSchema/oval-common-5 oval-common-schema.xsd         http://oval.mitre.org/XMLSchema/oval-definitions-5 oval-definitions-schema.xsd         http://oval.mitre.org/XMLSchema/oval-definitions-5#independent independent-definitions-schema.xsd         http://oval.mitre.org/XMLSchema/oval-definitions-5#unix unix-definitions-schema.xsd         http://oval.mitre.org/XMLSchema/oval-definitions-5#linux linux-definitions-schema.xsd">
+  <ns0:generator>
+    <ns2:product_name>python</ns2:product_name>
+    <ns2:product_version>2.7.5</ns2:product_version>
+    <ns2:schema_version>5.11</ns2:schema_version>
+    <ns2:timestamp>2017-05-27T15:46:00</ns2:timestamp>
+  </ns0:generator>
+  <ns0:definitions>
+    <ns0:definition class="compliance" id="oval:ssg-accounts_passwd_cmd:def:1" version="1">
+      <ns0:metadata>
+        <ns0:title>Use passwd for changing passwords.</ns0:title>
+        <ns0:affected family="unix">
+          <ns0:product>Webmin</ns0:product>
+        </ns0:affected>
+        <ns0:description>Webmin must use passwd for password changes so that 
+	  password requirements configured in the operating system are 
+	  enforced on new password selections.</ns0:description>
+      <reference ref_id="accounts_passwd_cmd" source="ssg"/></ns0:metadata>
+      <ns0:criteria operator="AND">
+        <ns0:criterion comment="Installed operating system is part of the unix family" test_ref="oval:ssg-test_unix_family:tst:1"/>
+        <ns0:criterion comment="passwd is configured for changing passwords." test_ref="oval:ssg-test_webmin_accounts_passwd_cmd:tst:1"/>
+      </ns0:criteria>
+    </ns0:definition>
+    <ns0:definition class="compliance" id="oval:ssg-accounts_passwd_mode:def:1" version="1">
+      <ns0:metadata>
+        <ns0:title>Enable the ability for a user to change an expired password.</ns0:title>
+        <ns0:affected family="unix">
+          <ns0:product>Webmin</ns0:product>
+        </ns0:affected>
+        <ns0:description>Webmin must enable a user to change their password when 
+	  it has expired.</ns0:description>
+      <reference ref_id="accounts_passwd_mode" source="ssg"/></ns0:metadata>
+      <ns0:criteria operator="AND">
+        <ns0:criterion comment="Installed operating system is part of the unix family" test_ref="oval:ssg-test_unix_family:tst:1"/>
+        <ns0:criterion comment="Changing expired passwords is enabled." test_ref="oval:ssg-test_webmin_accounts_passwd_mode:tst:1"/>
+      </ns0:criteria>
+    </ns0:definition>
+    <ns0:definition class="compliance" id="oval:ssg-accounts_use_pam:def:1" version="1">
+      <ns0:metadata>
+        <ns0:title>Use PAM for Unix authentication.</ns0:title>
+        <ns0:affected family="unix">
+          <ns0:product>Webmin</ns0:product>
+        </ns0:affected>
+        <ns0:description>Webmin must use the OS-provided Password Authentication 
+	  Module for validating passwords.</ns0:description>
+      <reference ref_id="accounts_use_pam" source="ssg"/></ns0:metadata>
+      <ns0:criteria operator="AND">
+        <ns0:criterion comment="Installed operating system is part of the unix family" test_ref="oval:ssg-test_unix_family:tst:1"/>
+        <ns0:criterion comment="perl-Authen-PAM is installed." test_ref="oval:ssg-test_webmin_perl_pam:tst:1"/>
+        <ns0:criterion comment="Require PAM to be used." test_ref="oval:ssg-test_webmin_accounts_use_pam:tst:1"/>
+      </ns0:criteria>
+    </ns0:definition>
+    <ns0:definition class="inventory" id="oval:ssg-installed_OS_is_part_of_Unix_family:def:1" version="1">
+      <ns0:metadata>
+        <ns0:title>Installed operating system is part of the Unix family</ns0:title>
+        <ns0:affected family="unix">
+          <ns0:product>Webmin</ns0:product>
+        </ns0:affected>
+        <ns0:description>The operating system installed on the system is part of the Unix OS family</ns0:description>
+      <reference ref_id="installed_OS_is_part_of_Unix_family" source="ssg"/></ns0:metadata>
+      <ns0:criteria>
+        <ns0:criterion comment="Installed operating system is part of the unix family" test_ref="oval:ssg-test_unix_family:tst:1"/>
+      </ns0:criteria>
+    </ns0:definition>
+    <ns0:definition class="inventory" id="oval:ssg-installed_app_is_webmin:def:1" version="2">
+      <ns0:metadata>
+        <ns0:title>Webmin</ns0:title>
+        <ns0:affected family="unix">
+          <ns0:product>Webmin</ns0:product>
+        </ns0:affected>
+        <ns0:reference ref_id="cpe:/a:gentoo:webmin" source="CPE"/>
+        <ns0:description>The application installed on the system is
+      webmin</ns0:description>
+      <reference ref_id="installed_app_is_webmin" source="ssg"/></ns0:metadata>
+      <ns0:criteria operator="AND">
+        <ns0:extend_definition comment="Installed OS is part of the Unix family" definition_ref="oval:ssg-installed_OS_is_part_of_Unix_family:def:1"/>
+        <ns0:criterion comment="Webmin is installed" test_ref="oval:ssg-test_webmin:tst:1"/>
+      </ns0:criteria>
+    </ns0:definition>
+    <ns0:definition class="compliance" id="oval:ssg-logs_webmin_actions_cleared:def:1" version="1">
+      <ns0:metadata>
+        <ns0:title>Prevent users from covering their trail.</ns0:title>
+        <ns0:affected family="unix">
+          <ns0:product>Webmin</ns0:product>
+        </ns0:affected>
+        <ns0:description>User actions must be tracked.</ns0:description>
+      <reference ref_id="logs_webmin_actions_cleared" source="ssg"/></ns0:metadata>
+      <ns0:criteria operator="AND">
+        <ns0:criterion comment="Installed operating system is part of the unix family" test_ref="oval:ssg-test_unix_family:tst:1"/>
+        <ns0:criterion comment="Prevent users from covering their trail." test_ref="oval:ssg-test_webmin_logs_webmin_actions_cleared:tst:1"/>
+      </ns0:criteria>
+    </ns0:definition>
+    <ns0:definition class="compliance" id="oval:ssg-logs_webmin_actions_enabled:def:1" version="1">
+      <ns0:metadata>
+        <ns0:title>Log actions performed by users.</ns0:title>
+        <ns0:affected family="unix">
+          <ns0:product>Webmin</ns0:product>
+        </ns0:affected>
+        <ns0:description>User actions must be tracked.</ns0:description>
+      <reference ref_id="logs_webmin_actions_enabled" source="ssg"/></ns0:metadata>
+      <ns0:criteria operator="AND">
+        <ns0:criterion comment="Installed operating system is part of the unix family" test_ref="oval:ssg-test_unix_family:tst:1"/>
+        <ns0:criterion comment="Log actions performed by users." test_ref="oval:ssg-test_webmin_logs_webmin_actions_enabled:tst:1"/>
+      </ns0:criteria>
+    </ns0:definition>
+    <ns0:definition class="compliance" id="oval:ssg-logs_webmin_actions_perms:def:1" version="1">
+      <ns0:metadata>
+        <ns0:title>Logs must not be accessible to unauthorized users.</ns0:title>
+        <ns0:affected family="unix">
+          <ns0:product>Webmin</ns0:product>
+        </ns0:affected>
+        <ns0:description>Logs must not be accessible to unauthorized users.</ns0:description>
+      <reference ref_id="logs_webmin_actions_perms" source="ssg"/></ns0:metadata>
+      <ns0:criteria operator="AND">
+        <ns0:criterion comment="Installed operating system is part of the unix family" test_ref="oval:ssg-test_unix_family:tst:1"/>
+        <ns0:criterion comment="Log actions performed by users." test_ref="oval:ssg-test_webmin_logs_webmin_actions_perms:tst:1"/>
+      </ns0:criteria>
+    </ns0:definition>
+    <ns0:definition class="compliance" id="oval:ssg-logs_webmin_requests_cleared:def:1" version="1">
+      <ns0:metadata>
+        <ns0:title>Prevent users from covering their trail.</ns0:title>
+        <ns0:affected family="unix">
+          <ns0:product>Webmin</ns0:product>
+        </ns0:affected>
+        <ns0:description>User requests must be tracked.</ns0:description>
+      <reference ref_id="logs_webmin_requests_cleared" source="ssg"/></ns0:metadata>
+      <ns0:criteria operator="AND">
+        <ns0:criterion comment="Installed operating system is part of the unix family" test_ref="oval:ssg-test_unix_family:tst:1"/>
+        <ns0:criterion comment="Prevent users from covering their trail." test_ref="oval:ssg-test_webmin_logs_webmin_requests_cleared:tst:1"/>
+      </ns0:criteria>
+    </ns0:definition>
+    <ns0:definition class="compliance" id="oval:ssg-logs_webmin_requests_enabled:def:1" version="1">
+      <ns0:metadata>
+        <ns0:title>Log requests performed by users.</ns0:title>
+        <ns0:affected family="unix">
+          <ns0:product>Webmin</ns0:product>
+        </ns0:affected>
+        <ns0:description>User requests must be tracked.</ns0:description>
+      <reference ref_id="logs_webmin_requests_enabled" source="ssg"/></ns0:metadata>
+      <ns0:criteria operator="AND">
+        <ns0:criterion comment="Installed operating system is part of the unix family" test_ref="oval:ssg-test_unix_family:tst:1"/>
+        <ns0:criterion comment="Log requests performed by users." test_ref="oval:ssg-test_webmin_logs_webmin_requests_enabled:tst:1"/>
+      </ns0:criteria>
+    </ns0:definition>
+    <ns0:definition class="compliance" id="oval:ssg-logs_webmin_requests_perms:def:1" version="1">
+      <ns0:metadata>
+        <ns0:title>Logs must not be accessible to unauthorized users.</ns0:title>
+        <ns0:affected family="unix">
+          <ns0:product>Webmin</ns0:product>
+        </ns0:affected>
+        <ns0:description>Logs must not be accessible to unauthorized users.</ns0:description>
+      <reference ref_id="logs_webmin_requests_perms" source="ssg"/></ns0:metadata>
+      <ns0:criteria operator="AND">
+        <ns0:criterion comment="Installed operating system is part of the unix family" test_ref="oval:ssg-test_unix_family:tst:1"/>
+        <ns0:criterion comment="Log actions performed by users." test_ref="oval:ssg-test_webmin_logs_webmin_requests_perms:tst:1"/>
+      </ns0:criteria>
+    </ns0:definition>
+    <ns0:definition class="compliance" id="oval:ssg-module_useradmin_accounts_char_types:def:1" version="1">
+      <ns0:metadata>
+        <ns0:title>Require passwords to include at least 1 upper-case character, 1 lower-case character, 1 numeric character, and 1 special character.</ns0:title>
+        <ns0:affected family="unix">
+          <ns0:product>Webmin</ns0:product>
+        </ns0:affected>
+        <ns0:description>Passwords created through the UserAdmin Webmin module 
+	must include at least 1 upper-case character, 1 lower-case character, 1 numeric character, and 1 special character.</ns0:description>
+      <reference ref_id="module_useradmin_accounts_char_types" source="ssg"/></ns0:metadata>
+      <ns0:criteria operator="AND">
+        <ns0:criterion comment="Installed operating system is part of the unix family" test_ref="oval:ssg-test_unix_family:tst:1"/>
+        <ns0:criterion comment="Require passwords to include at least 1 upper-case character, 1 lower-case character, 1 numeric character, and 1 special character." test_ref="oval:ssg-test_webmin_module_useradmin_accounts_char_types:tst:1"/>
+      </ns0:criteria>
+    </ns0:definition>
+    <ns0:definition class="compliance" id="oval:ssg-module_useradmin_accounts_home_perms:def:1" version="1">
+      <ns0:metadata>
+        <ns0:title>Set default permissions for new user home directories.</ns0:title>
+        <ns0:affected family="unix">
+          <ns0:product>Webmin</ns0:product>
+        </ns0:affected>
+        <ns0:description>New users created through the UserAdmin Webmin module 
+	  must have the default permissions of 750 applied to their home directory when created.</ns0:description>
+      <reference ref_id="module_useradmin_accounts_home_perms" source="ssg"/></ns0:metadata>
+      <ns0:criteria operator="AND">
+        <ns0:criterion comment="Installed operating system is part of the unix family" test_ref="oval:ssg-test_unix_family:tst:1"/>
+        <ns0:criterion comment="Set default permissions for new user home directories." test_ref="oval:ssg-test_webmin_module_useradmin_accounts_home_perms:tst:1"/>
+      </ns0:criteria>
+    </ns0:definition>
+    <ns0:definition class="compliance" id="oval:ssg-module_useradmin_accounts_inactive:def:1" version="1">
+      <ns0:metadata>
+        <ns0:title>Configure new accounts to lock out after a number of days 
+	  of no activity.</ns0:title>
+        <ns0:affected family="unix">
+          <ns0:product>Webmin</ns0:product>
+        </ns0:affected>
+        <ns0:description>New users created through the UserAdmin Webmin module 
+	  must include required account expiration criteria.</ns0:description>
+      <reference ref_id="module_useradmin_accounts_inactive" source="ssg"/></ns0:metadata>
+      <ns0:criteria operator="AND">
+        <ns0:criterion comment="Installed operating system is part of the unix family" test_ref="oval:ssg-test_unix_family:tst:1"/>
+        <ns0:criterion comment="Changing expired passwords is enabled." test_ref="oval:ssg-test_webmin_module_useradmin_accounts_inactive:tst:1"/>
+      </ns0:criteria>
+    </ns0:definition>
+    <ns0:definition class="compliance" id="oval:ssg-module_useradmin_accounts_last_login:def:1" version="1">
+      <ns0:metadata>
+        <ns0:title>Display last login information.</ns0:title>
+        <ns0:affected family="unix">
+          <ns0:product>Webmin</ns0:product>
+        </ns0:affected>
+        <ns0:description>User last login information must be displayed to support 
+	  detecting unauthorized access.</ns0:description>
+      <reference ref_id="module_useradmin_accounts_last_login" source="ssg"/></ns0:metadata>
+      <ns0:criteria operator="AND">
+        <ns0:criterion comment="Installed operating system is part of the unix family" test_ref="oval:ssg-test_unix_family:tst:1"/>
+        <ns0:criterion comment="Display last login information." test_ref="oval:ssg-test_webmin_module_useradmin_accounts_last_login:tst:1"/>
+      </ns0:criteria>
+    </ns0:definition>
+    <ns0:definition class="compliance" id="oval:ssg-module_useradmin_accounts_max:def:1" version="1">
+      <ns0:metadata>
+        <ns0:title>Configure new accounts to expire their password after 
+	  a maximum number days.</ns0:title>
+        <ns0:affected family="unix">
+          <ns0:product>Webmin</ns0:product>
+        </ns0:affected>
+        <ns0:description>New users created through the UserAdmin Webmin module 
+	  must include required maximum password life criteria.</ns0:description>
+      <reference ref_id="module_useradmin_accounts_max" source="ssg"/></ns0:metadata>
+      <ns0:criteria operator="AND">
+        <ns0:criterion comment="Installed operating system is part of the unix family" test_ref="oval:ssg-test_unix_family:tst:1"/>
+        <ns0:criterion comment="Configure new accounts to expire their password after a maximum number days." test_ref="oval:ssg-test_webmin_module_useradmin_accounts_max:tst:1"/>
+      </ns0:criteria>
+    </ns0:definition>
+    <ns0:definition class="compliance" id="oval:ssg-module_useradmin_accounts_min:def:1" version="1">
+      <ns0:metadata>
+        <ns0:title>Configure new accounts to prevent changing the password more than once per number of days.</ns0:title>
+        <ns0:affected family="unix">
+          <ns0:product>Webmin</ns0:product>
+        </ns0:affected>
+        <ns0:description>New users created through the UserAdmin Webmin module 
+	  must include required minimum password life criteria.</ns0:description>
+      <reference ref_id="module_useradmin_accounts_min" source="ssg"/></ns0:metadata>
+      <ns0:criteria operator="AND">
+        <ns0:criterion comment="Installed operating system is part of the unix family" test_ref="oval:ssg-test_unix_family:tst:1"/>
+        <ns0:criterion comment="Configure new accounts to prevent changing the password more than once per number of days." test_ref="oval:ssg-test_webmin_module_useradmin_accounts_min:tst:1"/>
+      </ns0:criteria>
+    </ns0:definition>
+    <ns0:definition class="compliance" id="oval:ssg-module_useradmin_accounts_min_length:def:1" version="1">
+      <ns0:metadata>
+        <ns0:title>Passwords include the required minimum character length.</ns0:title>
+        <ns0:affected family="unix">
+          <ns0:product>Webmin</ns0:product>
+        </ns0:affected>
+        <ns0:description>Passwords created through the UserAdmin Webmin module 
+	  must include the minimum defined number of characters in the password.</ns0:description>
+      <reference ref_id="module_useradmin_accounts_min_length" source="ssg"/></ns0:metadata>
+      <ns0:criteria operator="AND">
+        <ns0:criterion comment="Installed operating system is part of the unix family" test_ref="oval:ssg-test_unix_family:tst:1"/>
+        <ns0:criterion comment="Passwords include the required minimum character length." test_ref="oval:ssg-test_webmin_module_useradmin_accounts_min_length:tst:1"/>
+      </ns0:criteria>
+    </ns0:definition>
+    <ns0:definition class="compliance" id="oval:ssg-module_useradmin_accounts_password_dictionary:def:1" version="1">
+      <ns0:metadata>
+        <ns0:title>Selected passwords are not based on dictionary words.</ns0:title>
+        <ns0:affected family="unix">
+          <ns0:product>Webmin</ns0:product>
+        </ns0:affected>
+        <ns0:description>Passwords created through the UserAdmin Webmin module 
+	  must not include dictionary words.</ns0:description>
+      <reference ref_id="module_useradmin_accounts_password_dictionary" source="ssg"/></ns0:metadata>
+      <ns0:criteria operator="AND">
+        <ns0:criterion comment="Installed operating system is part of the unix family" test_ref="oval:ssg-test_unix_family:tst:1"/>
+        <ns0:criterion comment="Selected passwords are not based on dictionary words." test_ref="oval:ssg-test_webmin_module_useradmin_accounts_password_dictionary:tst:1"/>
+      </ns0:criteria>
+    </ns0:definition>
+    <ns0:definition class="compliance" id="oval:ssg-module_useradmin_accounts_password_hash:def:1" version="1">
+      <ns0:metadata>
+        <ns0:title>Passwords are stored using the required hash algorithm.</ns0:title>
+        <ns0:affected family="unix">
+          <ns0:product>Webmin</ns0:product>
+        </ns0:affected>
+        <ns0:description>Passwords generated through the UserAdmin Webmin module 
+	  must be stored using the specified hashing algorithm.</ns0:description>
+      <reference ref_id="module_useradmin_accounts_password_hash" source="ssg"/></ns0:metadata>
+      <ns0:criteria operator="AND">
+        <ns0:criterion comment="Installed operating system is part of the unix family" test_ref="oval:ssg-test_unix_family:tst:1"/>
+        <ns0:criterion comment="Passwords are stored using the required hash algorithm." test_ref="oval:ssg-test_webmin_module_useradmin_accounts_password_hash:tst:1"/>
+      </ns0:criteria>
+    </ns0:definition>
+    <ns0:definition class="compliance" id="oval:ssg-module_useradmin_accounts_password_masked:def:1" version="1">
+      <ns0:metadata>
+        <ns0:title>Password characters entered are not displayed in clear text.</ns0:title>
+        <ns0:affected family="unix">
+          <ns0:product>Webmin</ns0:product>
+        </ns0:affected>
+        <ns0:description>The UserAdmin Webmin module must not display the 
+	  characters entered for the password in clear text.</ns0:description>
+      <reference ref_id="module_useradmin_accounts_password_masked" source="ssg"/></ns0:metadata>
+      <ns0:criteria operator="AND">
+        <ns0:criterion comment="Installed operating system is part of the unix family" test_ref="oval:ssg-test_unix_family:tst:1"/>
+        <ns0:criterion comment="Password characters entered are not displayed in clear text." test_ref="oval:ssg-test_webmin_module_useradmin_accounts_password_masked:tst:1"/>
+      </ns0:criteria>
+    </ns0:definition>
+    <ns0:definition class="compliance" id="oval:ssg-module_useradmin_accounts_password_same:def:1" version="1">
+      <ns0:metadata>
+        <ns0:title>A password is not the same as the previously used password.</ns0:title>
+        <ns0:affected family="unix">
+          <ns0:product>Webmin</ns0:product>
+        </ns0:affected>
+        <ns0:description>Passwords created through the UserAdmin Webmin module 
+	  must not be the same as the previous password used.</ns0:description>
+      <reference ref_id="module_useradmin_accounts_password_same" source="ssg"/></ns0:metadata>
+      <ns0:criteria operator="AND">
+        <ns0:criterion comment="Installed operating system is part of the unix family" test_ref="oval:ssg-test_unix_family:tst:1"/>
+        <ns0:criterion comment="A password is not the same as the previously used password." test_ref="oval:ssg-test_webmin_module_useradmin_accounts_password_same:tst:1"/>
+      </ns0:criteria>
+    </ns0:definition>
+    <ns0:definition class="compliance" id="oval:ssg-module_useradmin_accounts_warn:def:1" version="1">
+      <ns0:metadata>
+        <ns0:title>Configure new accounts to warn the user about their password expiring.</ns0:title>
+        <ns0:affected family="unix">
+          <ns0:product>Webmin</ns0:product>
+        </ns0:affected>
+        <ns0:description>New users created through the UserAdmin Webmin module 
+	  must include required account password expiration warning criteria.</ns0:description>
+      <reference ref_id="module_useradmin_accounts_warn" source="ssg"/></ns0:metadata>
+      <ns0:criteria operator="AND">
+        <ns0:criterion comment="Installed operating system is part of the unix family" test_ref="oval:ssg-test_unix_family:tst:1"/>
+        <ns0:criterion comment="Configure new accounts to warn the user about their password expiring." test_ref="oval:ssg-test_webmin_module_useradmin_accounts_warn:tst:1"/>
+      </ns0:criteria>
+    </ns0:definition>
+    <ns0:definition class="compliance" id="oval:ssg-sessions_login_banner:def:1" version="1">
+      <ns0:metadata>
+        <ns0:title>Display approved login banner prior to login.</ns0:title>
+        <ns0:affected family="unix">
+          <ns0:product>Webmin</ns0:product>
+        </ns0:affected>
+        <ns0:description>Display approved login banner prior to login.</ns0:description>
+      <reference ref_id="sessions_login_banner" source="ssg"/></ns0:metadata>
+      <ns0:criteria operator="AND">
+        <ns0:criterion comment="Installed operating system is part of the unix family" test_ref="oval:ssg-test_unix_family:tst:1"/>
+        <ns0:criterion comment="Display approved login banner prior to login." test_ref="oval:ssg-test_webmin_sessions_login_banner:tst:1"/>
+        <ns0:criterion comment="Display approved login banner text prior to login." test_ref="oval:ssg-test_webmin_sessions_login_banner_text:tst:1"/>
+      </ns0:criteria>
+    </ns0:definition>
+    <ns0:definition class="compliance" id="oval:ssg-sessions_port:def:1" version="1">
+      <ns0:metadata>
+        <ns0:title>Configure approved webmin port.</ns0:title>
+        <ns0:affected family="unix">
+          <ns0:product>Webmin</ns0:product>
+        </ns0:affected>
+        <ns0:description>Configure approved webmin port.</ns0:description>
+      <reference ref_id="sessions_port" source="ssg"/></ns0:metadata>
+      <ns0:criteria operator="AND">
+        <ns0:criterion comment="Installed operating system is part of the unix family" test_ref="oval:ssg-test_unix_family:tst:1"/>
+        <ns0:criterion comment="Required port is configured for use." test_ref="oval:ssg-test_webmin_sessions_port:tst:1"/>
+        <ns0:criterion comment="Required port is configured for use." test_ref="oval:ssg-test_webmin_sessions_listen:tst:1"/>
+      </ns0:criteria>
+    </ns0:definition>
+    <ns0:definition class="compliance" id="oval:ssg-sessions_save_password:def:1" version="1">
+      <ns0:metadata>
+        <ns0:title>Prevent the ability for a user to save their login credentials for future access.</ns0:title>
+        <ns0:affected family="unix">
+          <ns0:product>Webmin</ns0:product>
+        </ns0:affected>
+        <ns0:description>Prevent the ability for a user to save their login credentials for future access.</ns0:description>
+      <reference ref_id="sessions_save_password" source="ssg"/></ns0:metadata>
+      <ns0:criteria operator="AND">
+        <ns0:criterion comment="Installed operating system is part of the unix family" test_ref="oval:ssg-test_unix_family:tst:1"/>
+        <ns0:criterion comment="Prevent the ability for a user to save their login credentials for future access." test_ref="oval:ssg-test_webmin_sessions_save_password:tst:1"/>
+      </ns0:criteria>
+    </ns0:definition>
+    <ns0:definition class="compliance" id="oval:ssg-sessions_ssl_cipher:def:1" version="1">
+      <ns0:metadata>
+        <ns0:title>Use approved ciphers for encryption.</ns0:title>
+        <ns0:affected family="unix">
+          <ns0:product>Webmin</ns0:product>
+        </ns0:affected>
+        <ns0:description>Use approved ciphers for encryption.</ns0:description>
+      <reference ref_id="sessions_ssl_cipher" source="ssg"/></ns0:metadata>
+      <ns0:criteria operator="AND">
+        <ns0:criterion comment="Installed operating system is part of the unix family" test_ref="oval:ssg-test_unix_family:tst:1"/>
+        <ns0:criterion comment="Use approved ciphers for encryption." test_ref="oval:ssg-test_webmin_sessions_ssl_cipher_order:tst:1"/>
+        <ns0:criteria operator="OR">
+          <ns0:criteria operator="AND">
+            <ns0:criterion comment="Poodle patch is applied." test_ref="oval:ssg-test_webmin_poodle_patch:tst:1"/>
+            <ns0:criterion comment="No SSLv2." test_ref="oval:ssg-test_webmin_poodle_no_sslv2:tst:1"/>
+            <ns0:criterion comment="No SSLv3." test_ref="oval:ssg-test_webmin_poodle_no_sslv3:tst:1"/>
+            <ns0:criterion comment="Use approved ciphers for encryption." test_ref="oval:ssg-test_webmin_sessions_ssl_cipher_list_poodle:tst:1"/>
+          </ns0:criteria>
+          <ns0:criterion comment="Use approved ciphers for encryption." test_ref="oval:ssg-test_webmin_sessions_ssl_cipher_list:tst:1"/>
+        </ns0:criteria>
+      </ns0:criteria>
+    </ns0:definition>
+    <ns0:definition class="compliance" id="oval:ssg-sessions_ssl_enabled:def:1" version="1">
+      <ns0:metadata>
+        <ns0:title>Encryption is enabled and enforced.</ns0:title>
+        <ns0:affected family="unix">
+          <ns0:product>Webmin</ns0:product>
+        </ns0:affected>
+        <ns0:description>Encryption is enabled and enforced.</ns0:description>
+      <reference ref_id="sessions_ssl_enabled" source="ssg"/></ns0:metadata>
+      <ns0:criteria operator="AND">
+        <ns0:criterion comment="Installed operating system is part of the unix family" test_ref="oval:ssg-test_unix_family:tst:1"/>
+        <ns0:criterion comment="Encryption is enabled." test_ref="oval:ssg-test_webmin_sessions_ssl_enabled:tst:1"/>
+        <ns0:criterion comment="Encryption is enforced" test_ref="oval:ssg-test_webmin_sessions_ssl_enforced:tst:1"/>
+        <ns0:criterion comment="perl-Net-SSLeay is installed." test_ref="oval:ssg-test_webmin_perl_ssl:tst:1"/>
+      </ns0:criteria>
+    </ns0:definition>
+    <ns0:definition class="compliance" id="oval:ssg-sessions_timeout:def:1" version="1">
+      <ns0:metadata>
+        <ns0:title>Sessions are closed after idling a specified number of minutes.</ns0:title>
+        <ns0:affected family="unix">
+          <ns0:product>Webmin</ns0:product>
+        </ns0:affected>
+        <ns0:description>Sessions are closed after idling a specified number of minutes.</ns0:description>
+      <reference ref_id="sessions_timeout" source="ssg"/></ns0:metadata>
+      <ns0:criteria operator="AND">
+        <ns0:criterion comment="Installed operating system is part of the unix family" test_ref="oval:ssg-test_unix_family:tst:1"/>
+        <ns0:criterion comment="Sessions are closed after idling a specified number of minutes." test_ref="oval:ssg-test_webmin_sessions_timeout:tst:1"/>
+      </ns0:criteria>
+    </ns0:definition>
+    <ns0:definition class="compliance" id="oval:ssg-webmin_is_up_to_date:def:1" version="1">
+      <ns0:metadata>
+        <ns0:title>Webmin</ns0:title>
+        <ns0:affected family="unix">
+          <ns0:product>Webmin</ns0:product>
+        </ns0:affected>
+        <ns0:reference ref_id="cpe:/a:gentoo:webmin" source="CPE"/>
+        <ns0:description>The Webmin application installed on the system is
+      updated.</ns0:description>
+      <reference ref_id="webmin_is_up_to_date" source="ssg"/></ns0:metadata>
+      <ns0:criteria>
+        <ns0:criterion comment="Installed operating system is part of the unix family" test_ref="oval:ssg-test_unix_family:tst:1"/>
+        <ns0:criterion comment="Webmin is updated" test_ref="oval:ssg-test_webmin_update:tst:1"/>
+      </ns0:criteria>
+    </ns0:definition>
+  </ns0:definitions>
+  <ns0:tests>
+    <ns3:textfilecontent54_test check="all" comment="Check passwd_cmd=/usr/bin/passwd is configured in /etc/webmin/config" id="oval:ssg-test_webmin_accounts_passwd_cmd:tst:1" version="1">
+      <ns3:object object_ref="oval:ssg-object_webmin_accounts_passwd_cmd:obj:1"/>
+    </ns3:textfilecontent54_test>
+    <ns3:textfilecontent54_test check="all" comment="Check passwd_mode=2 is configured in /etc/webmin/miniserv.conf" id="oval:ssg-test_webmin_accounts_passwd_mode:tst:1" version="1">
+      <ns3:object object_ref="oval:ssg-object_webmin_accounts_passwd_mode:obj:1"/>
+    </ns3:textfilecontent54_test>
+    <ns4:rpminfo_test check="all" check_existence="at_least_one_exists" comment="perl-Authen-PAM is installed" id="oval:ssg-test_webmin_perl_pam:tst:1" version="1">
+      <ns4:object object_ref="oval:ssg-obj_webmin_perl_pam:obj:1"/>
+    </ns4:rpminfo_test>
+    <ns3:textfilecontent54_test check="all" comment="Check no_pam=0 is configured in /etc/webmin/miniserv.conf" id="oval:ssg-test_webmin_accounts_use_pam:tst:1" version="1">
+      <ns3:object object_ref="oval:ssg-object_webmin_accounts_use_pam:obj:1"/>
+    </ns3:textfilecontent54_test>
+    <ns3:family_test check="all" check_existence="at_least_one_exists" comment="Test installed OS is part of the unix family" id="oval:ssg-test_unix_family:tst:1" version="1">
+      <ns3:object object_ref="oval:ssg-object_unix_family:obj:1"/>
+      <ns3:state state_ref="oval:ssg-state_unix_family:ste:1"/>
+    </ns3:family_test>
+    <ns4:rpminfo_test check="all" check_existence="at_least_one_exists" comment="Webmin is installed" id="oval:ssg-test_webmin:tst:1" version="1">
+      <ns4:object object_ref="oval:ssg-obj_webmin:obj:1"/>
+    </ns4:rpminfo_test>
+    <ns3:textfilecontent54_test check="all" comment="Check logclear is configured in /etc/webmin/config" id="oval:ssg-test_webmin_logs_webmin_actions_cleared:tst:1" version="1">
+      <ns3:object object_ref="oval:ssg-object_webmin_logs_webmin_actions_cleared:obj:1"/>
+    </ns3:textfilecontent54_test>
+    <ns3:textfilecontent54_test check="all" comment="Check log is configured in /etc/webmin/config" id="oval:ssg-test_webmin_logs_webmin_actions_enabled:tst:1" version="1">
+      <ns3:object object_ref="oval:ssg-object_webmin_logs_webmin_actions_enabled:obj:1"/>
+    </ns3:textfilecontent54_test>
+    <ns3:textfilecontent54_test check="all" comment="Check logperms is configured in /etc/webmin/config" id="oval:ssg-test_webmin_logs_webmin_actions_perms:tst:1" version="1">
+      <ns3:object object_ref="oval:ssg-object_webmin_logs_webmin_actions_perms:obj:1"/>
+    </ns3:textfilecontent54_test>
+    <ns3:textfilecontent54_test check="all" comment="Check logclear is configured in /etc/webmin/miniserv.conf" id="oval:ssg-test_webmin_logs_webmin_requests_cleared:tst:1" version="1">
+      <ns3:object object_ref="oval:ssg-object_webmin_logs_webmin_requests_cleared:obj:1"/>
+    </ns3:textfilecontent54_test>
+    <ns3:textfilecontent54_test check="all" comment="Check log is configured in /etc/webmin/miniserv.conf" id="oval:ssg-test_webmin_logs_webmin_requests_enabled:tst:1" version="1">
+      <ns3:object object_ref="oval:ssg-object_webmin_logs_webmin_requests_enabled:obj:1"/>
+    </ns3:textfilecontent54_test>
+    <ns3:textfilecontent54_test check="all" comment="Check logperms is configured in /etc/webmin/miniserv.conf" id="oval:ssg-test_webmin_logs_webmin_requests_perms:tst:1" version="1">
+      <ns3:object object_ref="oval:ssg-object_webmin_logs_webmin_requests_perms:obj:1"/>
+    </ns3:textfilecontent54_test>
+    <ns3:textfilecontent54_test check="all" comment="Check passwd_re is configured in /etc/webmin/config" id="oval:ssg-test_webmin_module_useradmin_accounts_char_types:tst:1" version="1">
+      <ns3:object object_ref="oval:ssg-object_webmin_module_useradmin_accounts_char_types:obj:1"/>
+    </ns3:textfilecontent54_test>
+    <ns3:textfilecontent54_test check="all" comment="Check homedir_perms is configured in /etc/webmin/config" id="oval:ssg-test_webmin_module_useradmin_accounts_home_perms:tst:1" version="1">
+      <ns3:object object_ref="oval:ssg-object_webmin_module_useradmin_accounts_home_perms:obj:1"/>
+    </ns3:textfilecontent54_test>
+    <ns3:textfilecontent54_test check="all" comment="Check default_inactive is configured in /etc/webmin/useradmin/config" id="oval:ssg-test_webmin_module_useradmin_accounts_inactive:tst:1" version="1">
+      <ns3:object object_ref="oval:ssg-object_webmin_module_useradmin_accounts_inactive:obj:1"/>
+      <ns3:state state_ref="oval:ssg-state_webmin_module_useradmin_accounts_inactive:ste:1"/>
+      <ns3:state state_ref="oval:ssg-state_webmin_module_useradmin_accounts_inactive_not_zero:ste:1"/>
+    </ns3:textfilecontent54_test>
+    <ns3:textfilecontent54_test check="all" comment="Check last_show is configured in /etc/webmin/config" id="oval:ssg-test_webmin_module_useradmin_accounts_last_login:tst:1" version="1">
+      <ns3:object object_ref="oval:ssg-object_webmin_module_useradmin_accounts_last_login:obj:1"/>
+    </ns3:textfilecontent54_test>
+    <ns3:textfilecontent54_test check="all" comment="Check default_max is configured in /etc/webmin/useradmin/config" id="oval:ssg-test_webmin_module_useradmin_accounts_max:tst:1" version="1">
+      <ns3:object object_ref="oval:ssg-object_webmin_module_useradmin_accounts_max:obj:1"/>
+      <ns3:state state_ref="oval:ssg-state_webmin_module_useradmin_accounts_max:ste:1"/>
+      <ns3:state state_ref="oval:ssg-state_webmin_module_useradmin_accounts_max_not_zero:ste:1"/>
+    </ns3:textfilecontent54_test>
+    <ns3:textfilecontent54_test check="all" comment="Check default_min is configured in /etc/webmin/useradmin/config" id="oval:ssg-test_webmin_module_useradmin_accounts_min:tst:1" version="1">
+      <ns3:object object_ref="oval:ssg-object_webmin_module_useradmin_accounts_min:obj:1"/>
+      <ns3:state state_ref="oval:ssg-state_webmin_module_useradmin_accounts_min:ste:1"/>
+    </ns3:textfilecontent54_test>
+    <ns3:textfilecontent54_test check="all" comment="Check passwd_min is configured in /etc/webmin/useradmin/config" id="oval:ssg-test_webmin_module_useradmin_accounts_min_length:tst:1" version="1">
+      <ns3:object object_ref="oval:ssg-object_webmin_module_useradmin_accounts_min_length:obj:1"/>
+      <ns3:state state_ref="oval:ssg-state_webmin_module_useradmin_accounts_min_length:ste:1"/>
+    </ns3:textfilecontent54_test>
+    <ns3:textfilecontent54_test check="all" comment="Check passwd_dict is configured in /etc/webmin/config" id="oval:ssg-test_webmin_module_useradmin_accounts_password_dictionary:tst:1" version="1">
+      <ns3:object object_ref="oval:ssg-object_webmin_module_useradmin_accounts_password_dictionary:obj:1"/>
+    </ns3:textfilecontent54_test>
+    <ns3:textfilecontent54_test check="all" comment="Check md5 is configured in /etc/webmin/useradmin/config" id="oval:ssg-test_webmin_module_useradmin_accounts_password_hash:tst:1" version="1">
+      <ns3:object object_ref="oval:ssg-object_webmin_module_useradmin_accounts_password_hash:obj:1"/>
+      <ns3:state state_ref="oval:ssg-state_webmin_module_useradmin_accounts_password_hash:ste:1"/>
+    </ns3:textfilecontent54_test>
+    <ns3:textfilecontent54_test check="all" comment="Check passwd_stars is configured in /etc/webmin/config" id="oval:ssg-test_webmin_module_useradmin_accounts_password_masked:tst:1" version="1">
+      <ns3:object object_ref="oval:ssg-object_webmin_module_useradmin_accounts_password_masked:obj:1"/>
+    </ns3:textfilecontent54_test>
+    <ns3:textfilecontent54_test check="all" comment="Check passwd_same is configured in /etc/webmin/config" id="oval:ssg-test_webmin_module_useradmin_accounts_password_same:tst:1" version="1">
+      <ns3:object object_ref="oval:ssg-object_webmin_module_useradmin_accounts_password_same:obj:1"/>
+    </ns3:textfilecontent54_test>
+    <ns3:textfilecontent54_test check="all" comment="Check default_warn is configured in /etc/webmin/useradmin/config" id="oval:ssg-test_webmin_module_useradmin_accounts_warn:tst:1" version="1">
+      <ns3:object object_ref="oval:ssg-object_webmin_module_useradmin_accounts_warn:obj:1"/>
+      <ns3:state state_ref="oval:ssg-state_webmin_module_useradmin_accounts_warn:ste:1"/>
+    </ns3:textfilecontent54_test>
+    <ns3:textfilecontent54_test check="all" comment="Check loginbanner is configured in /etc/webmin/config" id="oval:ssg-test_webmin_sessions_login_banner:tst:1" version="1">
+      <ns3:object object_ref="oval:ssg-object_webmin_sessions_login_banner:obj:1"/>
+    </ns3:textfilecontent54_test>
+    <ns3:textfilecontent54_test check="all" comment="Check loginbanner content is configured in /etc/webmin/login_banner" id="oval:ssg-test_webmin_sessions_login_banner_text:tst:1" version="1">
+      <ns3:object object_ref="oval:ssg-object_webmin_sessions_login_banner_text:obj:1"/>
+    </ns3:textfilecontent54_test>
+    <ns3:textfilecontent54_test check="all" comment="Check port is configured in /etc/webmin/miniserv.conf" id="oval:ssg-test_webmin_sessions_port:tst:1" version="1">
+      <ns3:object object_ref="oval:ssg-object_webmin_sessions_port:obj:1"/>
+      <ns3:state state_ref="oval:ssg-state_webmin_sessions_port:ste:1"/>
+    </ns3:textfilecontent54_test>
+    <ns3:textfilecontent54_test check="all" comment="Check port is configured in /etc/webmin/miniserv.conf" id="oval:ssg-test_webmin_sessions_listen:tst:1" version="1">
+      <ns3:object object_ref="oval:ssg-object_webmin_sessions_listen:obj:1"/>
+      <ns3:state state_ref="oval:ssg-state_webmin_sessions_listen:ste:1"/>
+    </ns3:textfilecontent54_test>
+    <ns3:textfilecontent54_test check="all" comment="Check noremember is configured in /etc/webmin/config" id="oval:ssg-test_webmin_sessions_save_password:tst:1" version="1">
+      <ns3:object object_ref="oval:ssg-object_webmin_sessions_save_password:obj:1"/>
+    </ns3:textfilecontent54_test>
+    <ns3:textfilecontent54_test check="all" comment="Check ssl_cipher_list is configured in /etc/webmin/miniserv.conf" id="oval:ssg-test_webmin_sessions_ssl_cipher_list:tst:1" version="1">
+      <ns3:object object_ref="oval:ssg-object_webmin_sessions_ssl_cipher_list:obj:1"/>
+    </ns3:textfilecontent54_test>
+    <ns3:textfilecontent54_test check="all" comment="Check ssl_cipher_order is configured in /etc/webmin/miniserv.conf" id="oval:ssg-test_webmin_sessions_ssl_cipher_order:tst:1" version="1">
+      <ns3:object object_ref="oval:ssg-object_webmin_sessions_ssl_cipher_order:obj:1"/>
+    </ns3:textfilecontent54_test>
+    <ns3:textfilecontent54_test check="all" comment="Check if webmin is patched to include the no_ssl3 parameter" id="oval:ssg-test_webmin_poodle_patch:tst:1" version="1">
+      <ns3:object object_ref="oval:ssg-object_webmin_poodle_patch:obj:1"/>
+    </ns3:textfilecontent54_test>
+    <ns3:textfilecontent54_test check="all" comment="Check ssl_cipher_list is configured in /etc/webmin/miniserv.conf" id="oval:ssg-test_webmin_sessions_ssl_cipher_list_poodle:tst:1" version="1">
+      <ns3:object object_ref="oval:ssg-object_webmin_sessions_ssl_cipher_list_poodle:obj:1"/>
+    </ns3:textfilecontent54_test>
+    <ns3:textfilecontent54_test check="all" comment="Check no_ssl2 is configured in /etc/webmin/miniserv.conf" id="oval:ssg-test_webmin_poodle_no_sslv2:tst:1" version="1">
+      <ns3:object object_ref="oval:ssg-object_webmin_poodle_no_sslv2:obj:1"/>
+    </ns3:textfilecontent54_test>
+    <ns3:textfilecontent54_test check="all" comment="Check no_ssl3 is configured in /etc/webmin/miniserv.conf" id="oval:ssg-test_webmin_poodle_no_sslv3:tst:1" version="1">
+      <ns3:object object_ref="oval:ssg-object_webmin_poodle_no_sslv3:obj:1"/>
+    </ns3:textfilecontent54_test>
+    <ns3:textfilecontent54_test check="all" comment="Check ssl is configured in /etc/webmin/miniserv.conf" id="oval:ssg-test_webmin_sessions_ssl_enabled:tst:1" version="1">
+      <ns3:object object_ref="oval:ssg-object_webmin_sessions_ssl_enabled:obj:1"/>
+    </ns3:textfilecontent54_test>
+    <ns3:textfilecontent54_test check="all" comment="Check ssl_redirect is configured in /etc/webmin/miniserv.conf" id="oval:ssg-test_webmin_sessions_ssl_enforced:tst:1" version="1">
+      <ns3:object object_ref="oval:ssg-object_webmin_sessions_ssl_enforced:obj:1"/>
+    </ns3:textfilecontent54_test>
+    <ns4:rpminfo_test check="all" check_existence="at_least_one_exists" comment="perl-Net-SSLeay is installed" id="oval:ssg-test_webmin_perl_ssl:tst:1" version="1">
+      <ns4:object object_ref="oval:ssg-obj_webmin_perl_ssl:obj:1"/>
+    </ns4:rpminfo_test>
+    <ns3:textfilecontent54_test check="all" comment="Check logouttime is configured in /etc/webmin/miniserv.conf" id="oval:ssg-test_webmin_sessions_timeout:tst:1" version="1">
+      <ns3:object object_ref="oval:ssg-object_webmin_sessions_timeout:obj:1"/>
+      <ns3:state state_ref="oval:ssg-state_webmin_sessions_timeout:ste:1"/>
+      <ns3:state state_ref="oval:ssg-state_webmin_sessions_timeout_not_zero:ste:1"/>
+    </ns3:textfilecontent54_test>
+    <ns4:rpminfo_test check="at least one" check_existence="at_least_one_exists" comment="Webmin is updated" id="oval:ssg-test_webmin_update:tst:1" version="1">
+      <ns4:object object_ref="oval:ssg-obj_webmin:obj:1"/>
+      <ns4:state state_ref="oval:ssg-state_webmin_update:ste:1"/>
+    </ns4:rpminfo_test>
+  </ns0:tests>
+  <ns0:objects>
+    <ns3:textfilecontent54_object id="oval:ssg-object_webmin_accounts_passwd_cmd:obj:1" version="1">
+      <ns3:filepath>/etc/webmin/config</ns3:filepath>
+      <ns3:pattern operation="pattern match">^passwd_cmd=/usr/bin/passwd$</ns3:pattern>
+      <ns3:instance datatype="int">1</ns3:instance>
+    </ns3:textfilecontent54_object>
+    <ns3:textfilecontent54_object id="oval:ssg-object_webmin_accounts_passwd_mode:obj:1" version="1">
+      <ns3:filepath>/etc/webmin/miniserv.conf</ns3:filepath>
+      <ns3:pattern operation="pattern match">^passwd_mode=2$</ns3:pattern>
+      <ns3:instance datatype="int">1</ns3:instance>
+    </ns3:textfilecontent54_object>
+    <ns4:rpminfo_object id="oval:ssg-obj_webmin_perl_pam:obj:1" version="1">
+      <ns4:name>perl-Authen-PAM</ns4:name>
+    </ns4:rpminfo_object>
+    <ns3:textfilecontent54_object id="oval:ssg-object_webmin_accounts_use_pam:obj:1" version="1">
+      <ns3:filepath>/etc/webmin/miniserv.conf</ns3:filepath>
+      <ns3:pattern operation="pattern match">^no_pam=0$</ns3:pattern>
+      <ns3:instance datatype="int">1</ns3:instance>
+    </ns3:textfilecontent54_object>
+    <ns3:family_object id="oval:ssg-object_unix_family:obj:1" version="1"/>
+    <ns4:rpminfo_object id="oval:ssg-obj_webmin:obj:1" version="1">
+      <ns4:name>webmin</ns4:name>
+    </ns4:rpminfo_object>
+    <ns3:textfilecontent54_object id="oval:ssg-object_webmin_logs_webmin_actions_cleared:obj:1" version="1">
+      <ns3:filepath>/etc/webmin/config</ns3:filepath>
+      <ns3:pattern operation="pattern match">^logclear=0$</ns3:pattern>
+      <ns3:instance datatype="int">1</ns3:instance>
+    </ns3:textfilecontent54_object>
+    <ns3:textfilecontent54_object id="oval:ssg-object_webmin_logs_webmin_actions_enabled:obj:1" version="1">
+      <ns3:filepath>/etc/webmin/config</ns3:filepath>
+      <ns3:pattern operation="pattern match">^log=1$</ns3:pattern>
+      <ns3:instance datatype="int">1</ns3:instance>
+    </ns3:textfilecontent54_object>
+    <ns3:textfilecontent54_object id="oval:ssg-object_webmin_logs_webmin_actions_perms:obj:1" version="1">
+      <ns3:filepath>/etc/webmin/config</ns3:filepath>
+      <ns3:pattern operation="pattern match">^logperms=640$</ns3:pattern>
+      <ns3:instance datatype="int">1</ns3:instance>
+    </ns3:textfilecontent54_object>
+    <ns3:textfilecontent54_object id="oval:ssg-object_webmin_logs_webmin_requests_cleared:obj:1" version="1">
+      <ns3:filepath>/etc/webmin/miniserv.conf</ns3:filepath>
+      <ns3:pattern operation="pattern match">^logclear=0$</ns3:pattern>
+      <ns3:instance datatype="int">1</ns3:instance>
+    </ns3:textfilecontent54_object>
+    <ns3:textfilecontent54_object id="oval:ssg-object_webmin_logs_webmin_requests_enabled:obj:1" version="1">
+      <ns3:filepath>/etc/webmin/miniserv.conf</ns3:filepath>
+      <ns3:pattern operation="pattern match">^log=1$</ns3:pattern>
+      <ns3:instance datatype="int">1</ns3:instance>
+    </ns3:textfilecontent54_object>
+    <ns3:textfilecontent54_object id="oval:ssg-object_webmin_logs_webmin_requests_perms:obj:1" version="1">
+      <ns3:filepath>/etc/webmin/miniserv.conf</ns3:filepath>
+      <ns3:pattern operation="pattern match">^logperms=640$</ns3:pattern>
+      <ns3:instance datatype="int">1</ns3:instance>
+    </ns3:textfilecontent54_object>
+    <ns3:textfilecontent54_object id="oval:ssg-object_webmin_module_useradmin_accounts_char_types:obj:1" version="1">
+      <ns3:filepath>/etc/webmin/useradmin/config</ns3:filepath>
+      <ns3:pattern operation="pattern match">^passwd_re=\^\.\*\(\?=\.\*\[a-z\]\)\(\?=\.\*\[A-Z\]\)\(\?=\.\*\[\\d\]\)\(\?=\.\*\[\\W\]\)\.\*\$$</ns3:pattern>
+      <ns3:instance datatype="int">1</ns3:instance>
+    </ns3:textfilecontent54_object>
+    <ns3:textfilecontent54_object id="oval:ssg-object_webmin_module_useradmin_accounts_home_perms:obj:1" version="1">
+      <ns3:filepath>/etc/webmin/useradmin/config</ns3:filepath>
+      <ns3:pattern operation="pattern match">^homedir_perms=0750$</ns3:pattern>
+      <ns3:instance datatype="int">1</ns3:instance>
+    </ns3:textfilecontent54_object>
+    <ns3:textfilecontent54_object id="oval:ssg-object_webmin_module_useradmin_accounts_inactive:obj:1" version="1">
+      <ns3:filepath>/etc/webmin/useradmin/config</ns3:filepath>
+      <ns3:pattern operation="pattern match">^default_inactive=+(\d+)$</ns3:pattern>
+      <ns3:instance datatype="int">1</ns3:instance>
+    </ns3:textfilecontent54_object>
+    <ns3:textfilecontent54_object id="oval:ssg-object_webmin_module_useradmin_accounts_last_login:obj:1" version="1">
+      <ns3:filepath>/etc/webmin/useradmin/config</ns3:filepath>
+      <ns3:pattern operation="pattern match">^last_show=1$</ns3:pattern>
+      <ns3:instance datatype="int">1</ns3:instance>
+    </ns3:textfilecontent54_object>
+    <ns3:textfilecontent54_object id="oval:ssg-object_webmin_module_useradmin_accounts_max:obj:1" version="1">
+      <ns3:filepath>/etc/webmin/useradmin/config</ns3:filepath>
+      <ns3:pattern operation="pattern match">^default_max=+(\d+)$</ns3:pattern>
+      <ns3:instance datatype="int">1</ns3:instance>
+    </ns3:textfilecontent54_object>
+    <ns3:textfilecontent54_object id="oval:ssg-object_webmin_module_useradmin_accounts_min:obj:1" version="1">
+      <ns3:filepath>/etc/webmin/useradmin/config</ns3:filepath>
+      <ns3:pattern operation="pattern match">^default_min=+(\d+)$</ns3:pattern>
+      <ns3:instance datatype="int">1</ns3:instance>
+    </ns3:textfilecontent54_object>
+    <ns3:textfilecontent54_object id="oval:ssg-object_webmin_module_useradmin_accounts_min_length:obj:1" version="1">
+      <ns3:filepath>/etc/webmin/useradmin/config</ns3:filepath>
+      <ns3:pattern operation="pattern match">^passwd_min=+(\d+)$</ns3:pattern>
+      <ns3:instance datatype="int">1</ns3:instance>
+    </ns3:textfilecontent54_object>
+    <ns3:textfilecontent54_object id="oval:ssg-object_webmin_module_useradmin_accounts_password_dictionary:obj:1" version="1">
+      <ns3:filepath>/etc/webmin/useradmin/config</ns3:filepath>
+      <ns3:pattern operation="pattern match">^passwd_dict=1$</ns3:pattern>
+      <ns3:instance datatype="int">1</ns3:instance>
+    </ns3:textfilecontent54_object>
+    <ns3:textfilecontent54_object id="oval:ssg-object_webmin_module_useradmin_accounts_password_hash:obj:1" version="1">
+      <ns3:filepath>/etc/webmin/useradmin/config</ns3:filepath>
+      <ns3:pattern operation="pattern match">^md5=+(\d+)$</ns3:pattern>
+      <ns3:instance datatype="int">1</ns3:instance>
+    </ns3:textfilecontent54_object>
+    <ns3:textfilecontent54_object id="oval:ssg-object_webmin_module_useradmin_accounts_password_masked:obj:1" version="1">
+      <ns3:filepath>/etc/webmin/useradmin/config</ns3:filepath>
+      <ns3:pattern operation="pattern match">^passwd_stars=1$</ns3:pattern>
+      <ns3:instance datatype="int">1</ns3:instance>
+    </ns3:textfilecontent54_object>
+    <ns3:textfilecontent54_object id="oval:ssg-object_webmin_module_useradmin_accounts_password_same:obj:1" version="1">
+      <ns3:filepath>/etc/webmin/useradmin/config</ns3:filepath>
+      <ns3:pattern operation="pattern match">^passwd_same=1$</ns3:pattern>
+      <ns3:instance datatype="int">1</ns3:instance>
+    </ns3:textfilecontent54_object>
+    <ns3:textfilecontent54_object id="oval:ssg-object_webmin_module_useradmin_accounts_warn:obj:1" version="1">
+      <ns3:filepath>/etc/webmin/useradmin/config</ns3:filepath>
+      <ns3:pattern operation="pattern match">^default_warn=+(\d+)$</ns3:pattern>
+      <ns3:instance datatype="int">1</ns3:instance>
+    </ns3:textfilecontent54_object>
+    <ns3:textfilecontent54_object id="oval:ssg-object_webmin_sessions_login_banner:obj:1" version="1">
+      <ns3:filepath>/etc/webmin/config</ns3:filepath>
+      <ns3:pattern operation="pattern match">^loginbanner=/etc/webmin/login_banner$</ns3:pattern>
+      <ns3:instance datatype="int">1</ns3:instance>
+    </ns3:textfilecontent54_object>
+    <ns3:textfilecontent54_object id="oval:ssg-object_webmin_sessions_login_banner_text:obj:1" version="1">
+      <ns3:filepath>/etc/webmin/login_banner</ns3:filepath>
+      <ns3:pattern operation="pattern match" var_ref="oval:ssg-var_webmin_sessions_login_banner_text:var:1"/>
+      <ns3:instance datatype="int">1</ns3:instance>
+    </ns3:textfilecontent54_object>
+    <ns3:textfilecontent54_object id="oval:ssg-object_webmin_sessions_port:obj:1" version="1">
+      <ns3:filepath>/etc/webmin/miniserv.conf</ns3:filepath>
+      <ns3:pattern operation="pattern match">^port=+(\d+)$</ns3:pattern>
+      <ns3:instance datatype="int">1</ns3:instance>
+    </ns3:textfilecontent54_object>
+    <ns3:textfilecontent54_object id="oval:ssg-object_webmin_sessions_listen:obj:1" version="1">
+      <ns3:filepath>/etc/webmin/miniserv.conf</ns3:filepath>
+      <ns3:pattern operation="pattern match">^listen=+(\d+)$</ns3:pattern>
+      <ns3:instance datatype="int">1</ns3:instance>
+    </ns3:textfilecontent54_object>
+    <ns3:textfilecontent54_object id="oval:ssg-object_webmin_sessions_save_password:obj:1" version="1">
+      <ns3:filepath>/etc/webmin/config</ns3:filepath>
+      <ns3:pattern operation="pattern match">^noremember=1$</ns3:pattern>
+      <ns3:instance datatype="int">1</ns3:instance>
+    </ns3:textfilecontent54_object>
+    <ns3:textfilecontent54_object id="oval:ssg-object_webmin_sessions_ssl_cipher_list:obj:1" version="1">
+      <ns3:filepath>/etc/webmin/miniserv.conf</ns3:filepath>
+      <ns3:pattern operation="pattern match">^ssl_cipher_list=ECDHE-RSA-AES256-SHA384\:AES256-SHA256\:RC4\:HIGH\:\+TLSv1.2\:\+TLSv1\:\!MD5\:\!SSLv2\:\!SSLv3\:\!ADH\:\!aNULL\:\!eNULL\:\!NULL\:\!DH\:\!EDH\:\!AESGCM$</ns3:pattern>
+      <ns3:instance datatype="int">1</ns3:instance>
+    </ns3:textfilecontent54_object>
+    <ns3:textfilecontent54_object id="oval:ssg-object_webmin_sessions_ssl_cipher_order:obj:1" version="1">
+      <ns3:filepath>/etc/webmin/miniserv.conf</ns3:filepath>
+      <ns3:pattern operation="pattern match">^ssl_honorcipherorder=1$</ns3:pattern>
+      <ns3:instance datatype="int">1</ns3:instance>
+    </ns3:textfilecontent54_object>
+    <ns3:textfilecontent54_object id="oval:ssg-object_webmin_poodle_patch:obj:1" version="1">
+      <ns3:filepath>/usr/libexec/webmin/miniserv.pl</ns3:filepath>
+      <ns3:pattern operation="pattern match">.*no_ssl3.*</ns3:pattern>
+      <ns3:instance datatype="int">1</ns3:instance>
+    </ns3:textfilecontent54_object>
+    <ns3:textfilecontent54_object id="oval:ssg-object_webmin_sessions_ssl_cipher_list_poodle:obj:1" version="1">
+      <ns3:filepath>/etc/webmin/miniserv.conf</ns3:filepath>
+      <ns3:pattern operation="pattern match">^ssl_cipher_list=ECDHE-RSA-AES256-SHA384\:AES256-SHA256\:RC4\:HIGH\:\+TLSv1.2\:\+TLSv1\:\!MD5\:\!SSLv2\:\+SSLv3\:\!ADH\:\!aNULL\:\!eNULL\:\!NULL\:\!DH\:\!EDH\:\!AESGCM$</ns3:pattern>
+      <ns3:instance datatype="int">1</ns3:instance>
+    </ns3:textfilecontent54_object>
+    <ns3:textfilecontent54_object id="oval:ssg-object_webmin_poodle_no_sslv2:obj:1" version="1">
+      <ns3:filepath>/etc/webmin/miniserv.conf</ns3:filepath>
+      <ns3:pattern operation="pattern match">^no_ssl2=1$</ns3:pattern>
+      <ns3:instance datatype="int">1</ns3:instance>
+    </ns3:textfilecontent54_object>
+    <ns3:textfilecontent54_object id="oval:ssg-object_webmin_poodle_no_sslv3:obj:1" version="1">
+      <ns3:filepath>/etc/webmin/miniserv.conf</ns3:filepath>
+      <ns3:pattern operation="pattern match">^no_ssl3=1$</ns3:pattern>
+      <ns3:instance datatype="int">1</ns3:instance>
+    </ns3:textfilecontent54_object>
+    <ns3:textfilecontent54_object id="oval:ssg-object_webmin_sessions_ssl_enabled:obj:1" version="1">
+      <ns3:filepath>/etc/webmin/miniserv.conf</ns3:filepath>
+      <ns3:pattern operation="pattern match">^ssl=1$</ns3:pattern>
+      <ns3:instance datatype="int">1</ns3:instance>
+    </ns3:textfilecontent54_object>
+    <ns3:textfilecontent54_object id="oval:ssg-object_webmin_sessions_ssl_enforced:obj:1" version="1">
+      <ns3:filepath>/etc/webmin/miniserv.conf</ns3:filepath>
+      <ns3:pattern operation="pattern match">^ssl_redirect=1$</ns3:pattern>
+      <ns3:instance datatype="int">1</ns3:instance>
+    </ns3:textfilecontent54_object>
+    <ns4:rpminfo_object id="oval:ssg-obj_webmin_perl_ssl:obj:1" version="1">
+      <ns4:name>perl-Net-SSLeay</ns4:name>
+    </ns4:rpminfo_object>
+    <ns3:textfilecontent54_object id="oval:ssg-object_webmin_sessions_timeout:obj:1" version="1">
+      <ns3:filepath>/etc/webmin/miniserv.conf</ns3:filepath>
+      <ns3:pattern operation="pattern match">^logouttime=+(\d+)$</ns3:pattern>
+      <ns3:instance datatype="int">1</ns3:instance>
+    </ns3:textfilecontent54_object>
+  </ns0:objects>
+  <ns0:states>
+    <ns3:family_state id="oval:ssg-state_unix_family:ste:1" version="1">
+      <ns3:family>unix</ns3:family>
+    </ns3:family_state>
+    <ns3:textfilecontent54_state id="oval:ssg-state_webmin_module_useradmin_accounts_inactive:ste:1" version="1">
+      <ns3:subexpression datatype="int" operation="less than or equal" var_ref="oval:ssg-var_webmin_module_useradmin_accounts_inactive:var:1"/>
+    </ns3:textfilecontent54_state>
+    <ns3:textfilecontent54_state id="oval:ssg-state_webmin_module_useradmin_accounts_inactive_not_zero:ste:1" version="1">
+      <ns3:subexpression operation="not equal">0</ns3:subexpression>
+    </ns3:textfilecontent54_state>
+    <ns3:textfilecontent54_state id="oval:ssg-state_webmin_module_useradmin_accounts_max:ste:1" version="1">
+      <ns3:subexpression datatype="int" operation="less than or equal" var_ref="oval:ssg-var_webmin_module_useradmin_accounts_max:var:1"/>
+    </ns3:textfilecontent54_state>
+    <ns3:textfilecontent54_state id="oval:ssg-state_webmin_module_useradmin_accounts_max_not_zero:ste:1" version="1">
+      <ns3:subexpression operation="not equal">0</ns3:subexpression>
+    </ns3:textfilecontent54_state>
+    <ns3:textfilecontent54_state id="oval:ssg-state_webmin_module_useradmin_accounts_min:ste:1" version="1">
+      <ns3:subexpression datatype="int" operation="greater than or equal" var_ref="oval:ssg-var_webmin_module_useradmin_accounts_min:var:1"/>
+    </ns3:textfilecontent54_state>
+    <ns3:textfilecontent54_state id="oval:ssg-state_webmin_module_useradmin_accounts_min_length:ste:1" version="1">
+      <ns3:subexpression datatype="int" operation="greater than or equal" var_ref="oval:ssg-var_webmin_module_useradmin_accounts_min_length:var:1"/>
+    </ns3:textfilecontent54_state>
+    <ns3:textfilecontent54_state id="oval:ssg-state_webmin_module_useradmin_accounts_password_hash:ste:1" version="1">
+      <ns3:subexpression datatype="int" operation="equals" var_ref="oval:ssg-var_webmin_module_useradmin_accounts_password_hash:var:1"/>
+    </ns3:textfilecontent54_state>
+    <ns3:textfilecontent54_state id="oval:ssg-state_webmin_module_useradmin_accounts_warn:ste:1" version="1">
+      <ns3:subexpression datatype="int" operation="greater than or equal" var_ref="oval:ssg-var_webmin_module_useradmin_accounts_warn:var:1"/>
+    </ns3:textfilecontent54_state>
+    <ns3:textfilecontent54_state id="oval:ssg-state_webmin_sessions_port:ste:1" version="1">
+      <ns3:subexpression datatype="int" operation="equals" var_ref="oval:ssg-var_webmin_sessions_port:var:1"/>
+    </ns3:textfilecontent54_state>
+    <ns3:textfilecontent54_state id="oval:ssg-state_webmin_sessions_listen:ste:1" version="1">
+      <ns3:subexpression datatype="int" operation="equals" var_ref="oval:ssg-var_webmin_sessions_port:var:1"/>
+    </ns3:textfilecontent54_state>
+    <ns3:textfilecontent54_state id="oval:ssg-state_webmin_sessions_timeout:ste:1" version="1">
+      <ns3:subexpression datatype="int" operation="less than or equal" var_ref="oval:ssg-var_webmin_sessions_timeout:var:1"/>
+    </ns3:textfilecontent54_state>
+    <ns3:textfilecontent54_state id="oval:ssg-state_webmin_sessions_timeout_not_zero:ste:1" version="1">
+      <ns3:subexpression operation="not equal">0</ns3:subexpression>
+    </ns3:textfilecontent54_state>
+    <ns4:rpminfo_state id="oval:ssg-state_webmin_update:ste:1" version="1">
+      <ns4:evr datatype="evr_string" operation="greater than or equal">0:1.660-1</ns4:evr>
+    </ns4:rpminfo_state>
+  </ns0:states>
+  <ns0:variables>
+    <ns0:external_variable comment="inactive account expiration in days" datatype="int" id="oval:ssg-var_webmin_module_useradmin_accounts_inactive:var:1" version="1"/>
+    <ns0:external_variable comment="maximum password age" datatype="int" id="oval:ssg-var_webmin_module_useradmin_accounts_max:var:1" version="1"/>
+    <ns0:external_variable comment="minimum password age" datatype="int" id="oval:ssg-var_webmin_module_useradmin_accounts_min:var:1" version="1"/>
+    <ns0:external_variable comment="minimum password length" datatype="int" id="oval:ssg-var_webmin_module_useradmin_accounts_min_length:var:1" version="1"/>
+    <ns0:external_variable comment="password hash algorithm" datatype="int" id="oval:ssg-var_webmin_module_useradmin_accounts_password_hash:var:1" version="1"/>
+    <ns0:external_variable comment="warning days before password expires" datatype="int" id="oval:ssg-var_webmin_module_useradmin_accounts_warn:var:1" version="1"/>
+    <ns0:external_variable comment="warning banner text variable" datatype="string" id="oval:ssg-var_webmin_sessions_login_banner_text:var:1" version="1"/>
+    <ns0:external_variable comment="inactive account expiration in days" datatype="int" id="oval:ssg-var_webmin_sessions_port:var:1" version="1"/>
+    <ns0:external_variable comment="inactive account expiration in days" datatype="int" id="oval:ssg-var_webmin_sessions_timeout:var:1" version="1"/>
+    <ns0:external_variable comment="dummy var" datatype="int" id="oval:ssg-var_dummy:var:1" version="1"/>
+  </ns0:variables>
+</ns0:oval_definitions>

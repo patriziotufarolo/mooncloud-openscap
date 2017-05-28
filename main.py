@@ -142,17 +142,18 @@ class XCCDFEvaluator(SSHConnection):
                 temp_dir=self.temp_dir, xccdf=xccdf
             )
         ]
-        print ssh_command
         index = 7
         if not self.verifyRoot():
             ssh_command = ["sudo"] + ssh_command
             index += 1
         if fetch_remote_resources:
             ssh_command.insert(index, "--fetch-remote-resources")
-        out = self.ssh_client.run(ssh_command, stdout=sys.stderr,
+        print ssh_command
+        out = self.ssh_client.run(ssh_command,
+                                  stdout=sys.stderr,
                                   stderr=sys.stderr,
+                                  use_pty=True,
                                   allow_error=True).output.strip().split("\n")
-
         initial_result = "pass"
         for line in out:
             if line.strip() == "":

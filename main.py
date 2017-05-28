@@ -2,10 +2,13 @@
 # -*- coding: utf-8 -*-
 import sys
 import spur
+import uuid
+
 from xml.etree import cElementTree as ElementTree
 
 from driver import Driver
 from test.ssh_client import CustomSshShell
+from azure.storage.blob import BlockBlobService, ContentSettings
 
 __author__ = "Patrizio Tufarolo"
 __email__ = "patrizio@tufarolo.eu"
@@ -19,7 +22,7 @@ xccdf_ns = "http://checklists.nist.gov/xccdf/1.1"
 class SSHConnection(object):
     def read_ssh_configuration(self, inputs):
         ssh_connection_ti = self.testinstances.get("read_ssh_configuration",
-                                                   None)
+                                                   {})
 
         assert ssh_connection_ti is not None
         hostname = ssh_connection_ti.get("hostname")
@@ -67,9 +70,10 @@ class SSHConnection(object):
 
 class XCCDFEvaluator(SSHConnection):
     def read_xccdf_configuration(self, inputs):
-        xccdf_ti = self.testinstances.get("read_xccdf_configuration")
-        xccdf = xccdf_ti.get("xccdf")
-        profile = xccdf_ti.get("profile")
+        xccdf_ti = self.testinstances.get("read_xccdf_configuration", None)
+        xccdf = xccdf_ti.get("xccdf", None)
+        profile = xccdf_ti.get("profile", None)
+        assert xccdf is not None and profile is not None
         fetch_remote_resources = xccdf_ti.get("fetch_remote_resources", False)
         return xccdf, profile, fetch_remote_resources
 
@@ -111,6 +115,14 @@ class XCCDFEvaluator(SSHConnection):
                 )
         return xccdf, profile, fetch_remote_resources
 
+    def get_report(self, inputs):
+        with self.ssh_client._connect_sftp() as sftp:
+            sftp.get(
+                "{temp_dir}/report.html".format(temp_dir=self.temp_dir),
+                "/tmp/report.html"
+            )
+        return inputs
+
     def evaluate_xccdf(self, inputs):
         xccdf, profile, fetch_remote_resources = inputs
         ssh_command = [
@@ -130,6 +142,7 @@ class XCCDFEvaluator(SSHConnection):
                 temp_dir=self.temp_dir, xccdf=xccdf
             )
         ]
+        print ssh_command
         index = 7
         if not self.verifyRoot():
             ssh_command = ["sudo"] + ssh_command
@@ -162,7 +175,49 @@ class XCCDFEvaluator(SSHConnection):
         return initial_result
 
 
-class OpenSCAP_SSH(Driver, XCCDFEvaluator):
+class AzureUploader(object):
+    def read_azure_configuration(self, inputs):
+        azure_ti = self.testinstances.get("read_azure_configuration", {})
+        azure_user = azure_ti.get("user", None)
+        azure_access_key = azure_ti.get("access_key", None)
+        azure_container_name = azure_ti.get("container_name", None)
+        self.azure_user = azure_user
+        self.azure_access_key = azure_access_key
+        self.azure_container_name = azure_container_name
+        return inputs
+
+    def upload_to_azure(self, inputs):
+        try:
+            azure_user, \
+                azure_access_key, \
+                azure_container_name = \
+                self.azure_user, \
+                self.azure_access_key, \
+                self.azure_container_name
+
+            if azure_user is None or azure_access_key is None \
+                    or azure_container_name is None:
+                return inputs
+            block_blob_service = BlockBlobService(account_name=azure_user,
+                                                  account_key=azure_access_key)
+
+            blob_name = str(uuid.uuid4()).replace("-", "")[:10]
+            block_blob_service.create_blob_from_path(
+                self.azure_container_name, blob_name,
+                "/tmp/report.html",
+                content_settings=ContentSettings(content_type="text/html")
+            )
+            report_url = block_blob_service.make_blob_url(
+                self.azure_container_name, blob_name
+            )
+            self.result.put_value("report", report_url)
+        except:
+            raise
+            self.logger.error("Error during report upload")
+        return inputs
+
+
+class OpenSCAP_SSH(Driver, XCCDFEvaluator, AzureUploader):
 
     def verifyOscapInstalled(self, inputs):
         try:
@@ -186,5 +241,8 @@ class OpenSCAP_SSH(Driver, XCCDFEvaluator):
         self.appendAtomic(self.read_xccdf_configuration, lambda rollback: None)
         self.appendAtomic(self.upload_files, lambda rollback: None)
         self.appendAtomic(self.evaluate_xccdf, lambda rollback: None)
+        self.appendAtomic(self.read_azure_configuration, lambda rollback: None)
+        self.appendAtomic(self.get_report, lambda rollback: None)
+        self.appendAtomic(self.upload_to_azure, lambda rollback: None)
         self.appendAtomic(self.ssh_remove_tmp_dir, lambda rollback: None)
         self.appendAtomic(self.ssh_close, lambda rollback: None)

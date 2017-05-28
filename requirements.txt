@@ -1,1 +1,2 @@
 spur==0.3.20
+azure-storage==0.34.0
